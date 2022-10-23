@@ -2,7 +2,7 @@
 <img width="668" alt="Screen Shot 2022-10-23 at 1 10 51 PM" src="https://user-images.githubusercontent.com/112578566/197405737-ae9751bc-c7b3-4e32-9c71-6ae368a5c97f.png">
 
 ## Checkout our app here:
-[CupAdventure App](https://www.justinmind.com/usernote/tests/73177010/73181425/73181427/index.html#/screens/d12245cc-1680-458d-89dd-4f0d7fb22724)
+[CupsAdventure App](https://www.justinmind.com/usernote/tests/73177010/73181425/73181427/index.html#/screens/d12245cc-1680-458d-89dd-4f0d7fb22724)
 
 ## Checkout our website here:
 [CupAdventure Website](http://cupsadventure.tech)
