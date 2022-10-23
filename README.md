@@ -32,3 +32,7 @@ We learned that in making front-end, there are more than one language to combine
 - Back-end polishes for the app, implementing cloud storage to make sure the app runs 24/7
 - Trial implementation in Fuqua Friday (so many plasticware)
 - West campus dining implementation
+
+## References
+https://www.earthday.org/fact-sheet-how-much-disposable-plastic-we-use/
+https://www.anthropocenemagazine.org/2017/07/reusable-or-disposable-which-coffee-cup-has-a-smaller-footprint/
