@@ -2,10 +2,10 @@
 <img width="668" alt="Screen Shot 2022-10-23 at 1 10 51 PM" src="https://user-images.githubusercontent.com/112578566/197405737-ae9751bc-c7b3-4e32-9c71-6ae368a5c97f.png">
 
 ## Checkout our app here:
-[CupsAdventure App](https://www.justinmind.com/usernote/tests/73177010/73181425/73181427/index.html#/screens/d12245cc-1680-458d-89dd-4f0d7fb22724)
+[CupAdventure App](https://www.justinmind.com/usernote/tests/73177010/73181425/73181427/index.html#/screens/d12245cc-1680-458d-89dd-4f0d7fb22724)
 
 ## Checkout our website here:
-[CupAdventure Website](http://cupsadventure.tech)
+[CupsAdventure Website](http://cupsadventure.tech)
 
 ## Inspiration
 We are inspired by a cup of hot chocolate. This Saturday afternoon, when we were brainstorming about the project for this hackathon at McDonald's, Jenny ordered a hot chocolate. However, we disposed of the coffee cup after using it, which is not environmentally friendly. In addition, we notice students mainly use plastic or paper cups when dining on the campus. Therefore, we decided to build an app that helps to recycle the cups when we order drinks at the cafe.
