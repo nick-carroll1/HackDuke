@@ -1,7 +1,7 @@
 # Cup Adventure!
 
 Checkout our app here:
-[Cup Adventure App](https://www.justinmind.com/usernote/tests/73177010/73181425/73181427/index.html#/screens/b0ec1a3a-d0b4-43f7-ac6c-1e9b98c715f9)
+[Cup Adventure App](https://www.justinmind.com/usernote/tests/73177010/73181425/73181427/index.html#/screens/d12245cc-1680-458d-89dd-4f0d7fb22724)
 
 The "Cup Adventure" program is designed to encourage students to reduce the amount of single-use cups and promote a more sustainable campus. Reusable cups would be circulated around the campus through borrowing and returning, and sustainability credits could be earned with rewards redeemable after each circulation.
 
