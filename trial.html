@@ -1,15 +1,396 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <link rel="stylesheet" href="styles.css">
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Cup Adventure!</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+        media="screen">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.17.0"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
 </head>
+<!-- body -->
 
-<body>
+<body class="main-layout">
 
-    <h1>This is a heading</h1>
-    <p>This is a paragraph.</p>
+    <!-- end loader -->
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="#about">About</a>
+        <a href="#teamx">Our Impact</a>
+        <a href="#we_Do">Circulation Process</a>
+        <a href="#team">Meet the Team</a>
+    </div>
+    <!-- header -->
+    <header>
+        <!-- header inner -->
+        <div class="header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
 
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col logo_section">
+                        <div class="full">
+                            <div class="center-desk">
+                                <div class="logo">
+                                    <a href="#"><img src="images/logo.jpg" alt="#" /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                        <div class="right_bottun">
+                            <button class="openbtn" onclick="openNav()"><img src="images/menu_icon.png" alt="#" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end header inner -->
+    <!-- end header -->
+    <!-- banner -->
+    <section class="banner_main">
+        <div id="banner1" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#banner1" data-slide-to="0" class="active"></li>
+                <li data-target="#banner1" data-slide-to="1"></li>
+                <li data-target="#banner1" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <div class="text-bg">
+                                <h1>cup</h1>
+                                <h1>adventure</h1>
+                                <a class="read_more" href="https://www.google.com">App Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <div class="text-bg">
+                                <h1>green</h1>
+                                <h1>impact</h1>
+                                <a class="read_more" href="https://www.google.com">App Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <div class="text-bg">
+                                <h1>start</h1>
+                                <h1>today!</h1>
+                                <a class="read_more" href="https://www.google.com">App Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#banner1" role="button" data-slide="prev">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </a>
+            <a class="carousel-control-next" href="#banner1" role="button" data-slide="next">
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </a>
+        </div>
+    </section>
+    <!-- end banner -->
+    <!-- about section -->
+    <div id="about" class="about">
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="titlepage">
+                                <h2>About</h2>
+                                <p> The "Cup Adventure" program is designed to encourage students to reduce the amount
+                                    of
+                                    single-use cups and promote a more sustainable campus. Reusable cups would be
+                                    circulated
+                                    around the campus through borrowing and returning, and sustainability credits could
+                                    be earned
+                                    with rewards redeemable after each circulation.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="about_right">
+                        <figure><img src="images/banner1.jpg" alt="#" /></figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- about section -->
+    <!-- software section -->
+    <div id="teamx" class="teamx">
+        <div class="container-fluid">
+            <div class="row d_flex">
+                <div class="col-md-6">
+                    <div class="titlepage">
+                        <h2>Our Impact</h2>
+                        <p>The plastic waste from the United States as ocean pollution increase drastically from
+                            1990-2001 as the figure on the right shows. Moreover, the number of coffee cups thrown away
+                            in the U.S. has increased by 50 billion every year. Since it would take between 20-100 uses
+                            for a reusable cup to make up for the greenhouse gas emissions of a single-use cup, the “Cup
+                            Adventure” will help save the greenhouse gas emissions by at least 10 times a single-use cup
+                            would generate as a reusable usually take more than 1000 uses. This number is expected to
+                            boost exponentially given the amount of staffs and students on campus. </p>
+                    </div>
+                </div>
+                <div class="col-md-6 padding_right2">
+                    <div id="vis"></div>
+                    <script>
+                        (function (vegaEmbed) {
+                            var spec = { "config": { "view": { "continuousWidth": 670, "continuousHeight": 450 } }, "data": { "name": "data-b933a534d86fe74becf531a4db344a89" }, "mark": { "type": "area", "color": { "gradient": "linear", "stops": [{ "color": "white", "offset": 0 }, { "color": "#54C8A1", "offset": 1 }], "x1": 1, "x2": 1, "y1": 1, "y2": 0 }, "line": { "color": "#54C8A1" } }, "encoding": { "tooltip": { "field": "Value", "type": "quantitative" }, "x": { "field": "new_Time", "scale": { "zero": false }, "title": "Year", "type": "temporal" }, "y": { "field": "Value", "scale": { "zero": false }, "title": "Plastic Waste (Million Ton)", "type": "quantitative" } }, "selection": { "selector030": { "type": "interval", "bind": "scales", "encodings": ["x", "y"] } }, "title": "Plastic Waste  from U.S. as Ocean Pollution Growth 1990 - 2019", "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": { "data-b933a534d86fe74becf531a4db344a89": [{ "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 1990, "Time": 1990, "Value": 7.70209, "Flag Codes": null, "Flags": null, "new_Time": "1990-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 1991, "Time": 1991, "Value": 8.30703, "Flag Codes": null, "Flags": null, "new_Time": "1991-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 1992, "Time": 1992, "Value": 8.93474, "Flag Codes": null, "Flags": null, "new_Time": "1992-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 1993, "Time": 1993, "Value": 9.58468, "Flag Codes": null, "Flags": null, "new_Time": "1993-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 1994, "Time": 1994, "Value": 10.25812, "Flag Codes": null, "Flags": null, "new_Time": "1994-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 1995, "Time": 1995, "Value": 10.95423, "Flag Codes": null, "Flags": null, "new_Time": "1995-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 1996, "Time": 1996, "Value": 11.67308, "Flag Codes": null, "Flags": null, "new_Time": "1996-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 1997, "Time": 1997, "Value": 12.41646, "Flag Codes": null, "Flags": null, "new_Time": "1997-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 1998, "Time": 1998, "Value": 13.18346, "Flag Codes": null, "Flags": null, "new_Time": "1998-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 1999, "Time": 1999, "Value": 13.975530000000001, "Flag Codes": null, "Flags": null, "new_Time": "1999-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2000, "Time": 2000, "Value": 14.7905, "Flag Codes": null, "Flags": null, "new_Time": "2000-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2001, "Time": 2001, "Value": 15.629059999999999, "Flag Codes": null, "Flags": null, "new_Time": "2001-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2002, "Time": 2002, "Value": 16.48965, "Flag Codes": null, "Flags": null, "new_Time": "2002-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2003, "Time": 2003, "Value": 17.37407, "Flag Codes": null, "Flags": null, "new_Time": "2003-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2004, "Time": 2004, "Value": 18.27926, "Flag Codes": null, "Flags": null, "new_Time": "2004-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2005, "Time": 2005, "Value": 19.20488, "Flag Codes": null, "Flags": null, "new_Time": "2005-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2006, "Time": 2006, "Value": 20.1511, "Flag Codes": null, "Flags": null, "new_Time": "2006-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2007, "Time": 2007, "Value": 21.1158, "Flag Codes": null, "Flags": null, "new_Time": "2007-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2008, "Time": 2008, "Value": 22.096960000000003, "Flag Codes": null, "Flags": null, "new_Time": "2008-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2009, "Time": 2009, "Value": 23.091089999999998, "Flag Codes": null, "Flags": null, "new_Time": "2009-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2010, "Time": 2010, "Value": 24.099520000000002, "Flag Codes": null, "Flags": null, "new_Time": "2010-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2011, "Time": 2011, "Value": 25.11974, "Flag Codes": null, "Flags": null, "new_Time": "2011-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2012, "Time": 2012, "Value": 26.15021, "Flag Codes": null, "Flags": null, "new_Time": "2012-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2013, "Time": 2013, "Value": 27.189030000000002, "Flag Codes": null, "Flags": null, "new_Time": "2013-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2014, "Time": 2014, "Value": 28.23467, "Flag Codes": null, "Flags": null, "new_Time": "2014-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2015, "Time": 2015, "Value": 29.285519999999998, "Flag Codes": null, "Flags": null, "new_Time": "2015-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2016, "Time": 2016, "Value": 30.34087, "Flag Codes": null, "Flags": null, "new_Time": "2016-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2017, "Time": 2017, "Value": 31.39809, "Flag Codes": null, "Flags": null, "new_Time": "2017-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2018, "Time": 2018, "Value": 32.455, "Flag Codes": null, "Flags": null, "new_Time": "2018-01-01T00:00:00" }, { "LOCATION": "USA1", "Location": "United States", "PLASTIC_LEAKAGE_TO_OCEAN": "ACCUMULATED_STOCK_IN_OCEANS", "Variable": "Accumulated stock in oceans", "TIME": 2019, "Time": 2019, "Value": 33.511250000000004, "Flag Codes": null, "Flags": null, "new_Time": "2019-01-01T00:00:00" }] } };
+                            var embedOpt = { "mode": "vega-lite" };
+
+                            function showError(el, error) {
+                                el.innerHTML = ('<div class="error" style="color:red;">'
+                                    + '<p>JavaScript Error: ' + error.message + '</p>'
+                                    + "<p>This usually means there's a typo in your chart specification. "
+                                    + "See the javascript console for the full traceback.</p>"
+                                    + '</div>');
+                                throw error;
+                            }
+                            const el = document.getElementById('vis');
+                            vegaEmbed("#vis", spec, embedOpt)
+                                .catch(error => showError(el, error));
+                        })(vegaEmbed);
+
+                    </script>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- software section -->
+    <!-- We Do section -->
+    <div id="we_Do" class="we_do">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>Circulation Process</h2>
+                        <p>Are you ready to embark on a very interesting adventure while sipping your favorite drink?
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div id="hover_color" class="we_box">
+                        <span>1</span>
+                        <h3>Borrow</h3>
+                        <p>Start your journey by borrowing a cup from your favorite
+                            <br> Duke dining vendors!
+
+                            <br> Maximum 1 cup per adventurer.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div id="hover_color" class="we_box">
+                        <span>2</span>
+                        <h3>Return</h3>
+                        <p> Make sure you return your cup before embarking on another adventure (or even a hiatus)
+                            <br> Let the noble member of Duke dining take care of that cup for you, adventurer!
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div id="hover_color" class="we_box">
+                        <span>3</span>
+                        <h3>Save the Earth!</h3>
+                        <p>You don't even realize it, but you've saved the earth from marine plastic pollution!
+                            10% of increase in reusable bottle share can decrease 22% of marine pollution (Oceana).
+                            <br> Mother earth says thank you for participating!
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end We Do section -->
+    <!-- Our  team section -->
+    <div id="team" class="team">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>Our Team</h2>
+                        <p>Strong belief in sustainability brought us together.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="team_box">
+                        <figure><img src="images/team_img1.jpg" alt="#" /></figure>
+                        <div class="social_box">
+                            <ul class="social_team">
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.instagram.com/alisa__tian0705"><i class="fa fa-instagram"
+                                            aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.linkedin.com/in/alisa-tian/"><i class="fa fa-linkedin"
+                                            aria-hidden="true"></i></a></li>
+
+                            </ul>
+                            <h3>Alisa Tian</h3>
+                            <p>Data Science Student</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team_box">
+                        <figure><img src="images/team_img2.jpeg" alt="#" /></figure>
+                        <div class="social_box">
+                            <ul class="social_team">
+                                <li><a href="https://www.facebook.com/jenny.shen.520125"><i class="fa fa-facebook"
+                                            aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.instagram.com/shendawanghhh"><i class="fa fa-instagram"
+                                            aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.linkedin.com/in/yiran-jenny-shen/"><i class="fa fa-linkedin"
+                                            aria-hidden="true"></i></a></li>
+
+                            </ul>
+                            <h3>Jenny Shen</h3>
+                            <p>Data Science Student</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team_box">
+                        <figure><img src="images/team_img3.jpg" alt="#" /></figure>
+                        <div class="social_box">
+                            <ul class="social_team">
+                                <li><a href="https://www.facebook.com/profile.php?id=1507740454"><i
+                                            class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.instagram.com/wafiakmal"><i class="fa fa-instagram"
+                                            aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.linkedin.com/in/wafiakmal/"><i class="fa fa-linkedin"
+                                            aria-hidden="true"></i></a></li>
+
+                            </ul>
+                            <h3>Wafiakmal Miftah</h3>
+                            <p>Data Science Student</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end Our  team section -->
+    <!--  footer -->
+    <footer>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3>Suggestions are Welcome</h3>
+                        <p> This is a disclaimer that our application is still under heavy construction, both backend
+                            and frontend. We are working hard to finish it throughout the Fall semester. Any
+                            constructive criticisms are welcome!
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="fid_box">
+                            <h3>Find us </h3>
+                            <ul class="location_icon">
+                                <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a>Gross Hall,
+                                    1 Towerview Rd, Durham, NC 27710</li>
+                                <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
+                                    (+1) 12345678
+                                </li>
+                                <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a> trial@duke.edu
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="fid_box">
+                            <h3>News letter</h3>
+                            <form class="news_form">
+                                <input class="letter_form" placeholder=" Email" type="text" name="Email">
+                                <button class="sumbit">Subscribe</button>
+                            </form>
+                            <ul class="social_icon">
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>© 2019 All Rights Reserved. Design by<a href="https://html.design/"> Free Html
+                                    Templates</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+    <!-- Javascript files-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <script>
+        function openNav() {
+            document.getElementById("mySidepanel").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidepanel").style.width = "0";
+        }
+    </script>
 </body>
 
 </html>
