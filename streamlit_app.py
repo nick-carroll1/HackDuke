@@ -3,7 +3,7 @@ import streamlit.components.v1 as components
 
 st.title("Cup Adventure")
 # st.image("images\logo.jpg")
-# st.image(r"images\banner.jpg")
+st.image(r"images\banner.jpg")
 
 # st.subtitle("Previous Code")
 # HTMLFile = open('hack.html', 'r', encoding='utf-8')
