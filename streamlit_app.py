@@ -5,7 +5,7 @@ st.title("Cup Adventure")
 # st.image("images\logo.jpg")
 # st.image(r"images\banner.jpg")
 
-st.subtitle("Previous Code")
+st.subheader("Previous Code")
 HTMLFile = open('hack.html', 'r', encoding='utf-8')
 sourceCode = HTMLFile.read()
 components.html(sourceCode)
