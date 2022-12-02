@@ -1,8 +1,10 @@
 import streamlit as st
 import streamlit.components.v1 as components
+
 # import streamlit_authenticator as stauth
 
 # streamlit_app.py
+
 
 def check_password():
     """Returns `True` if the user had a correct password."""
@@ -24,24 +26,18 @@ def check_password():
         with st.form("sign-in1"):
             # First run, show inputs for username + password.
             st.text_input("Username", key="username")
-            st.text_input(
-                "Password", type="password", key="password"
-            )
+            st.text_input("Password", type="password", key="password")
 
             # Every form must have a submit button.
             submitted = st.form_submit_button("Submit")
             if submitted:
                 password_entered()
-        
-        return False
     elif not st.session_state["password_correct"]:
         # Password not correct, show input + error.
         with st.form("sign-in2"):
             # First run, show inputs for username + password.
             st.text_input("Username", key="username")
-            st.text_input(
-                "Password", type="password", key="password"
-            )
+            st.text_input("Password", type="password", key="password")
 
             # Every form must have a submit button.
             submitted = st.form_submit_button("Submit")
@@ -51,9 +47,10 @@ def check_password():
         # Password correct.
         return True
 
+
 st.title("Cup Adventure")
 if check_password():
-    st.write(f'Welcome *Fred*')
+    st.write(f"Welcome *Fred*")
 
 # authenticator = stauth.Authenticate(
 #     config['credentials'],
