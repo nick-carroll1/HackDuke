@@ -28,10 +28,10 @@ def check_password():
                 "Password", type="password", key="password"
             )
 
-        # Every form must have a submit button.
-        submitted = st.form_submit_button("Submit")
-        if submitted:
-            password_entered()
+            # Every form must have a submit button.
+            submitted = st.form_submit_button("Submit")
+            if submitted:
+                password_entered()
         
         return False
     elif not st.session_state["password_correct"]:
@@ -43,10 +43,10 @@ def check_password():
                 "Password", type="password", key="password"
             )
 
-        # Every form must have a submit button.
-        submitted = st.form_submit_button("Submit")
-        if submitted:
-            password_entered()
+            # Every form must have a submit button.
+            submitted = st.form_submit_button("Submit")
+            if submitted:
+                password_entered()
     else:
         # Password correct.
         return True
