@@ -5,6 +5,8 @@ import subprocess
 
 st.write(subprocess.check_output(['pip', 'freeze']))
 
+st.write(subprocess.check_output(['ls', '-la']))
+
 # authenticator = stauth.Authenticate(
 #     config['credentials'],
 #     config['cookie']['name'],
