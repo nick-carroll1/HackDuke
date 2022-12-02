@@ -2,10 +2,10 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 st.title("Cup Adventure")
-from PIL import Image
-image = Image.open(r"images\banner.jpg")
+# from PIL import Image
+# image = Image.open(r"images\banner.jpg")
 
-st.image(image)
+# st.image(image)
 # st.image("images\logo.jpg")
 # st.image(r"images\banner.jpg")
 
