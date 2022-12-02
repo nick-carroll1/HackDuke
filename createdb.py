@@ -2,6 +2,7 @@
 
 import os
 import mysql.connector
+from datetime import date
 
 
 def createdb(
@@ -91,7 +92,11 @@ def add_user(
                 pass
             pass
         pass
-    cursor.execute(f"INSERT INTO customers ({columns}) VALUES ({values});")
+    try:
+        cursor.execute(f"INSERT INTO customers ({columns}) VALUES ({values});")
+        connection.commit()
+    except:
+        connection.rollback()
     # print(f"INSERT INTO customers ({columns}) VALUES ({values});")
     connection.close()
     pass
@@ -114,8 +119,8 @@ if __name__ == "__main__":
         "deposit float",
         "primary key (customer_id)",
     ]
-    myquery = "SELECT * FROM customers"
-    newUser = {"customer_firstName": "Alisa", "customer_lastName": "Tian", "join_date": date.today().__str__()}
+    myquery = "INSERT INTO customers (customer_firstName, customer_lastName, join_date) VALUES ('Jenny', 'Shen', '2022-12-02');"
+    newUser = {"customer_firstName": "Jenny", "customer_lastName": "Shen", "join_date": date.today().__str__()}
     # createdb(mydatabase, myuser, mypassword, myhost, myport)
     # createTable(mytable, myparameters, mydatabase, myuser, mypassword, myhost, myport)
     # query(myquery, mydatabase, myuser, mypassword, myhost, myport)
