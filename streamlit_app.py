@@ -21,27 +21,39 @@ def check_password():
             st.session_state["password_correct"] = False
 
     if "password_correct" not in st.session_state:
-        # First run, show inputs for username + password.
-        st.text_input("Username", on_change=password_entered, key="username")
-        st.text_input(
-            "Password", type="password", on_change=password_entered, key="password"
-        )
+        with st.form("sign-in1"):
+            # First run, show inputs for username + password.
+            st.text_input("Username", key="username")
+            st.text_input(
+                "Password", type="password", key="password"
+            )
+
+        # Every form must have a submit button.
+        submitted = st.form_submit_button("Submit")
+        if submitted:
+            password_entered()
+        
         return False
     elif not st.session_state["password_correct"]:
         # Password not correct, show input + error.
-        st.text_input("Username", on_change=password_entered, key="username")
-        st.text_input(
-            "Password", type="password", on_change=password_entered, key="password"
-        )
-        st.error("😕 User not known or password incorrect")
-        return False
+        with st.form("sign-in2"):
+            # First run, show inputs for username + password.
+            st.text_input("Username", key="username")
+            st.text_input(
+                "Password", type="password", key="password"
+            )
+
+        # Every form must have a submit button.
+        submitted = st.form_submit_button("Submit")
+        if submitted:
+            password_entered()
     else:
         # Password correct.
         return True
 
+st.title("Cup Adventure")
 if check_password():
-    st.write("Here goes your normal Streamlit app...")
-    st.button("Click me")
+    st.write(f'Welcome *{st.session_state["username"]}*')
 
 # authenticator = stauth.Authenticate(
 #     config['credentials'],
