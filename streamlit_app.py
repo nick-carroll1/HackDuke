@@ -7,6 +7,8 @@ st.write(subprocess.check_output(['pip', 'freeze']))
 
 st.write(subprocess.check_output(['ls', '-la']))
 
+st.write(subprocess.check_output(['cat', 'requirements.txt']))
+
 # authenticator = stauth.Authenticate(
 #     config['credentials'],
 #     config['cookie']['name'],
