@@ -91,8 +91,8 @@ def add_user(
                 pass
             pass
         pass
-    # cursor.execute(f"INSERT INTO customers ({columns}) VALUES ({values});")
-    print(f"INSERT INTO customers ({columns}) VALUES ({values});")
+    cursor.execute(f"INSERT INTO customers ({columns}) VALUES ({values});")
+    # print(f"INSERT INTO customers ({columns}) VALUES ({values});")
     connection.close()
     pass
 
@@ -115,8 +115,8 @@ if __name__ == "__main__":
         "primary key (customer_id)",
     ]
     myquery = "SELECT * FROM customers"
-    newUser = {"customer_firstName": "Nick", "customer_lastName": "Carroll"}
+    newUser = {"customer_firstName": "Alisa", "customer_lastName": "Tian", "join_date": date.today().__str__()}
     # createdb(mydatabase, myuser, mypassword, myhost, myport)
     # createTable(mytable, myparameters, mydatabase, myuser, mypassword, myhost, myport)
-    query(myquery, mydatabase, myuser, mypassword, myhost, myport)
-    # add_user(newUser)
+    # query(myquery, mydatabase, myuser, mypassword, myhost, myport)
+    add_user(newUser)
