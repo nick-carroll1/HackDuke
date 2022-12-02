@@ -4,7 +4,7 @@ from datetime import date
 
 st.title("Customer Sign-up")
 
-st.subhead("Welcome to Cup Adventure!")
+st.subheader("Welcome to Cup Adventure!")
 
 first_name = st.text_input("Add your first name")
 last_name = st.text_input("Add your last name")
