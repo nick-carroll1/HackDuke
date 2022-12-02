@@ -3,7 +3,7 @@ import streamlit.components.v1 as components
 # import streamlit_authenticator as stauth
 import subprocess
 
-st.write(subprocess.check_output(['pip', '--version']))
+st.write(subprocess.check_output(['pip', 'freeze']))
 
 # authenticator = stauth.Authenticate(
 #     config['credentials'],
