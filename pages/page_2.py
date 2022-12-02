@@ -1,10 +1,19 @@
 import streamlit as st
+import streamlit_authenticator as stauth
 import createdb
 from datetime import date
+
 
 st.title("Customer Sign-up")
 
 st.subheader("Welcome to Cup Adventure!")
+
+try:
+    if authenticator.register_user('Register user', preauthorization=False):
+        st.success('User registered successfully')
+except Exception as e:
+    st.error(e)
+
 
 first_name = st.text_input("Add your first name")
 last_name = st.text_input("Add your last name")
