@@ -68,12 +68,19 @@ def add_user(
     hostname=os.getenv("AWS_CUPADVENTURE_HOSTNAME"),
     portnum=int(os.getenv("AWS_CUPADVENTURE_PORT")),
 ):
+    # Create Connection
     connection = mysql.connector.connect(
         user=username, password=passwd, host=hostname, port=portnum
     )
     cursor = connection.cursor()
     cursor.execute(f"USE {database};")
+    # Confirm user information is complete to create a new user
     userKeys = list(user.keys())
+    assert set(userKeys) == {"customer_firstName", "customer_lastName", "join_date", "user_name", "password"}
+    # Confirm username is unique
+    cursor.execute(f"SELECT user_name FROM customers WHERE user_name = '{user[user_name]}';")
+    assert len(cursor) == 0
+    # Conver user information to a query
     columns = userKeys[0]
     if type(user[userKeys[0]]) == str:
         values = "'" + user[userKeys[0]] + "'"
@@ -92,12 +99,12 @@ def add_user(
                 pass
             pass
         pass
+    # execute query
     try:
         cursor.execute(f"INSERT INTO customers ({columns}) VALUES ({values});")
         connection.commit()
     except:
         connection.rollback()
-    # print(f"INSERT INTO customers ({columns}) VALUES ({values});")
     connection.close()
     pass
 
@@ -119,8 +126,8 @@ if __name__ == "__main__":
         "deposit float",
         "primary key (customer_id)",
     ]
-    myquery = "INSERT INTO customers (customer_firstName, customer_lastName, join_date) VALUES ('Jenny', 'Shen', '2022-12-02');"
-    newUser = {"customer_firstName": "Jenny", "customer_lastName": "Shen", "join_date": date.today().__str__()}
+    # myquery = "INSERT INTO customers (customer_firstName, customer_lastName, join_date) VALUES ('Jenny', 'Shen', '2022-12-02');"
+    newUser = {"customer_firstName": "Jenny", "customer_lastName": "Shen", "join_date": date.today().__str__(), "user_name": "jshen1", "password": "password"}
     # createdb(mydatabase, myuser, mypassword, myhost, myport)
     # createTable(mytable, myparameters, mydatabase, myuser, mypassword, myhost, myport)
     # query(myquery, mydatabase, myuser, mypassword, myhost, myport)
