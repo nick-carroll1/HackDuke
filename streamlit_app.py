@@ -11,6 +11,7 @@ def check_password():
         userquery = f"SELECT user_name, password FROM customers_db where user_name = '{st.session_state['username']}';"
         results = query(userquery)
         passwords = {eachLine[0]: eachLine[1] for eachLine in results}
+        st.write(passwords)
         if (
             (st.session_state["username"] in passwords.keys())
             and (st.session_state["password"]
@@ -32,17 +33,17 @@ def check_password():
             submitted = st.form_submit_button("Submit")
             if submitted:
                 password_entered()
-    elif not st.session_state["password_correct"]:
-        # Password not correct, show input + error.
-        with st.form("sign-in2"):
-            # First run, show inputs for username + password.
-            st.text_input("Username", key="username")
-            st.text_input("Password", type="password", key="password")
+    # elif not st.session_state["password_correct"]:
+    #     # Password not correct, show input + error.
+    #     with st.form("sign-in2"):
+    #         # First run, show inputs for username + password.
+    #         st.text_input("Username", key="username")
+    #         st.text_input("Password", type="password", key="password")
 
-            # Every form must have a submit button.
-            submitted = st.form_submit_button("Submit")
-            if submitted:
-                password_entered()
+    #         # Every form must have a submit button.
+    #         submitted = st.form_submit_button("Submit")
+    #         if submitted:
+    #             password_entered()
     else:
         # Password correct.
         return True
