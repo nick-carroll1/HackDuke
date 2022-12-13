@@ -3,6 +3,8 @@
 import os
 import mysql.connector
 from datetime import date
+import pandas as pd
+from sqlalchemy import create_engine
 
 
 def createdb(
@@ -47,17 +49,25 @@ def createTable(
     pass
 
 
-def query(query, database, username, passwd, hostname, portnum):
+def query(
+    query,
+    database="cup_adventure",
+    username=os.getenv("AWS_CUPADVENTURE_USERNAME"),
+    passwd=os.getenv("AWS_CUPADVENTURE_PASSWORD"),
+    hostname=os.getenv("AWS_CUPADVENTURE_HOSTNAME"),
+    portnum=int(os.getenv("AWS_CUPADVENTURE_PORT")),
+):
     connection = mysql.connector.connect(
         user=username, password=passwd, host=hostname, port=portnum
     )
     cursor = connection.cursor()
     cursor.execute(f"USE {database}")
     cursor.execute(query)
-    for x in cursor:
-        print(x)
+    results = []
+    for line in cursor:
+        results.append(line)
     connection.close()
-    pass
+    return results
 
 
 def add_user(
@@ -78,9 +88,12 @@ def add_user(
     userKeys = list(user.keys())
     assert set(userKeys) == {"customer_firstName", "customer_lastName", "join_date", "user_name", "password"}
     # Confirm username is unique
-    cursor.execute(f"SELECT user_name FROM customers WHERE user_name = '{user[user_name]}';")
-    assert len(cursor) == 0
-    # Conver user information to a query
+    cursor.execute(f"SELECT user_name FROM customers_db WHERE user_name = '{user['user_name']}';")
+    users = set()
+    for x in cursor:
+        users.add(x[0])
+    assert users == set()
+    # Convert user information to a query
     columns = userKeys[0]
     if type(user[userKeys[0]]) == str:
         values = "'" + user[userKeys[0]] + "'"
@@ -101,11 +114,34 @@ def add_user(
         pass
     # execute query
     try:
-        cursor.execute(f"INSERT INTO customers ({columns}) VALUES ({values});")
+        cursor.execute(f"INSERT INTO customers_db ({columns}) VALUES ({values});")
         connection.commit()
     except:
         connection.rollback()
     connection.close()
+    pass
+
+# Create a table to store the stock performance information
+def update_table(
+    dataframe,
+    table,
+    database="cup_adventure",
+    username=os.getenv("AWS_CUPADVENTURE_USERNAME"),
+    passwd=os.getenv("AWS_CUPADVENTURE_PASSWORD"),
+    hostname=os.getenv("AWS_CUPADVENTURE_HOSTNAME"),
+    portnum=int(os.getenv("AWS_CUPADVENTURE_PORT")),
+):
+    # Create Connection
+    engine = create_engine(f"mysql://{username}:{passwd}@{hostname}:{portnum}/{database}")
+    connection = engine.connect()
+    # Update table
+    try:
+        dataframe.to_sql(
+            table, connection, if_exists="replace", index=False
+        )
+        pass
+    except:
+        print(f"Error: {table} could not be updated in database")
     pass
 
 
@@ -115,7 +151,7 @@ if __name__ == "__main__":
     myhost = os.getenv("AWS_CUPADVENTURE_HOSTNAME")
     myport = int(os.getenv("AWS_CUPADVENTURE_PORT"))
     mydatabase = "cup_adventure"
-    mytable = "customers"
+    mytable = "customers_db"
     myparameters = [
         "customer_id INT NOT NULL AUTO_INCREMENT",
         "customer_lastName varchar(255) NOT NULL",
@@ -127,8 +163,13 @@ if __name__ == "__main__":
         "primary key (customer_id)",
     ]
     # myquery = "INSERT INTO customers (customer_firstName, customer_lastName, join_date) VALUES ('Jenny', 'Shen', '2022-12-02');"
-    newUser = {"customer_firstName": "Jenny", "customer_lastName": "Shen", "join_date": date.today().__str__(), "user_name": "jshen1", "password": "password"}
+    myquery = "SELECT password FROM customers_db where user_name = 'ngift1';"
+    # myquery = "SHOW TABLES;"
+    newUser = {"customer_firstName": "Noah", "customer_lastName": "Gift", "join_date": date.today().__str__(), "user_name": "ngift1", "password": "password7"}
     # createdb(mydatabase, myuser, mypassword, myhost, myport)
     # createTable(mytable, myparameters, mydatabase, myuser, mypassword, myhost, myport)
-    # query(myquery, mydatabase, myuser, mypassword, myhost, myport)
-    add_user(newUser)
+    query(myquery, mydatabase, myuser, mypassword, myhost, myport)
+    # add_user(newUser)
+    # updatedTable = pd.read_excel('customers_db.xlsx')
+    # update_table(updatedTable, mytable)
+    

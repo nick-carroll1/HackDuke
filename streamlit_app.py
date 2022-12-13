@@ -1,5 +1,6 @@
 import streamlit as st
 import streamlit.components.v1 as components
+from createdb import query
 
 # import streamlit_authenticator as stauth
 
@@ -11,10 +12,13 @@ def check_password():
 
     def password_entered():
         """Checks whether a password entered by the user is correct."""
+        userquery = f"SELECT user_name, password FROM customers_db where user_name = '{st.session_state['username']}';"
+        results = query(userquery)
+        passwords = {eachLine[0]: eachLine[1] for eachLine in results}
         if (
-            st.session_state["username"] in st.secrets["passwords"]
-            and st.session_state["password"]
-            == st.secrets["passwords"][st.session_state["username"]]
+            (st.session_state["username"] in passwords.keys)
+            and (st.session_state["password"]
+            == passwords[st.session_state["username"]])
         ):
             st.session_state["password_correct"] = True
             del st.session_state["password"]  # don't store username + password
