@@ -49,6 +49,7 @@ def check_password():
 
 
 st.title("Cup Adventure")
+st.write(st.session_state)
 if check_password():
     userquery = f"SELECT customer_firstName, user_name, customer_status FROM customers_db where user_name = '{st.session_state['username']}';"
     results = query(userquery)
@@ -79,7 +80,7 @@ if check_password():
             st.selectbox("Please select a cup", ["Cup 1", "Cup 2"])
             # Every form must have a submit button.
             submitted = st.form_submit_button("Submit")
-            st.write(submitted)
+            # st.write(submitted)
             # if submitted:
             #     # cup_rental()
             #     st.write("Thank you for renting your cup.")
