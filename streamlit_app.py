@@ -1,33 +1,33 @@
 import streamlit as st
 import streamlit.components.v1 as components
-# from createdb import query
-import os
-import subprocess
+from createdb import query
+# import os
+# import subprocess
 
 # import streamlit_authenticator as stauth
 
 # streamlit_app.py
 
-file1 = open('requirements.txt', 'r')
-Lines = file1.readlines()
-st.write(Lines)
+# file1 = open('requirements.txt', 'r')
+# Lines = file1.readlines()
+# st.write(Lines)
 
-a = subprocess.run(["pip", "freeze"], capture_output=True)
-st.write(a.stdout)
+# a = subprocess.run(["pip", "freeze"], capture_output=True)
+# st.write(a.stdout)
 
-a = subprocess.run(["pipenv", "run", "pip", "freeze"], capture_output=True)
-st.write(a.stdout)
+# a = subprocess.run(["pipenv", "run", "pip", "freeze"], capture_output=True)
+# st.write(a.stdout)
 
-a = subprocess.run(["pip", "--version"], capture_output=True)
-st.write(a.stdout)
+# a = subprocess.run(["pip", "--version"], capture_output=True)
+# st.write(a.stdout)
 
-file1 = open('packages.txt', 'r')
-Lines = file1.readlines()
-st.write(Lines)
+# file1 = open('packages.txt', 'r')
+# Lines = file1.readlines()
+# st.write(Lines)
 
-file1 = open('Pipfile', 'r')
-Lines = file1.readlines()
-st.write(Lines)
+# file1 = open('Pipfile', 'r')
+# Lines = file1.readlines()
+# st.write(Lines)
 
 # def check_password():
 #     """Returns `True` if the user had a correct password."""
