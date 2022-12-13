@@ -49,8 +49,6 @@ def check_password():
 
 @st.cache
 def main():
-    st.title("Cup Adventure")
-    st.write(st.session_state)
     if check_password():
         userquery = f"SELECT customer_firstName, user_name, customer_status FROM customers_db where user_name = '{st.session_state['username']}';"
         results = query(userquery)
@@ -91,4 +89,6 @@ def main():
 def cup_rental():
     st.write("Thank you for renting your cup.")
 
+st.title("Cup Adventure")
+st.write(st.session_state)
 main()
