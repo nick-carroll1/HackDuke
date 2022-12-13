@@ -12,12 +12,11 @@ file1 = open('requirements.txt', 'r')
 Lines = file1.readlines()
 st.write(Lines)
 
-a = subprocess.run(["pip", "freeze", ">", "requirements2.txt"], capture_output=True)
+a = subprocess.run(["pip", "freeze"], capture_output=True)
 st.write(a.stdout)
 
-file2 = open('requirements2.txt', 'r')
-Lines2 = file2.readlines()
-st.write(Lines2)
+a = subprocess.run(["pip", "--version"], capture_output=True)
+st.write(a.stdout)
 
 # def check_password():
 #     """Returns `True` if the user had a correct password."""
