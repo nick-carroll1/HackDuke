@@ -76,6 +76,10 @@ def check_password():
 
 st.title("Cup Adventure")
 if check_password():
+    userquery = f"SELECT customer_firstName, user_name FROM customers_db where user_name = '{st.session_state['username']}';"
+    results = query(userquery)
+    st.write(results[0])
+    # userInfo['firstName'] = results[0]
     st.write(f"Welcome {st.session_state['username']}")
 
 # authenticator = stauth.Authenticate(
