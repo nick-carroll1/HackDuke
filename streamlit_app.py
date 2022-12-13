@@ -55,7 +55,7 @@ if check_password():
         results = query(userquery)
         userInfo = {'firstName': results[0][0], 'username': results[0][1], 'status': results[0][2]}
         st.session_state['user info'] = userInfo
-    else:
+    if "user info" in st.session_state:
         st.write(f"Welcome {st.session_state['user info']['firstName']}")
         if st.session_state['user info']['status'] == "Borrowed":
             st.write("You currently have a cup borrowed.  Please return your cup when you are finished with it.")
