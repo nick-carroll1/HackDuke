@@ -18,6 +18,10 @@ st.write(a.stdout)
 a = subprocess.run(["pip", "--version"], capture_output=True)
 st.write(a.stdout)
 
+file1 = open('packages.txt', 'r')
+Lines = file1.readlines()
+st.write(Lines)
+
 # def check_password():
 #     """Returns `True` if the user had a correct password."""
 
