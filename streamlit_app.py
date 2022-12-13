@@ -47,7 +47,7 @@ def check_password():
         # Password correct.
         return True
 
-@st.cache
+@st.cache(suppress_st_warning=True)
 def main():
     st.title("Cup Adventure")
     st.write(st.session_state)
