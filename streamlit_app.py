@@ -82,5 +82,5 @@ if check_password():
     else:
         st.write("There has been an error tracking your last cup.  Please contact us for help.")
 
-def cup_rental:
+def cup_rental():
     st.write("Thank you for renting your cup.")
