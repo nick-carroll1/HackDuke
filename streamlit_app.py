@@ -1,6 +1,8 @@
 import streamlit as st
 import streamlit.components.v1 as components
 # from createdb import query
+import os
+import subprocess
 
 # import streamlit_authenticator as stauth
 
@@ -9,6 +11,9 @@ import streamlit.components.v1 as components
 file1 = open('requirements.txt', 'r')
 Lines = file1.readlines()
 st.write(Lines)
+
+a = subprocess.run(["pip", "freeze"], capture_output=True)
+st.write(a.stdout)
 
 # def check_password():
 #     """Returns `True` if the user had a correct password."""
