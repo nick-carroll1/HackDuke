@@ -1,6 +1,6 @@
 import streamlit as st
 import streamlit.components.v1 as components
-from createdb import query
+from createdb import query, rent_cup, return_cup
 
 
 def check_password():
@@ -68,17 +68,18 @@ if check_password():
                 vendorquery = f"SELECT DISTINCT vendor_id, vendor_name FROM vendors_db;"
                 vendorresults = query(vendorquery)
                 vendors = {'id': [eachVendor[0] for eachVendor in vendorresults], 'name': [eachVendor[1] for eachVendor in vendorresults]}
-                st.selectbox("Please select a vendor", vendors['name'])
+                vendor = st.selectbox("Please select a vendor", vendors['name'])
                 cupquery = f"SELECT cup_id FROM cups_db WHERE sold = 'no' AND cup_status = 'Available';"
                 cupresults = query(cupquery)
                 cups = [eachCup[0] for eachCup in cupresults]
-                st.selectbox("Please select a cup", cups)
+                cup = st.selectbox("Please select a cup", cups)
                 # Every form must have a submit button.
                 submitted = st.form_submit_button("Submit")
                 st.write(submitted)
                 if submitted:
                     st.write("Thank you for renting your cup.")
-                    st.session_state['user info']['status'] = "Borrowed"
+                    rent_cup(st.session_state['user info']['username'], cup)
+                    st.session_state['user info']['status'] = cup
         elif st.session_state['user info']['status'] == None:
             st.write("Use the dropdown below to rent your first cup.")
             with st.form("first_rental"):
@@ -86,19 +87,18 @@ if check_password():
                 vendorquery = f"SELECT DISTINCT vendor_id, vendor_name FROM vendors_db;"
                 vendorresults = query(vendorquery)
                 vendors = {'id': [eachVendor[0] for eachVendor in vendorresults], 'name': [eachVendor[1] for eachVendor in vendorresults]}
-                st.write(vendors)
-                st.selectbox("Please select a vendor", vendors['name'])
+                vendor = st.selectbox("Please select a vendor", vendors['name'])
                 cupquery = f"SELECT cup_id FROM cups_db WHERE sold = 'no' AND cup_status = 'Available';"
                 cupresults = query(cupquery)
                 cups = [eachCup[0] for eachCup in cupresults]
-                st.selectbox("Please select a cup", cups)
+                cup = st.selectbox("Please select a cup", cups)
                 # Every form must have a submit button.
                 submitted = st.form_submit_button("Submit")
-                # st.write(submitted)
+                st.write(submitted)
                 if submitted:
-                    # cup_rental()
                     st.write("Thank you for renting your cup.")
-                    st.session_state['user info']['status'] = "Borrowed"
+                    rent_cup(st.session_state['user info']['username'], cup)
+                    st.session_state['user info']['status'] = cup
         elif st.session_state['user info']['status'] != "Available":
             st.write("You currently have a cup borrowed.  Please return your cup when you are finished with it.")
             with st.form("return"):

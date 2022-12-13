@@ -121,7 +121,60 @@ def add_user(
     connection.close()
     pass
 
-# Create a table to store the stock performance information
+# Rent a cup
+def rent_cup(
+    user,
+    cup,
+    database="cup_adventure",
+    username=os.getenv("AWS_CUPADVENTURE_USERNAME"),
+    passwd=os.getenv("AWS_CUPADVENTURE_PASSWORD"),
+    hostname=os.getenv("AWS_CUPADVENTURE_HOSTNAME"),
+    portnum=int(os.getenv("AWS_CUPADVENTURE_PORT")),
+):
+    # Create Connection
+    connection = mysql.connector.connect(
+        user=username, password=passwd, host=hostname, port=portnum
+    )
+    cursor = connection.cursor()
+    cursor.execute(f"USE {database};")
+    # execute query
+    try:
+        cursor.execute(f"UPDATE customers_db SET customer_status = '{cup}' WHERE user_name = '{user}';")
+        cursor.execute(f"UPDATE cups_db SET cup_status = 'Borrowed' WHERE cup_id = {cup};")
+        connection.commit()
+    except:
+        connection.rollback()
+    connection.close()
+    pass
+
+# Return a cup
+def return_cup(
+    user,
+    cup,
+    database="cup_adventure",
+    username=os.getenv("AWS_CUPADVENTURE_USERNAME"),
+    passwd=os.getenv("AWS_CUPADVENTURE_PASSWORD"),
+    hostname=os.getenv("AWS_CUPADVENTURE_HOSTNAME"),
+    portnum=int(os.getenv("AWS_CUPADVENTURE_PORT")),
+):
+    # Create Connection
+    connection = mysql.connector.connect(
+        user=username, password=passwd, host=hostname, port=portnum
+    )
+    cursor = connection.cursor()
+    cursor.execute(f"USE {database};")
+    # execute query
+    try:
+        cursor.execute(f"UPDATE customers_db SET customer_status = 'Available' WHERE user_name = '{user}';")
+        cursor.execute(f"UPDATE cups_db SET cup_status = 'Available' WHERE cup_id = {cup};")
+        connection.commit()
+    except:
+        connection.rollback()
+    connection.close()
+    pass
+
+
+# Update table
 def update_table(
     dataframe,
     table,
