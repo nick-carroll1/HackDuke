@@ -12,11 +12,15 @@ def check_password():
         results = query(userquery)
         passwords = {eachLine[0]: eachLine[1] for eachLine in results}
         st.write(passwords)
+        st.write((st.session_state["username"] in passwords.keys())
+            and (st.session_state["password"]
+            == passwords[st.session_state["username"]]))
         if (
             (st.session_state["username"] in passwords.keys())
             and (st.session_state["password"]
             == passwords[st.session_state["username"]])
         ):
+            st.write("I am Here")
             st.session_state["password_correct"] = True
             del st.session_state["password"]  # don't store username + password
             # del st.session_state["username"]
