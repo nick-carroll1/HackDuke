@@ -39,7 +39,7 @@ def check_password():
         passwords = {eachLine[0]: eachLine[1] for eachLine in results}
         st.write(passwords)
         if (
-            (st.session_state["username"] in passwords.keys)
+            (st.session_state["username"] in passwords.keys())
             and (st.session_state["password"]
             == passwords[st.session_state["username"]])
         ):
