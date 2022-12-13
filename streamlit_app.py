@@ -104,7 +104,7 @@ if check_password():
             with st.form("return"):
                 # First run, show inputs for username + password.
                 vendorquery = f"SELECT vendor_name FROM vendors_db;"
-                vendorresults = query(userquery)
+                vendorresults = query(vendorquery)
                 vendors = [eachVendor[0] for eachVendor in vendorresults]
                 st.selectbox("Please select a vendor", vendors)
                 st.selectbox("Please select a cup", [st.session_state['user info']['status']])
