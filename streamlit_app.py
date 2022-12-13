@@ -69,6 +69,7 @@ if check_password():
                     st.write(submitted)
                     if submitted:
                         st.write("Thank you for renting your cup.")
+                        st.session_state['user info']['status'] = "Borrowed"
             elif st.session_state['user info']['status'] == None:
                 st.write("Use the dropdown below to rent your first cup.")
                 with st.form("first_rental"):
@@ -81,6 +82,7 @@ if check_password():
                     if submitted:
                         # cup_rental()
                         st.write("Thank you for renting your cup.")
+                        st.session_state['user info']['status'] = "Borrowed"
             else:
                 st.write("There has been an error tracking your last cup.  Please contact us for help.")
         if st.session_state['user info']['status'] == "Borrowed":
