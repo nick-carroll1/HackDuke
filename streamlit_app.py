@@ -69,7 +69,7 @@ if check_password():
             submitted = st.form_submit_button("Submit")
             if submitted:
                 cup_rental()
-    elif userInfo['status'] == "":
+    elif userInfo['status'] == None:
         st.write("Use the dropdown below to rent your first cup.")
         with st.form("first_rental"):
             # First run, show inputs for username + password.
