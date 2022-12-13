@@ -91,4 +91,5 @@ def cup_rental():
 
 st.title("Cup Adventure")
 st.write(st.session_state)
+check_password()
 main()
