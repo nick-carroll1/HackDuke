@@ -59,16 +59,16 @@ if check_password():
         st.write(f"Welcome {st.session_state['user info']['firstName']}")
         while st.session_state['user info']['status'] != "Borrowed":
             if st.session_state['user info']['status'] == "Available":
-            st.write("If you would like to rent a cup, please use the dropdown below.")
-            with st.form("rental"):
-                # First run, show inputs for username + password.
-                st.selectbox("Please select a vendor", ["Starbucks", "Beyu"])
-                st.selectbox("Please select a cup", ["Cup 1", "Cup 2"])
-                # Every form must have a submit button.
-                submitted = st.form_submit_button("Submit")
-                st.write(submitted)
-                if submitted:
-                    st.write("Thank you for renting your cup.")
+                st.write("If you would like to rent a cup, please use the dropdown below.")
+                with st.form("rental"):
+                    # First run, show inputs for username + password.
+                    st.selectbox("Please select a vendor", ["Starbucks", "Beyu"])
+                    st.selectbox("Please select a cup", ["Cup 1", "Cup 2"])
+                    # Every form must have a submit button.
+                    submitted = st.form_submit_button("Submit")
+                    st.write(submitted)
+                    if submitted:
+                        st.write("Thank you for renting your cup.")
             elif st.session_state['user info']['status'] == None:
                 st.write("Use the dropdown below to rent your first cup.")
                 with st.form("first_rental"):
