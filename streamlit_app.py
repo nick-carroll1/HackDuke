@@ -6,7 +6,7 @@ import streamlit.components.v1 as components
 
 # streamlit_app.py
 
-file1 = open('myfile.txt', 'r')
+file1 = open('requirements.txt', 'r')
 Lines = file1.readlines()
 st.write(Lines)
 
