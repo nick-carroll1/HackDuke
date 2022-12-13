@@ -47,7 +47,6 @@ def check_password():
         # Password correct.
         return True
 
-@st.cache
 def main():
     if check_password():
         userquery = f"SELECT customer_firstName, user_name, customer_status FROM customers_db where user_name = '{st.session_state['username']}';"
@@ -56,6 +55,7 @@ def main():
         userInfo['firstName'] = results[0][0]
         userInfo['username'] = results[0][1]
         userInfo['status'] = results[0][2]
+        st.session_state['user info'] = userInfo
         st.write(f"Welcome {userInfo['firstName']}")
         if userInfo['status'] == "Borrowed":
             st.write("You currently have a cup borrowed.  Please return your cup when you are finished with it.")
