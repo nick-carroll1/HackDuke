@@ -15,6 +15,9 @@ st.write(Lines)
 a = subprocess.run(["pip", "freeze"], capture_output=True)
 st.write(a.stdout)
 
+a = subprocess.run(["pipenv", "run", "pip", "freeze"], capture_output=True)
+st.write(a.stdout)
+
 a = subprocess.run(["pip", "--version"], capture_output=True)
 st.write(a.stdout)
 
