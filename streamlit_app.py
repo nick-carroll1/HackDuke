@@ -68,7 +68,8 @@ if check_password():
             # Every form must have a submit button.
             submitted = st.form_submit_button("Submit")
             if submitted:
-                cup_rental()
+                # cup_rental()
+                st.write("Thank you for renting your cup.")
     elif userInfo['status'] == None:
         st.write("Use the dropdown below to rent your first cup.")
         with st.form("first_rental"):
@@ -78,7 +79,8 @@ if check_password():
             # Every form must have a submit button.
             submitted = st.form_submit_button("Submit")
             if submitted:
-                cup_rental()
+                # cup_rental()
+                st.write("Thank you for renting your cup.")
     else:
         st.write("There has been an error tracking your last cup.  Please contact us for help.")
 
