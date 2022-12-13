@@ -37,7 +37,6 @@ def check_password():
         userquery = f"SELECT user_name, password FROM customers_db where user_name = '{st.session_state['username']}';"
         results = query(userquery)
         passwords = {eachLine[0]: eachLine[1] for eachLine in results}
-        st.write(passwords)
         if (
             (st.session_state["username"] in passwords.keys())
             and (st.session_state["password"]
@@ -77,7 +76,7 @@ def check_password():
 
 st.title("Cup Adventure")
 if check_password():
-    st.write(f"Welcome *Fred*")
+    st.write(f"Welcome {st.session_state["username"]}")
 
 # authenticator = stauth.Authenticate(
 #     config['credentials'],
