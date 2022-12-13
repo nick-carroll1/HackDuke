@@ -66,7 +66,7 @@ if check_password():
             st.write("If you would like to rent a cup, please use the dropdown below.")
             with st.form("rental"):
                 vendorquery = f"SELECT DISTINCT vendor_id, vendor_name FROM vendors_db;"
-                vendorresults = query(userquery)
+                vendorresults = query(vendorquery)
                 vendors = {'id': [eachVendor[0] for eachVendor in vendorresults], 'name': [eachVendor[1] for eachVendor in vendorresults]}
                 st.selectbox("Please select a vendor", vendors['name'])
                 cupquery = f"SELECT cup_id FROM cups_db WHERE sold = 'no' AND cup_status = 'Available';"
@@ -84,7 +84,7 @@ if check_password():
             with st.form("first_rental"):
                 # First run, show inputs for username + password.
                 vendorquery = f"SELECT DISTINCT vendor_id, vendor_name FROM vendors_db;"
-                vendorresults = query(userquery)
+                vendorresults = query(vendorquery)
                 for each in vendorresults:
                     st.write(each)
                 # vendors = {'id': [eachVendor[0] for eachVendor in vendorresults], 'name': [eachVendor[1] for eachVendor in vendorresults]}
