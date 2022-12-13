@@ -22,6 +22,10 @@ file1 = open('packages.txt', 'r')
 Lines = file1.readlines()
 st.write(Lines)
 
+file1 = open('Pipfile', 'r')
+Lines = file1.readlines()
+st.write(Lines)
+
 # def check_password():
 #     """Returns `True` if the user had a correct password."""
 
