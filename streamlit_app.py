@@ -76,7 +76,7 @@ def check_password():
 
 st.title("Cup Adventure")
 if check_password():
-    st.write(f"Welcome {st.session_state["username"]}")
+    st.write(f"Welcome {st.session_state['username']}")
 
 # authenticator = stauth.Authenticate(
 #     config['credentials'],
