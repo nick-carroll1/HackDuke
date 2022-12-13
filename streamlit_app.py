@@ -1,33 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 from createdb import query
-# import os
-# import subprocess
 
-# import streamlit_authenticator as stauth
-
-# streamlit_app.py
-
-# file1 = open('requirements.txt', 'r')
-# Lines = file1.readlines()
-# st.write(Lines)
-
-# a = subprocess.run(["pip", "freeze"], capture_output=True)
-# st.write(a.stdout)
-
-# a = subprocess.run(["pipenv", "run", "pip", "freeze"], capture_output=True)
-# st.write(a.stdout)
-
-# a = subprocess.run(["pip", "--version"], capture_output=True)
-# st.write(a.stdout)
-
-# file1 = open('packages.txt', 'r')
-# Lines = file1.readlines()
-# st.write(Lines)
-
-# file1 = open('Pipfile', 'r')
-# Lines = file1.readlines()
-# st.write(Lines)
 
 def check_password():
     """Returns `True` if the user had a correct password."""
@@ -76,48 +50,37 @@ def check_password():
 
 st.title("Cup Adventure")
 if check_password():
-    userquery = f"SELECT customer_firstName, user_name FROM customers_db where user_name = '{st.session_state['username']}';"
+    userquery = f"SELECT customer_firstName, user_name, customer_status FROM customers_db where user_name = '{st.session_state['username']}';"
     results = query(userquery)
-    st.write(results[0])
-    # userInfo['firstName'] = results[0]
-    st.write(f"Welcome {st.session_state['username']}")
+    userInfo = {}
+    userInfo['firstName'] = results[0][0]
+    userInfo['username'] = results[0][1]
+    userInfo['status'] = results[0][2]
+    st.write(f"Welcome {userInfo['firstName']}")
+    if userInfo['status'] == "Borrowed":
+        st.write("You currently have a cup borrowed.  Please return your cup when you are finished with it.")
+    elif userInfo['status'] == "Available":
+        st.write("If you would like to rent a cup, please use the dropdown below.")
+        with st.form("rental"):
+            # First run, show inputs for username + password.
+            st.selectbox("Please select a vendor", ["Starbucks", "Beyu"])
+            st.selectbox("Please select a cup", ["Cup 1", "Cup 2"])
+            # Every form must have a submit button.
+            submitted = st.form_submit_button("Submit")
+            if submitted:
+                cup_rental()
+    elif userInfo['status'] == "":
+        st.write("Use the dropdown below to rent your first cup.")
+        with st.form("first_rental"):
+            # First run, show inputs for username + password.
+            st.selectbox("Please select a vendor", ["Starbucks", "Beyu"])
+            st.selectbox("Please select a cup", ["Cup 1", "Cup 2"])
+            # Every form must have a submit button.
+            submitted = st.form_submit_button("Submit")
+            if submitted:
+                cup_rental()
+    else:
+        st.write("There has been an error tracking your last cup.  Please contact us for help.")
 
-# authenticator = stauth.Authenticate(
-#     config['credentials'],
-#     config['cookie']['name'],
-#     config['cookie']['key'],
-#     config['cookie']['expiry_days'],
-#     config['preauthorized']
-# )
-
-# with open('../config.yaml') as file:
-#     config = yaml.load(file, Loader=SafeLoader)
-
-# name, authentication_status, username = authenticator.login('Login', 'main')
-
-# if authentication_status:
-#     authenticator.logout('Logout', 'main')
-#     st.title("Cup Adventure")
-#     st.write(f'Welcome *{name}*')
-#     st.write(config['credentials'])
-# elif authentication_status == False:
-#     st.error('Username/password is incorrect')
-# elif authentication_status == None:
-#     st.warning('Please enter your username and password')
-
-# from PIL import Image
-# image = Image.open(r"images\banner.jpg")
-
-# st.image(image)
-# st.image("images\logo.jpg")
-# st.image(r"images\banner.jpg")
-
-# st.subheader("Previous Code")
-# HTMLFile = open('hack.html', 'r', encoding='utf-8')
-# sourceCode = HTMLFile.read()
-# components.html(sourceCode)
-
-# st.subheader("Website Code")
-# HTMLFile = open('final_form_website.html', 'r', encoding='utf-8')
-# sourceCode = HTMLFile.read()
-# components.html(sourceCode)
+def cup_rental:
+    st.write("Thank you for renting your cup.")
