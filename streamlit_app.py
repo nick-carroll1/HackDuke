@@ -29,54 +29,54 @@ from createdb import query
 # Lines = file1.readlines()
 # st.write(Lines)
 
-# def check_password():
-#     """Returns `True` if the user had a correct password."""
+def check_password():
+    """Returns `True` if the user had a correct password."""
 
-#     def password_entered():
-#         """Checks whether a password entered by the user is correct."""
-#         userquery = f"SELECT user_name, password FROM customers_db where user_name = '{st.session_state['username']}';"
-#         results = query(userquery)
-#         passwords = {eachLine[0]: eachLine[1] for eachLine in results}
-#         if (
-#             (st.session_state["username"] in passwords.keys)
-#             and (st.session_state["password"]
-#             == passwords[st.session_state["username"]])
-#         ):
-#             st.session_state["password_correct"] = True
-#             del st.session_state["password"]  # don't store username + password
-#             del st.session_state["username"]
-#         else:
-#             st.session_state["password_correct"] = False
+    def password_entered():
+        """Checks whether a password entered by the user is correct."""
+        userquery = f"SELECT user_name, password FROM customers_db where user_name = '{st.session_state['username']}';"
+        results = query(userquery)
+        passwords = {eachLine[0]: eachLine[1] for eachLine in results}
+        if (
+            (st.session_state["username"] in passwords.keys)
+            and (st.session_state["password"]
+            == passwords[st.session_state["username"]])
+        ):
+            st.session_state["password_correct"] = True
+            del st.session_state["password"]  # don't store username + password
+            del st.session_state["username"]
+        else:
+            st.session_state["password_correct"] = False
 
-#     if "password_correct" not in st.session_state:
-#         with st.form("sign-in1"):
-#             # First run, show inputs for username + password.
-#             st.text_input("Username", key="username")
-#             st.text_input("Password", type="password", key="password")
+    if "password_correct" not in st.session_state:
+        with st.form("sign-in1"):
+            # First run, show inputs for username + password.
+            st.text_input("Username", key="username")
+            st.text_input("Password", type="password", key="password")
 
-#             # Every form must have a submit button.
-#             submitted = st.form_submit_button("Submit")
-#             if submitted:
-#                 password_entered()
-#     elif not st.session_state["password_correct"]:
-#         # Password not correct, show input + error.
-#         with st.form("sign-in2"):
-#             # First run, show inputs for username + password.
-#             st.text_input("Username", key="username")
-#             st.text_input("Password", type="password", key="password")
+            # Every form must have a submit button.
+            submitted = st.form_submit_button("Submit")
+            if submitted:
+                password_entered()
+    elif not st.session_state["password_correct"]:
+        # Password not correct, show input + error.
+        with st.form("sign-in2"):
+            # First run, show inputs for username + password.
+            st.text_input("Username", key="username")
+            st.text_input("Password", type="password", key="password")
 
-#             # Every form must have a submit button.
-#             submitted = st.form_submit_button("Submit")
-#             if submitted:
-#                 password_entered()
-#     else:
-#         # Password correct.
-#         return True
+            # Every form must have a submit button.
+            submitted = st.form_submit_button("Submit")
+            if submitted:
+                password_entered()
+    else:
+        # Password correct.
+        return True
 
 
-# st.title("Cup Adventure")
-# if check_password():
-#     st.write(f"Welcome *Fred*")
+st.title("Cup Adventure")
+if check_password():
+    st.write(f"Welcome *Fred*")
 
 # authenticator = stauth.Authenticate(
 #     config['credentials'],
