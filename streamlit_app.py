@@ -52,12 +52,9 @@ def main():
         if "user info" not in st.session_state:
             userquery = f"SELECT customer_firstName, user_name, customer_status FROM customers_db where user_name = '{st.session_state['username']}';"
             results = query(userquery)
-            userInfo = {}
-            userInfo['firstName'] = results[0][0]
-            userInfo['username'] = results[0][1]
-            userInfo['status'] = results[0][2]
+            userInfo = {'firstName': results[0][0], 'username': results[0][1], 'status': results[0][2]}
             st.session_state['user info'] = userInfo
-        st.write(f"Welcome {userInfo['firstName']}")
+        st.write(f"Welcome {st.session_state['user info']['firstName']}")
         if userInfo['status'] == "Borrowed":
             st.write("You currently have a cup borrowed.  Please return your cup when you are finished with it.")
         elif userInfo['status'] == "Available":
