@@ -107,7 +107,7 @@ if check_password():
                 vendorresults = query(vendorquery)
                 vendors = [eachVendor[0] for eachVendor in vendorresults]
                 vendor = st.selectbox("Please select a vendor", vendors)
-                cup = st.selectbox("Please select a cup", [st.session_state['user info']['status']])
+                cup = int(st.selectbox("Please select a cup", [st.session_state['user info']['status']]))
                 # Every form must have a submit button.
                 submitted = st.form_submit_button("Submit")
                 st.write(submitted)
