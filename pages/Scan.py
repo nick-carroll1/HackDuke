@@ -37,7 +37,7 @@ components.html(
 				  ?>
                 </div>
                 <div class = "col-md-6">
-                <form action = "insert1.php" method = "post" name = "form1" id = "form1" class = "form-horizontal">
+                <form action = "../Scan/insert1.php" method = "post" name = "form1" id = "form1" class = "form-horizontal">
                     <label>SCAN QR CODE</label>
                     <input type = "text" name = "text" id = "text" readonyy = "" placeholder = "scan the QR Code" class = "form-control">
                 </form>
@@ -54,10 +54,10 @@ components.html(
                     </thead>
                     <tbody>
                         <?php
-                        $server = "cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com";
-                        $username="admin";
-                        $password="NoahGift706";
-                        $dbname="cup_adventure";
+                        $server = "test1";
+                        $username="test2";
+                        $password="test3";
+                        $dbname="test4";
                     
                         $conn = new mysqli($server,$username,$password,$dbname);
 						$date = date("Y-m-d H:i:s");

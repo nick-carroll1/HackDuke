@@ -5,10 +5,10 @@
     error_reporting(E_ALL);
 
     SESSION_START();
-    $server = "cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com";
-    $username="admin";
-    $password="NoahGift706";
-    $dbname="cup_adventure";
+    $server = "test1";
+    $username="test2";
+    $password="test3";
+    $dbname="test4";
 
     $conn = mysqli_connect($server,$username,$password,$dbname);
 
