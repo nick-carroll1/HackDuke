@@ -104,5 +104,5 @@ components.html(
         
         </script>
     </body>
-</html>""", width = 250, height = 250, scrolling= True
+</html>""", width = 500, height = 500, scrolling= True
 )
