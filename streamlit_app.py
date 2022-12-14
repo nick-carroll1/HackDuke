@@ -11,16 +11,11 @@ def check_password():
         userquery = f"SELECT user_name, password FROM customers_db where user_name = '{st.session_state['username']}';"
         results = query(userquery)
         passwords = {eachLine[0]: eachLine[1] for eachLine in results}
-        st.write(passwords)
-        st.write((st.session_state["username"] in passwords.keys())
-            and (st.session_state["password"]
-            == passwords[st.session_state["username"]]))
         if (
             (st.session_state["username"] in passwords.keys())
             and (st.session_state["password"]
             == passwords[st.session_state["username"]])
         ):
-            st.write("I am Here")
             st.session_state["password_correct"] = True
             del st.session_state["password"]  # don't store username + password
             # del st.session_state["username"]
@@ -53,7 +48,6 @@ def check_password():
         return True
 
 st.title("Cup Adventure")
-st.write(st.session_state)
 if check_password():
     if "user info" not in st.session_state:
         userquery = f"SELECT customer_firstName, user_name, cup_rental FROM customers_db where user_name = '{st.session_state['username']}';"
@@ -117,10 +111,7 @@ if check_password():
                     st.session_state['user info']['status'] = "Available"
         else:
             st.write("There has been an error tracking your last cup.  Please contact us for help.")
-        
 
-def cup_rental():
-    st.write("Thank you for renting your cup.")
 
 
 
