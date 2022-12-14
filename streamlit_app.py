@@ -77,7 +77,7 @@ if check_password():
                 submitted = st.form_submit_button("Submit")
                 st.write(submitted)
                 if submitted:
-                    rent_cup(st.session_state['user info']['username'], cup)
+                    rent_cup(st.session_state['user info']['username'], vendor, cup)
                     st.write("Thank you for renting your cup.")
                     st.session_state['user info']['status'] = cup
         elif st.session_state['user info']['status'] == None:
@@ -96,23 +96,23 @@ if check_password():
                 submitted = st.form_submit_button("Submit")
                 st.write(submitted)
                 if submitted:
-                    rent_cup(st.session_state['user info']['username'], cup)
+                    rent_cup(st.session_state['user info']['username'], vendor, cup)
                     st.write("Thank you for renting your cup.")
                     st.session_state['user info']['status'] = cup
         elif st.session_state['user info']['status'] != "Available":
             st.write("You currently have a cup borrowed.  Please return your cup when you are finished with it.")
             with st.form("return"):
                 # First run, show inputs for username + password.
-                vendorquery = f"SELECT vendor_name FROM vendors_db;"
+                vendorquery = f"SELECT DISTINCT vendor_name FROM vendors_db;"
                 vendorresults = query(vendorquery)
                 vendors = [eachVendor[0] for eachVendor in vendorresults]
-                st.selectbox("Please select a vendor", vendors)
-                st.selectbox("Please select a cup", [st.session_state['user info']['status']])
+                vendor = st.selectbox("Please select a vendor", vendors)
+                cup = st.selectbox("Please select a cup", [st.session_state['user info']['status']])
                 # Every form must have a submit button.
                 submitted = st.form_submit_button("Submit")
                 st.write(submitted)
                 if submitted:
-                    return_cup(st.session_state['user info']['username'], cup)
+                    return_cup(st.session_state['user info']['username'], vendor, cup)
                     st.write("Thank you for returning your cup.")
                     st.session_state['user info']['status'] = "Available"
         else:

@@ -124,6 +124,7 @@ def add_user(
 # Rent a cup
 def rent_cup(
     user,
+    vendor,
     cup,
     database="cup_adventure",
     username=os.getenv("AWS_CUPADVENTURE_USERNAME"),
@@ -137,10 +138,17 @@ def rent_cup(
     )
     cursor = connection.cursor()
     cursor.execute(f"USE {database};")
+    columns = ['order_id', 'transaction_date', 'customer_id', 'vendor_id', 'cup_id', 'transaction_status', 'Revenue']
+    values = [None, date.today(), user, vendor, cup, "'Borrowed'", 0]
     # execute query
     try:
-        cursor.execute(f"UPDATE customers_db SET customer_status = '{cup}' WHERE user_name = '{user}';")
-        cursor.execute(f"UPDATE cups_db SET cup_status = 'Borrowed' WHERE cup_id = {cup};")
+        values[0] = cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")[0][0]
+        values[2] = cursor.execute(f"SELECT customer_id FROM customers_db WHERE user_name = '{user}';")[0][0]
+        values[3] = "'" + cursor.execute(f"SELECT vendor_id FROM vendors_db WHERE vendor_name = '{vendor}';")[0][0] + "'"
+        cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
+        cursor.execute(f"UPDATE customers_db SET cup_rental = '{cup}' WHERE user_name = '{user}';")
+        cursor.execute(f"UPDATE cups_db SET cup_status = 'Borrowed', vendor_id = 'Out' WHERE cup_id = {cup};")
+        cursor.execute(f"UPDATE vendors_db SET cup_stock = (SELECT cup_stock FROM vendors_db WHERE vendor_name = {vendor} - 1) WHERE vendor_name = {vendor};")
         connection.commit()
     except:
         connection.rollback()
@@ -150,6 +158,7 @@ def rent_cup(
 # Return a cup
 def return_cup(
     user,
+    vendor,
     cup,
     database="cup_adventure",
     username=os.getenv("AWS_CUPADVENTURE_USERNAME"),
@@ -163,10 +172,17 @@ def return_cup(
     )
     cursor = connection.cursor()
     cursor.execute(f"USE {database};")
+    columns = ['order_id', 'transaction_date', 'customer_id', 'vendor_id', 'cup_id', 'transaction_status', 'Revenue']
+    values = [None, date.today(), user, vendor, cup, "'Returned'", 0]
     # execute query
     try:
-        cursor.execute(f"UPDATE customers_db SET customer_status = 'Available' WHERE user_name = '{user}';")
-        cursor.execute(f"UPDATE cups_db SET cup_status = 'Available' WHERE cup_id = {cup};")
+        values[0] = cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")[0][0]
+        values[2] = cursor.execute(f"SELECT customer_id FROM customers_db WHERE user_name = '{user}';")[0][0]
+        values[3] = "'" + cursor.execute(f"SELECT vendor_id FROM vendors_db WHERE vendor_name = '{vendor}';")[0][0] + "'"
+        cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
+        cursor.execute(f"UPDATE customers_db SET cup_rental = {None} WHERE user_name = '{user}';")
+        cursor.execute(f"UPDATE cups_db SET cup_status = 'Available', vendor_id = {values[3]} WHERE cup_id = {cup};")
+        cursor.execute(f"UPDATE vendors_db SET cup_stock = (SELECT cup_stock FROM vendors_db WHERE vendor_name = {vendor} + 1) WHERE vendor_name = {vendor};")
         connection.commit()
     except:
         connection.rollback()
@@ -204,7 +220,7 @@ if __name__ == "__main__":
     myhost = os.getenv("AWS_CUPADVENTURE_HOSTNAME")
     myport = int(os.getenv("AWS_CUPADVENTURE_PORT"))
     mydatabase = "cup_adventure"
-    mytable = "vendors_db"
+    mytable = "customers_db"
     myparameters = [
         "customer_id INT NOT NULL AUTO_INCREMENT",
         "customer_lastName varchar(255) NOT NULL",
@@ -218,12 +234,14 @@ if __name__ == "__main__":
     # myquery = "INSERT INTO customers (customer_firstName, customer_lastName, join_date) VALUES ('Jenny', 'Shen', '2022-12-02');"
     # myquery = "SELECT password FROM customers_db where user_name = 'ngift1';"
     # myquery = f"SELECT DISTINCT vendor_id, vendor_name FROM vendors_db;"
+    # myquery = f"SELECT MAX(order_id) + 1 FROM transactions_log;"
+    # myquery = f"SELECT customer_id FROM customers_db WHERE user_name = '{user}';"
     # myquery = "SHOW TABLES;"
     # newUser = {"customer_firstName": "Noah", "customer_lastName": "Gift", "join_date": date.today().__str__(), "user_name": "ngift1", "password": "password7"}
     # createdb(mydatabase, myuser, mypassword, myhost, myport)
     # createTable(mytable, myparameters, mydatabase, myuser, mypassword, myhost, myport)
     # print(query(myquery, mydatabase, myuser, mypassword, myhost, myport))
     # add_user(newUser)
-    updatedTable = pd.read_excel('raw_data/vendors_db.xlsx')
-    update_table(updatedTable, mytable)
+    # updatedTable = pd.read_excel('raw_data/customers_db.xlsx')
+    # update_table(updatedTable, mytable)
     
