@@ -5,10 +5,10 @@
     error_reporting(E_ALL);
 
     SESSION_START();
-    $server = "test1";
-    $username="test2";
-    $password="test3";
-    $dbname="test4";
+    $server = .$_ENV["AWS_CUPADVENTURE_HOSTNAME"] .;
+    $username=.$_ENV["AWS_CUPADVENTURE_USERNAME"] .;
+    $password=.$_ENV["AWS_CUPADVENTURE_PASSWORD"] .;
+    $dbname="cup_adventure";
 
     $conn = mysqli_connect($server,$username,$password,$dbname);
 

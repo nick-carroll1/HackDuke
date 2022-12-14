@@ -1,5 +1,6 @@
 import streamlit as st
 import streamlit.components.v1 as components
+import os
 
 components.html(
     """<?php SESSION_START(); ?>
@@ -52,12 +53,12 @@ components.html(
                             <td>Status</td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody>"""+f"""
                         <?php
-                        $server = "test1";
-                        $username="test2";
-                        $password="test3";
-                        $dbname="test4";
+                        $server = {os.getenv("AWS_CUPADVENTURE_HOSTNAME")};
+                        $username={os.getenv("AWS_CUPADVENTURE_USERNAME")};
+                        $password={os.getenv("AWS_CUPADVENTURE_PASSWORD")};
+                        $dbname="cup_adventure";"""+"""
                     
                         $conn = new mysqli($server,$username,$password,$dbname);
 						$date = date("Y-m-d H:i:s");

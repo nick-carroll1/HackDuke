@@ -1,4 +1,6 @@
-<?php SESSION_START(); ?>
+import os
+cat = 'fart'
+print("""<?php SESSION_START(); ?>
 <html>
     <head>  
     <script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
@@ -33,7 +35,7 @@
 				  ?>
                 </div>
                 <div class = "col-md-6">
-                <form action = "insert1.php" method = "post" name = "form1" id = "form1" class = "form-horizontal">
+                <form action = "../Scan/insert1.php" method = "post" name = "form1" id = "form1" class = "form-horizontal">
                     <label>SCAN QR CODE</label>
                     <input type = "text" name = "text" id = "text" readonyy = "" placeholder = "scan the QR Code" class = "form-control">
                 </form>
@@ -48,12 +50,12 @@
                             <td>Status</td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody>"""+f"""
                         <?php
-                        $server = "insert environment variable here";
-                        $username="insert environment variable here";
-                        $password="insert environment variable here";
-                        $dbname="insert environment variable here";
+                        $server = {os.getenv("AWS_CUPADVENTURE_HOSTNAME")};
+                        $username={os.getenv("AWS_CUPADVENTURE_USERNAME")};
+                        $password={os.getenv("AWS_CUPADVENTURE_PASSWORD")};
+                        $dbname="cup_adventure";"""+"""
                     
                         $conn = new mysqli($server,$username,$password,$dbname);
 						$date = date("Y-m-d H:i:s");
@@ -99,4 +101,5 @@
         
         </script>
     </body>
-</html>
+</html>"""
+)
