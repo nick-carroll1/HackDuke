@@ -56,7 +56,7 @@ st.title("Cup Adventure")
 st.write(st.session_state)
 if check_password():
     if "user info" not in st.session_state:
-        userquery = f"SELECT customer_firstName, user_name, customer_status FROM customers_db where user_name = '{st.session_state['username']}';"
+        userquery = f"SELECT customer_firstName, user_name, cup_rental FROM customers_db where user_name = '{st.session_state['username']}';"
         results = query(userquery)
         userInfo = {'firstName': results[0][0], 'username': results[0][1], 'status': results[0][2]}
         st.session_state['user info'] = userInfo
@@ -77,8 +77,8 @@ if check_password():
                 submitted = st.form_submit_button("Submit")
                 st.write(submitted)
                 if submitted:
-                    st.write("Thank you for renting your cup.")
                     rent_cup(st.session_state['user info']['username'], cup)
+                    st.write("Thank you for renting your cup.")
                     st.session_state['user info']['status'] = cup
         elif st.session_state['user info']['status'] == None:
             st.write("Use the dropdown below to rent your first cup.")
@@ -96,8 +96,8 @@ if check_password():
                 submitted = st.form_submit_button("Submit")
                 st.write(submitted)
                 if submitted:
-                    st.write("Thank you for renting your cup.")
                     rent_cup(st.session_state['user info']['username'], cup)
+                    st.write("Thank you for renting your cup.")
                     st.session_state['user info']['status'] = cup
         elif st.session_state['user info']['status'] != "Available":
             st.write("You currently have a cup borrowed.  Please return your cup when you are finished with it.")
@@ -112,6 +112,7 @@ if check_password():
                 submitted = st.form_submit_button("Submit")
                 st.write(submitted)
                 if submitted:
+                    return_cup(st.session_state['user info']['username'], cup)
                     st.write("Thank you for returning your cup.")
                     st.session_state['user info']['status'] = "Available"
         else:

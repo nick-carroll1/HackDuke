@@ -204,7 +204,7 @@ if __name__ == "__main__":
     myhost = os.getenv("AWS_CUPADVENTURE_HOSTNAME")
     myport = int(os.getenv("AWS_CUPADVENTURE_PORT"))
     mydatabase = "cup_adventure"
-    mytable = "customers_db"
+    mytable = "vendors_db"
     myparameters = [
         "customer_id INT NOT NULL AUTO_INCREMENT",
         "customer_lastName varchar(255) NOT NULL",
@@ -224,6 +224,6 @@ if __name__ == "__main__":
     # createTable(mytable, myparameters, mydatabase, myuser, mypassword, myhost, myport)
     # print(query(myquery, mydatabase, myuser, mypassword, myhost, myport))
     # add_user(newUser)
-    updatedTable = pd.read_excel('customers_db.xlsx')
+    updatedTable = pd.read_excel('raw_data/vendors_db.xlsx')
     update_table(updatedTable, mytable)
     
