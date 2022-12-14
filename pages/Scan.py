@@ -104,5 +104,5 @@ components.html(
         
         </script>
     </body>
-</html>"""
+</html>""", height = 300
 )
