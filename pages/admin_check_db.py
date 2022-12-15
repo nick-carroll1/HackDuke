@@ -6,96 +6,97 @@ from sqlalchemy import create_engine
 import streamlit as st
 import altair as alt
 import datetime
+import createdb
 
 
-def create_db_connection(host_name, user_name, user_password, user_port, db_name):
-    connection = None
-    try:
-        connection = mysql.connector.connect(
-            host=host_name,
-            user=user_name,
-            passwd=user_password,
-            port=user_port,
-            database=db_name,
-        )
-        print("MySQL Database connection successful")
-    except Error as err:
-        print(f"Error: '{err}'")
+# def create_db_connection(host_name, user_name, user_password, user_port, db_name):
+#     connection = None
+#     try:
+#         connection = mysql.connector.connect(
+#             host=host_name,
+#             user=user_name,
+#             passwd=user_password,
+#             port=user_port,
+#             database=db_name,
+#         )
+#         print("MySQL Database connection successful")
+#     except Error as err:
+#         print(f"Error: '{err}'")
 
-    return connection
-
-
-connection = create_db_connection(
-    os.getenv("AWS_HOST"),
-    os.getenv("AWS_USER"),
-    os.getenv("AWS_PASSWORD"),
-    os.getenv("AWS_PORT"),
-    "cup_adventure",
-)
-
-# fetch the table names from the database
-cursor = connection.cursor()
-cursor.execute("SHOW TABLES")
-tables = cursor.fetchall()
-tables = [table[0] for table in tables]
+#     return connection
 
 
-def rent_cup(
-    user,
-    vendor,
-    cup,
-    database="cup_adventure",
-    username=os.getenv("AWS_USER"),
-    passwd=os.getenv("AWS_PASSWORD"),
-    hostname=os.getenv("AWS_HOST"),
-    portnum=int(os.getenv("AWS_PORT")),
-):
-    # Create Connection
-    connection = mysql.connector.connect(
-        user=username, password=passwd, host=hostname, port=portnum
-    )
-    cursor = connection.cursor()
-    cursor.execute(f"USE {database};")
-    columns = [
-        "order_id",
-        "transaction_date",
-        "customer_id",
-        "vendor_id",
-        "cup_id",
-        "transaction_status",
-        "Revenue",
-    ]
-    values = [None, date.today(), user, vendor, cup, "'Borrowed'", 0]
-    # execute query
-    try:
-        values[0] = cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")[
-            0
-        ][0]
-        values[2] = cursor.execute(
-            f"SELECT customer_id FROM customers_db WHERE user_name = '{user}';"
-        )[0][0]
-        values[3] = (
-            "'"
-            + cursor.execute(
-                f"SELECT vendor_id FROM vendors_db WHERE vendor_name = '{vendor}';"
-            )[0][0]
-            + "'"
-        )
-        cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
-        cursor.execute(
-            f"UPDATE customers_db SET cup_rental = '{cup}' WHERE user_name = '{user}';"
-        )
-        cursor.execute(
-            f"UPDATE cups_db SET cup_status = 'Borrowed', vendor_id = 'Out' WHERE cup_id = {cup};"
-        )
-        cursor.execute(
-            f"UPDATE vendors_db SET cup_stock = (SELECT cup_stock FROM vendors_db WHERE vendor_name = {vendor} - 1) WHERE vendor_name = {vendor};"
-        )
-        connection.commit()
-    except:
-        connection.rollback()
-    connection.close()
-    pass
+# connection = create_db_connection(
+#     os.getenv("AWS_HOST"),
+#     os.getenv("AWS_USER"),
+#     os.getenv("AWS_PASSWORD"),
+#     os.getenv("AWS_PORT"),
+#     "cup_adventure",
+# )
+
+# # fetch the table names from the database
+# cursor = connection.cursor()
+# cursor.execute("SHOW TABLES")
+# tables = cursor.fetchall()
+# tables = [table[0] for table in tables]
+
+
+# def rent_cup(
+#     user,
+#     vendor,
+#     cup,
+#     database="cup_adventure",
+#     username=os.getenv("AWS_USER"),
+#     passwd=os.getenv("AWS_PASSWORD"),
+#     hostname=os.getenv("AWS_HOST"),
+#     portnum=int(os.getenv("AWS_PORT")),
+# ):
+#     # Create Connection
+#     connection = mysql.connector.connect(
+#         user=username, password=passwd, host=hostname, port=portnum
+#     )
+#     cursor = connection.cursor()
+#     cursor.execute(f"USE {database};")
+#     columns = [
+#         "order_id",
+#         "transaction_date",
+#         "customer_id",
+#         "vendor_id",
+#         "cup_id",
+#         "transaction_status",
+#         "Revenue",
+#     ]
+#     values = [None, date.today(), user, vendor, cup, "'Borrowed'", 0]
+#     # execute query
+#     try:
+#         values[0] = cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")[
+#             0
+#         ][0]
+#         values[2] = cursor.execute(
+#             f"SELECT customer_id FROM customers_db WHERE user_name = '{user}';"
+#         )[0][0]
+#         values[3] = (
+#             "'"
+#             + cursor.execute(
+#                 f"SELECT vendor_id FROM vendors_db WHERE vendor_name = '{vendor}';"
+#             )[0][0]
+#             + "'"
+#         )
+#         cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
+#         cursor.execute(
+#             f"UPDATE customers_db SET cup_rental = '{cup}' WHERE user_name = '{user}';"
+#         )
+#         cursor.execute(
+#             f"UPDATE cups_db SET cup_status = 'Borrowed', vendor_id = 'Out' WHERE cup_id = {cup};"
+#         )
+#         cursor.execute(
+#             f"UPDATE vendors_db SET cup_stock = (SELECT cup_stock FROM vendors_db WHERE vendor_name = {vendor} - 1) WHERE vendor_name = {vendor};"
+#         )
+#         connection.commit()
+#     except:
+#         connection.rollback()
+#     connection.close()
+#     pass
 
 
 # make a sidebar with choice of different pages named "Read Data" and "Add New Data"
