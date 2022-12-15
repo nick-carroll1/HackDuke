@@ -94,7 +94,10 @@ elif selection == "Vendor Data":
             ),
             y=alt.Y("cup_stock", title="Cup Stock"),
             color="vendor_name",
-            tooltip=["vendor_name", "cup_stock"],
+            tooltip=[
+                alt.Tooltip("vendor_name", title="Vendor Name"),
+                alt.Tooltip("cup_stock", title="Cup Stock"),
+            ],
         )
         .interactive()
     )
