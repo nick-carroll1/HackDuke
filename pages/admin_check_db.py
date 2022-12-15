@@ -258,12 +258,13 @@ elif selection == "Pull Customer Data":
         connection.close()
 
 elif selection == "Add New Customer Data":
+    today = datetime.date.today()
     st.header("Add New Customer Data")
     st.write("Please enter the new customer data below")
     customer_id = st.text_input("Customer ID", "")
     customer_lastName = st.text_input("Customer Last Name", "")
     customer_firstName = st.text_input("Customer First Name", "")
-    customer_join_date = st.date_input("Join Date", "")
+    customer_join_date = st.date_input("Join Date", today)
     user_name = st.text_input("User Name", "")
     join_date = st.text_input("Join Date", "")
     if st.button("Add Data"):
