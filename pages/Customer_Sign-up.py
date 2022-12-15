@@ -29,4 +29,6 @@ with st.form("Customer Sign-up"):
             st.write(
                 "There was an error signing you up.  Please ensure no fields are blank."
             )
+            st.write(user.keys(), len({"customer_id", "customer_firstName", "customer_lastName", "join_date"}.difference(set(user.keys()))) == 0)
             st.write(err)
+            
