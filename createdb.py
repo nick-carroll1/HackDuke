@@ -88,25 +88,25 @@ def add_user(
     userKeys = list(user.keys())
     assert len({"customer_id", "customer_firstName", "customer_lastName", "join_date"}.difference(set(userKeys))) == 0
     # Confirm customer_id is unique
-    cursor.execute(f"SELECT customer_id FROM customers_db WHERE user_name = '{user['customer_id']}';")
+    cursor.execute(f"SELECT customer_id FROM customers_db WHERE customer_id = '{user['customer_id']}';")
     users = {x[0] for x in cursor}
     assert users == set()
     # Convert user information to a query
     columns = userKeys[0]
-    if type(user[userKeys[0]]) == str:
+    if (type(user[userKeys[0]]) == type(str())) or (type(user[userKeys[0]]) == type(date.today())):
         values = "'" + user[userKeys[0]] + "'"
         pass
     else:
-        values = user[userKeys[0]]
+        values = str(user[userKeys[0]])
     if len(userKeys) > 1:
         for eachKey in userKeys[1:]:
             columns += ", " + eachKey
             eachValue = user[eachKey]
-            if type(eachValue) == str:
-                values += ", '" + eachValue + "'"
+            if (type(eachValue) == type(str())) or (type(eachValue) == type(date.today())):
+                values += ", '" + str(eachValue) + "'"
                 pass
             else:
-                values += ", " + eachValue
+                values += ", " + str(eachValue)
                 pass
             pass
         pass
@@ -275,10 +275,10 @@ if __name__ == "__main__":
     # myquery = f"SELECT MAX(order_id) + 1 FROM transactions_log;"
     # myquery = f"SELECT customer_id FROM customers_db WHERE user_name = '{user}';"
     # myquery = "SHOW TABLES;"
-    # newUser = {"customer_firstName": "Noah", "customer_lastName": "Gift", "join_date": date.today().__str__(), "user_name": "ngift1", "password": "password7"}
+    # newUser = {"customer_id": 14050, "customer_firstName": "Noah", "customer_lastName": "Gift", "join_date": date.today()}
     # createdb(mydatabase, myuser, mypassword, myhost, myport)
     # createTable(mytable, myparameters, mydatabase, myuser, mypassword, myhost, myport)
-    # print(query(myquery, mydatabase, myuser, mypassword, myhost, myport))
+    print(query(myquery, mydatabase, myuser, mypassword, myhost, myport))
     # add_user(newUser)
     # updatedTable = pd.read_excel('raw_data/customers_db.xlsx')
     # update_table(updatedTable, mytable)
