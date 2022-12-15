@@ -1,5 +1,5 @@
 import streamlit as st
-import createdb
+from createdb import add_user
 from datetime import date
 
 
@@ -20,12 +20,13 @@ with st.form("Customer Sign-up"):
                 "join_date": date.today()
                 }
         try:
-            createdb.add_user(user)
+            add_user(user)
             st.write(
                 f"Congratulations {first_name} {last_name}!  You have signed-up for Cup Adventure!"
             )
             st.write("Thank you for joining us in reducing Cup Waste!")
-        except:
+        except as err:
             st.write(
                 "There was an error signing you up.  Please ensure no fields are blank."
             )
+            st.write(err)
