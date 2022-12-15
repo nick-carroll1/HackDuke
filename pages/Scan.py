@@ -2,7 +2,8 @@ import streamlit as st
 import streamlit.components.v1 as components
 import os
 
-a = components.html(
+c = ""
+components.html(
     """<?php SESSION_START(); ?>
 <html>
     <head>  
@@ -97,7 +98,7 @@ a = components.html(
             });
 
             scanner.addListener('scan', function (c) {
-                document.getElementById('text').value = c;
+                """+f"""document.getElementById('text').value = {c};
                 <!--document.forms["form1"].submit();-->
             });
         
@@ -107,4 +108,4 @@ a = components.html(
 </html>""", width = 900, height = 1500, scrolling= True
 )
 
-st.write(type(a), dir(a))
+st.write(c)
