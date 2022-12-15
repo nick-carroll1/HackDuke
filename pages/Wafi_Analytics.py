@@ -49,10 +49,17 @@ query_customer_1 = "SELECT month(join_date) as Month, COUNT(distinct customer_id
 df_customer_1 = pd.read_sql(query_customer_1, connection)
 query_customer_2 = "SELECT month(transaction_date) as Month, count(distinct customer_id) as active_user FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
 df_customer_2 = pd.read_sql(query_customer_2, connection)
+query_customer_3="SELECT month(transaction_date) as Month, count(distinct cup_id) as unique_cup FROM transactions_log GROUP BY month(transaction_date)"
+df_customer_3=pd.read_sql(query_customer_3, connection)
 
-df_customer_1 = pd.read_sql(query_customer_1, connection)
-query_customer_2 = "SELECT month(transaction_date) as Month, count(distinct customer_id) as active_user FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
-df_customer_2 = pd.read_sql(query_customer_2, connection)
+
+
+unique=alt.Chart(df_customer_3).mark_line().encode(x='Month:N',y='unique_cup:Q')
+
+
+st.altair_chart(unique)
+
+
 
 # create an altair chart to show x:Month, y:new_user from df_metric_3
 customer_chart = (
@@ -92,3 +99,4 @@ customer_line_chart = (
 )
 st.altair_chart(customer_line_chart, use_container_width=True)
 connection.close()
+
