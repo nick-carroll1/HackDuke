@@ -9,7 +9,6 @@ import datetime
 from createdb import query, add_user, update_user
 
 
-
 # def create_db_connection(host_name, user_name, user_password, user_port, db_name):
 #     connection = None
 #     try:
@@ -114,6 +113,7 @@ selection = st.sidebar.radio(
     ],
 )
 
+
 def check_password():
     """Returns `True` if the user had a correct password."""
 
@@ -125,7 +125,7 @@ def check_password():
         if (
             (st.session_state["username"] in passwords.keys())
             and (st.session_state["password"]
-            == passwords[st.session_state["username"]])
+                 == passwords[st.session_state["username"]])
         ):
             st.session_state["password_correct"] = True
             del st.session_state["password"]  # don't store username + password
@@ -157,6 +157,7 @@ def check_password():
     else:
         # Password correct.
         return True
+
 
 st.title("Cup Adventure")
 if check_password():
@@ -220,7 +221,8 @@ if check_password():
             alt.Chart(df_metric_2)
             .mark_bar()
             .encode(
-                x=alt.X("Month:N", title="Month", axis=alt.Axis(labelAngle=-0)),
+                x=alt.X("Month:N", title="Month",
+                        axis=alt.Axis(labelAngle=-0)),
                 y=alt.Y("Active_Vendors:Q", title="Active Vendors"),
                 tooltip=[
                     alt.Tooltip("Month", title="Month"),
@@ -249,7 +251,8 @@ if check_password():
             alt.Chart(df_customer_1)
             .mark_bar()
             .encode(
-                x=alt.X("Month:N", title="Month", axis=alt.Axis(labelAngle=-0)),
+                x=alt.X("Month:N", title="Month",
+                        axis=alt.Axis(labelAngle=-0)),
                 y=alt.Y("new_user:Q", title="New Users"),
                 tooltip=[
                     alt.Tooltip("Month", title="Month"),
@@ -272,7 +275,8 @@ if check_password():
                     axis=alt.Axis(labelAngle=-0),
                     scale=alt.Scale(zero=False),
                 ),
-                y=alt.Y("active_user:Q", title="Active Users", scale=alt.Scale(zero=False)),
+                y=alt.Y("active_user:Q", title="Active Users",
+                        scale=alt.Scale(zero=False)),
                 tooltip=[
                     alt.Tooltip("Month", title="Month"),
                     alt.Tooltip("active_user:Q", title="Active Users"),
@@ -336,18 +340,19 @@ if check_password():
                     customerQuery = f"SELECT * FROM customers_db WHERE customer_id = {customer_id};"
                     customerResults = query(customerQuery)
                     # Add new user
-                    if len(customerResults)  == 0:
+                    if len(customerResults) == 0:
                         add_user(user)
                         st.write(
                             f"Congratulations {first_name} {last_name}!  You have signed-up for Cup Adventure!"
                         )
-                        st.write("Thank you for joining us in reducing Cup Waste!")
+                        st.write(
+                            "Thank you for joining us in reducing Cup Waste!")
                     # Update existing user
                     else:
                         update_user(user)
-                        st.write(f"{first_name} {last_name}'s information has been updated in the database.")
+                        st.write(
+                            f"{first_name} {last_name}'s information has been updated in the database.")
                 except:
                     st.write(
                         "There was an error signing you up.  Please ensure no fields are blank."
                     )
-                    
