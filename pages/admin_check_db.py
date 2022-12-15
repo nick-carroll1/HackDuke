@@ -86,7 +86,7 @@ elif selection == "Vendor Data":
         )
         .interactive()
     )
-    st.altair_chart(chart, use_container_width=True)
+    st.altair_chart(chart, height=500, width=500)
 
 
 # close connection
