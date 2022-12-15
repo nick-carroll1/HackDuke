@@ -121,7 +121,7 @@ if selection == "Welcome Page":
 
     st.write('test')
     myquery = "SHOW TABLES;"
-    resultes = db.query(myquery)
+    results = db.query(myquery)
     st.write(results)
 
 elif selection == "Read All Data":
