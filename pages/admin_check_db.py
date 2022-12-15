@@ -5,7 +5,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 import streamlit as st
 import altair as alt
-from datetime import date
+import datetime
 
 
 def create_db_connection(host_name, user_name, user_password, user_port, db_name):
