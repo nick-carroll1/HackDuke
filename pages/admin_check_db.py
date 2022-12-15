@@ -98,7 +98,7 @@ elif selection == "Vendor Data":
         alt.Chart(df_metric_2)
         .mark_bar()
         .encode(
-            x="month",
+            x="month:N",
             y="countx",
             tooltip=["month", "countx"],
         )
