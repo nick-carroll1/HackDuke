@@ -49,7 +49,7 @@ st.write(df)
 column_name = st.selectbox("Select a column", df.columns)
 
 # make a summary statistics table of the selected column in horizontal format and integer format
-st.write(df[column_name].describe().to_frame().T.style.format("{:.0f}"))
+st.write(df[column_name].describe().to_frame().T)
 
 # close connection
 connection.close()
