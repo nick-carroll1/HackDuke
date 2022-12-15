@@ -74,8 +74,11 @@ elif selection == "Vendor Data":
     query_metric_1 = "SELECT * FROM vendors_db"
     df_metric_1 = pd.read_sql(query_metric_1, connection)
 
+    query_metric_2 = "SELECT month(transaction_date), count(distinct vendor_id) FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
+    df_metric_2 = pd.read_sql(query_metric_2, connection)
+
     # create an altair chart to show vendor_name and cup_stock
-    chart = (
+    stock_chart = (
         alt.Chart(df_metric_1)
         .mark_bar()
         .encode(
@@ -86,7 +89,7 @@ elif selection == "Vendor Data":
         )
         .interactive()
     )
-    st.altair_chart(chart, height=500, width=500)
+    st.altair_chart(stock_chart, use_container_width=True)
 
 
 # close connection
