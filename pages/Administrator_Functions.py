@@ -293,16 +293,13 @@ elif selection == "Pull Customer Data":
     username = st.text_input("User Name", "")
     try:
         if st.button("Pull Data"):
-            query = (
+            customerQuery = (
                 "SELECT customer_id, customer_lastName, customer_firstName, join_date, cup_rental, deposit, cups_bought, account_value, user_name FROM customers_db WHERE user_name = "
                 + str(username)
             )
-            df = pd.read_sql(query, connection)
-            st.write(df)
-            connection.close()
-    except Exception as e:
-        st.write("User not found")
-        connection.close()
+            st.table(customerQuery)
+    except:
+        st.write("Error searching for User.")
 
 elif selection == "Add/Update Customer Data":
     # Add/Update Customer Data Page
