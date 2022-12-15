@@ -43,6 +43,7 @@ st.sidebar.title("Navigation")
 selection = st.sidebar.radio(
     "Go to",
     [
+        "Welcome Page",
         "Read All Data",
         "Vendor Data",
         "Customer Data",
@@ -53,7 +54,11 @@ selection = st.sidebar.radio(
 )
 
 # if the user selects "Read Data" then show the table
-if selection == "Read All Data":
+if selection == "Welcome Page":
+    st.write("Welcome to Cup Adventure Admin Page")
+    st.write("Please select a page from the sidebar")
+
+elif selection == "Read All Data":
     # create a streamlit selectbox to select the table
     table_name = st.selectbox("Select a table", tables)
 
