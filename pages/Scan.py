@@ -2,6 +2,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 import os
 
+st.write("hello")
 st.session_state['c'] = ""
 components.html(
     """<?php SESSION_START(); ?>
@@ -109,3 +110,4 @@ components.html(
 )
 
 st.write(st.session_state['c'])
+st.write("hello")
