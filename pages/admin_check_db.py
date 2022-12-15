@@ -6,7 +6,8 @@ from sqlalchemy import create_engine
 import streamlit as st
 import altair as alt
 import datetime
-import createdb
+import createdb as db
+
 
 
 # def create_db_connection(host_name, user_name, user_password, user_port, db_name):
@@ -117,6 +118,11 @@ selection = st.sidebar.radio(
 if selection == "Welcome Page":
     st.write("Welcome to Cup Adventure Admin Page")
     st.write("Please select a page from the sidebar")
+
+    st.write('test')
+    myquery = "SHOW TABLES;"
+    resultes = db.query(myquery)
+    st.write(results)
 
 elif selection == "Read All Data":
     # create a streamlit selectbox to select the table
