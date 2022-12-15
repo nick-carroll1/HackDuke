@@ -44,7 +44,7 @@ components.html(
                 </form>
                   <table class="table table-bordered">
 
-                  <thead>
+                  <!--<thead>
                         <tr>
                             <td>ID</td>
                             <td>Student ID</td>
@@ -52,7 +52,7 @@ components.html(
                             <td>Return</td>
                             <td>Status</td>
                         </tr>
-                    </thead>
+                    </thead>-->
                     <!--<tbody>"""+f"""
                         <?php
                         $server = {os.getenv("AWS_CUPADVENTURE_HOSTNAME")};
@@ -98,7 +98,7 @@ components.html(
 
             scanner.addListener('scan', function (c) {
                 document.getElementById('text').value = c;
-                document.forms["form1"].submit();
+                <!--document.forms["form1"].submit();-->
             });
         
         
