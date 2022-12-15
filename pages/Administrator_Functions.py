@@ -294,7 +294,7 @@ elif selection == "Pull Customer Data":
     try:
         if st.button("Pull Data"):
             customerQuery = (
-                f"SELECT customer_id, customer_lastName, customer_firstName, join_date, cup_rental, deposit, cups_bought, account_value, user_name FROM customers_db WHERE customer_id = '{customer_id}'"
+                f"SELECT customer_id, customer_lastName, customer_firstName, join_date, cup_rental, deposit, cups_bought, account_value FROM customers_db WHERE customer_id = '{customer_id}'"
             )
             st.table(query(customerQuery))
     except Exception as err:
