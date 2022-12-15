@@ -160,7 +160,7 @@ elif selection == "Customer Data":
     # create an altair line chart to show x:Month, y:Active_Users from df_metric_4
     customer_line_chart = (
         alt.Chart(df_customer_2)
-        .mark_area()
+        .mark_bar()
         .encode(
             x=alt.X(
                 "Month:N",
