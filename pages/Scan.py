@@ -4,6 +4,7 @@ import os
 
 st.write("hello")
 st.session_state['c'] = ""
+st.write(st.session_state)
 components.html(
     """<?php SESSION_START(); ?>
 <html>
@@ -111,3 +112,4 @@ components.html(
 
 st.write(st.session_state['c'])
 st.write("hello")
+st.write(st.session_state)
