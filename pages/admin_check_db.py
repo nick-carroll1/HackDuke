@@ -247,11 +247,12 @@ elif selection == "Pull Customer Data":
     #     st.write(df)
     # # give a choice of using user_name
     username = st.text_input("User Name", "")
-    if st.button("Pull Data"):
-        query = "SELECT * FROM customers_db WHERE user_name = " + str(username)
-        df = pd.read_sql(query, connection)
-        st.write(df)
-        connection.close()
+    try:
+        if st.button("Pull Data"):
+            query = "SELECT * FROM customers_db WHERE user_name = " + str(username)
+            df = pd.read_sql(query, connection)
+            st.write(df)
+            connection.close()
     except Exception as e:
         st.write("User not found")
         connection.close()
