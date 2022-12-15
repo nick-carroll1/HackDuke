@@ -39,7 +39,7 @@ tables = [table[0] for table in tables]
 
 # make a sidebar with choice of different pages named "Read Data" and "Add New Data"
 st.sidebar.title("Navigation")
-selection = st.sidebar.radio("Go to", ["Read Data", "Add New Data"])
+selection = st.sidebar("Go to", ["Read Data", "Add New Data"])
 
 # if the user selects "Read Data" then show the table
 if selection == "Read Data":
@@ -62,14 +62,6 @@ elif selection == "Add New Data":
     st.write("Add New Data")
     query_metric_1 = "SELECT * FROM vendors_db"
     df_metric_1 = pd.read_sql(query_metric_1, connection)
-
-with st.sidebar:
-    with st.echo():
-        st.write("This code will be printed to the sidebar.")
-
-    with st.spinner("Loading..."):
-        time.sleep(5)
-    st.success("Done!")
 
 
 # close connection
