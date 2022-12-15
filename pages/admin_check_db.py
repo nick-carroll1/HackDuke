@@ -7,7 +7,6 @@ import streamlit as st
 
 
 def create_db_connection(host_name, user_name, user_password, user_port, db_name):
-    connection = None
     try:
         connection = mysql.connector.connect(
             host=host_name,
