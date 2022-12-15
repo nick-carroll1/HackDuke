@@ -2,7 +2,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 import os
 
-c = ""
+c = "c"
 components.html(
     """<?php SESSION_START(); ?>
 <html>
