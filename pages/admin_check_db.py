@@ -162,8 +162,13 @@ elif selection == "Customer Data":
         alt.Chart(df_customer_2)
         .mark_area()
         .encode(
-            x=alt.X("Month:N", title="Month", axis=alt.Axis(labelAngle=-0)),
-            y=alt.Y("active_user:Q", title="Active Users"),
+            x=alt.X(
+                "Month:N",
+                title="Month",
+                axis=alt.Axis(labelAngle=-0),
+                scale=alt.Scale(zero=False),
+            ),
+            y=alt.Y("active_user:Q", title="Active Users", scale=alt.Scale(zero=False)),
             tooltip=[
                 alt.Tooltip("Month", title="Month"),
                 alt.Tooltip("active_user:Q", title="Active Users"),
@@ -172,7 +177,6 @@ elif selection == "Customer Data":
         .interactive()
     )
     st.altair_chart(customer_line_chart, use_container_width=True)
-
 
 # close connection
 connection.close()
