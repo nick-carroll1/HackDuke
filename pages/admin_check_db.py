@@ -75,22 +75,24 @@ elif selection == "Read All Data":
 
 # if the user selects "Add New Data" then show the form
 elif selection == "Vendor Data":
-    st.write("Vendor Data")
     query_metric_1 = "SELECT * FROM vendors_db"
     df_metric_1 = pd.read_sql(query_metric_1, connection)
-
     query_metric_2 = "SELECT month(transaction_date) as Month, count(distinct vendor_id) as Active_Vendors FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
     df_metric_2 = pd.read_sql(query_metric_2, connection)
-    # # change column name in df_metric_2 into month and countx
-    # df_metric_2.columns = ["month", "countx"]
+
     st.header("Vendor Data for 2022")
     # create an altair chart to show vendor_name and cup_stock
     stock_chart = (
         alt.Chart(df_metric_1)
         .mark_bar()
         .encode(
-            x="vendor_name",
-            y="cup_stock",
+            x=alt.X(
+                "vendor_name",
+                sort="-y",
+                axis=alt.Axis(labelAngle=-90),
+                title="Vendor Name",
+            ),
+            y=alt.Y("cup_stock", title="Cup Stock"),
             color="vendor_name",
             tooltip=["vendor_name", "cup_stock"],
         )
@@ -103,9 +105,12 @@ elif selection == "Vendor Data":
         alt.Chart(df_metric_2)
         .mark_bar()
         .encode(
-            x="Month:N",
-            y="Active_Vendors:Q",
-            tooltip=["Month", "Active_Vendors:Q"],
+            x=alt.X("Month:N", title="Month", axis=alt.Axis(labelAngle=-45)),
+            y=alt.Y("Active_Vendors:Q", title="Active Vendors"),
+            tooltip=[
+                alt.Tooltip("Month", title="Month"),
+                alt.Tooltip("Active_Vendors:Q", title="Active Vendors"),
+            ],
         )
         .interactive()
     )
