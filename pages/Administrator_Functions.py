@@ -161,11 +161,14 @@ def check_password():
 
 st.title("Cup Adventure")
 
-match selection:
-    case "Welcome Page":
-        st.write(selection)
-    case "Read All Data":
-        st.write(selection)
+import sys
+st.write(sys.version)
+
+# match selection:
+#     case "Welcome Page":
+#         st.write(selection)
+#     case "Read All Data":
+#         st.write(selection)
 
 
 # if check_password():
