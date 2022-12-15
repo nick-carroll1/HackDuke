@@ -12,6 +12,7 @@ df=pd.read_excel("https://github.com/nick-carroll1/HackDuke/blob/main/raw_data/t
 d=df.groupby('transaction_date')['cup_id'].nunique()
 d1 = d.to_frame().reset_index()
 
-altair.Chart(d1).mark_line().encode(x='transaction_date',y='cup_id')
+unique=altair.Chart(d1).mark_line().encode(x='transaction_date',y='cup_id')
 
 
+st.altair_chart(unique)
