@@ -26,10 +26,10 @@ def create_db_connection(host_name, user_name, user_password, user_port, db_name
 
 
 connection = create_db_connection(
-    os.getenv("AWS_HOST"),
-    os.getenv("AWS_USER"),
-    os.getenv("AWS_PASSWORD"),
-    os.getenv("AWS_PORT"),
+    os.getenv("AWS_CUPADVENTURE_HOSTNAME"),
+    os.getenv("AWS_CUPADVENTURE_USERNAME"),
+    os.getenv("AWS_CUPADVENTURE_PASSWORD"),
+    os.getenv("AWS_CUPADVENTURE_PORT"),
     "cup_adventure",
 )
 
@@ -45,10 +45,10 @@ def rent_cup(
     vendor,
     cup,
     database="cup_adventure",
-    username=os.getenv("AWS_USER"),
-    passwd=os.getenv("AWS_PASSWORD"),
-    hostname=os.getenv("AWS_HOST"),
-    portnum=int(os.getenv("AWS_PORT")),
+    username=os.getenv("AWS_CUPADVENTURE_USERNAME"),
+    passwd=os.getenv("AWS_CUPADVENTURE_PASSWORD"),
+    hostname=os.getenv("AWS_CUPADVENTURE_HOSTNAME"),
+    portnum=int(os.getenv("AWS_CUPADVENTURE_PORT")),
 ):
     # Create Connection
     connection = mysql.connector.connect(
