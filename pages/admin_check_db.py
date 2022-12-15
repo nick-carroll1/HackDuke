@@ -139,13 +139,6 @@ elif selection == "Vendor Data":
     query_vendor_2 = "SELECT month(transaction_date) as Month, count(distinct vendor_id) as Active_Vendors FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
     df_metric_2 = pd.read_sql(query_vendor_2, connection)
     month = st.selectbox("Select a month", df_metric_1["Month"].unique())
-    df_metric_3 = df_metric_1.loc[df_metric_1["Month"] == month, :]
-    # grou by vendor_id and count how many transaction_status == "Borrowed" for each vendor_id and make it a dataframe
-    df_metric_3 = (
-        df_metric_3.groupby("vendor_id")
-        .agg({"transaction_status": "count"})
-        .reset_index()
-    )
 
     st.header("Vendor Data for 2022")
 
