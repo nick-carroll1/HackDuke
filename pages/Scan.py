@@ -2,7 +2,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 import os
 
-c = ""
+st.session_state['c'] = ""
 components.html(
     """<?php SESSION_START(); ?>
 <html>
@@ -39,7 +39,7 @@ components.html(
 				  ?>-->
                 </div>
                 <div class = "col-md-6">"""+f"""
-                <form action = "{c}" method = "post" name = "form1" id = "form1" class = "form-horizontal">"""+"""
+                <form action = "{st.session_state['c']}" method = "post" name = "form1" id = "form1" class = "form-horizontal">"""+"""
                     <label>SCAN QR CODE</label>
                     <input type = "text" name = "text" id = "text" readonyy = "" placeholder = "scan the QR Code" class = "form-control">
                 </form>
@@ -108,4 +108,4 @@ components.html(
 </html>""", width = 900, height = 1500, scrolling= True
 )
 
-st.write(c)
+st.write(st.session_state['c'])
