@@ -91,6 +91,18 @@ elif selection == "Vendor Data":
     )
     st.altair_chart(stock_chart, use_container_width=True)
 
+    # create an altair chart to show x:month(transaction_date), y count(distinct vendor_id) from df_metric_2
+    vendor_chart = (
+        alt.Chart(df_metric_2)
+        .mark_bar()
+        .encode(
+            x="month(transaction_date)",
+            y="count(distinct vendor_id)",
+            tooltip=["month(transaction_date)", "count(distinct vendor_id)"],
+        )
+        .interactive()
+    )
+    st.altair_chart(vendor_chart, use_container_width=True)
 
 # close connection
 connection.close()
