@@ -168,7 +168,7 @@ if check_password():
 
         st.write('test')
         myquery = "SHOW TABLES;"
-        results = db.query(myquery)
+        results = query(myquery)
         st.write(results)
 
     elif selection == "Read All Data":
