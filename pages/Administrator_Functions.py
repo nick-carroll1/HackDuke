@@ -283,19 +283,18 @@ elif selection == "Customer Data":
     connection.close()
 elif selection == "Pull Customer Data":
     st.header("Pull User Data")
-    st.write("Please enter the user ID below to pull the user data")
+    st.write("Please enter the Customer ID below to pull the user data")
     # user_id = st.text_input("User ID", "")
     # if st.button("Pull Data"):
     #     query = "SELECT * FROM customers_db WHERE customer_id = " + user_id
     #     df = pd.read_sql(query, connection)
     #     st.write(df)
     # # give a choice of using user_name
-    username = st.text_input("User Name", "")
+    customer_id = st.text_input("Customer ID")
     try:
         if st.button("Pull Data"):
             customerQuery = (
-                "SELECT customer_id, customer_lastName, customer_firstName, join_date, cup_rental, deposit, cups_bought, account_value, user_name FROM customers_db WHERE user_name = "
-                + str(username)
+                f"SELECT customer_id, customer_lastName, customer_firstName, join_date, cup_rental, deposit, cups_bought, account_value, user_name FROM customers_db WHERE customer_id = '{customer_id}'"
             )
             st.table(customerQuery)
     except:
