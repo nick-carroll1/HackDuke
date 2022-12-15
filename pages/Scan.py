@@ -5,12 +5,12 @@ import os
 components.html(
     """<?php SESSION_START(); ?>
 <html>
-    <!--<head>  
+    <head>  
     <script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
     <script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
     <script type = "text/javascript" src = "https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
     <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    </head>-->
+    </head>
     <body>
         <div class = "container">
             <div class = "row">
@@ -53,7 +53,7 @@ components.html(
                             <td>Status</td>
                         </tr>
                     </thead>
-                    <tbody>"""+f"""
+                    <!--<tbody>"""+f"""
                         <?php
                         $server = {os.getenv("AWS_CUPADVENTURE_HOSTNAME")};
                         $username={os.getenv("AWS_CUPADVENTURE_USERNAME")};
@@ -79,7 +79,7 @@ components.html(
                         <?php
                         }
                         ?>
-                    </tbody>
+                    </tbody>-->
                 </table>
             </div>
         </div>
