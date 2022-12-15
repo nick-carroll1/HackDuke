@@ -42,7 +42,7 @@ tables = [table[0] for table in tables]
 
 
 
-st.header("Customer Data for 2022")
+st.header("Customer Analytics for 2022")
 st.subheader("New Users by Month")
 
 query_customer_1 = "SELECT month(join_date) as Month, COUNT(distinct customer_id) as new_user FROM customers_db GROUP BY month(join_date);"
