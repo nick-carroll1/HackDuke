@@ -267,25 +267,30 @@ elif selection == "Add New Customer Data":
     customer_join_date = st.date_input("Join Date", today)
     cup_rental = st.text_input("Cup Code", "")
     deposit = st.text_input("Deposit", "")
-    cups_bought = st.text_input("Cups Bought", 0)
     account_value = st.text_input("Account Value", 0)
-    user_name = st.text_input("User Name", "")
-    password = st.text_input("Password", 0)
     if st.button("Add Data"):
-        query = "INSERT INTO customers_db (customer_id, customer_lastName, customer_firstName, join_date, cup_rental, deposit, cups_bought, account_value, user_name, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        values = (
-            customer_id,
-            customer_lastName,
-            customer_firstName,
-            customer_join_date,
-            cup_rental,
-            deposit,
-            cups_bought,
-            account_value,
-            user_name,
-            password,
-        )
-        cursor.execute(query, values)
-        connection.commit()
-        st.write("Data added successfully")
-        connection.close()
+        # check if customer_id already exists in customers_db
+        query = "SELECT * FROM customers_db WHERE customer_id = " + customer_id
+        df = pd.read_sql(query, connection)
+        if ~df.empty:
+            st.write("Customer ID already exists")
+            connection.close()
+        else:
+            try:
+                query = "INSERT INTO customers_db VALUES (%s, %s, %s, %s, %s, %s, %s)"
+                val = (
+                    customer_id,
+                    customer_lastName,
+                    customer_firstName,
+                    customer_join_date,
+                    cup_rental,
+                    deposit,
+                    account_value,
+                )
+                cursor.execute(query, val)
+                connection.commit()
+                st.write("Data added successfully")
+                connection.close()
+            except Exception as e:
+                st.write("Data not added")
+                connection.close()
