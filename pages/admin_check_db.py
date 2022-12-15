@@ -4,6 +4,7 @@ import os
 import pandas as pd
 from sqlalchemy import create_engine
 import streamlit as st
+import altair as alt
 
 
 def create_db_connection(host_name, user_name, user_password, user_port, db_name):
@@ -39,10 +40,20 @@ tables = [table[0] for table in tables]
 
 # make a sidebar with choice of different pages named "Read Data" and "Add New Data"
 st.sidebar.title("Navigation")
-selection = st.sidebar("Go to", ["Read Data", "Add New Data"])
+selection = st.sidebar.radio(
+    "Go to",
+    [
+        "Read All Data",
+        "Vendor Data",
+        "Customer Data",
+        "Order Data",
+        "Product Data",
+        "Order Details Data",
+    ],
+)
 
 # if the user selects "Read Data" then show the table
-if selection == "Read Data":
+if selection == "Read All Data":
     # create a streamlit selectbox to select the table
     table_name = st.selectbox("Select a table", tables)
 
@@ -58,10 +69,24 @@ if selection == "Read Data":
     st.write(df[column_name].describe().to_frame().T)
 
 # if the user selects "Add New Data" then show the form
-elif selection == "Add New Data":
-    st.write("Add New Data")
+elif selection == "Vendor Data":
+    st.write("Vendor Data")
     query_metric_1 = "SELECT * FROM vendors_db"
     df_metric_1 = pd.read_sql(query_metric_1, connection)
+
+    # create an altair chart to show vendor_name and cup_stock
+    chart = (
+        alt.Chart(df_metric_1)
+        .mark_bar()
+        .encode(
+            x="vendor_name",
+            y="cup_stock",
+            color="vendor_name",
+            tooltip=["vendor_name", "cup_stock"],
+        )
+        .interactive()
+    )
+    st.altair_chart(chart, use_container_width=True)
 
 
 # close connection
