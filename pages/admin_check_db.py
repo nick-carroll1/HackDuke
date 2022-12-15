@@ -107,7 +107,8 @@ selection = st.sidebar.radio(
         "Read All Data",
         "Vendor Data",
         "Customer Data",
-        "Pull User Data",
+        "Pull Customer Data",
+        "Add New Customer Data",
     ],
 )
 
@@ -235,8 +236,8 @@ elif selection == "Customer Data":
         .interactive()
     )
     st.altair_chart(customer_line_chart, use_container_width=True)
-
-elif selection == "Pull User Data":
+    connection.close()
+elif selection == "Pull Customer Data":
     st.header("Pull User Data")
     st.write("Please enter the user ID below to pull the user data")
     # user_id = st.text_input("User ID", "")
@@ -250,3 +251,24 @@ elif selection == "Pull User Data":
         query = "SELECT * FROM customers_db WHERE user_name = " + str(username)
         df = pd.read_sql(query, connection)
         st.write(df)
+        connection.close()
+    except:
+        st.write("User not found")
+        connection.close()
+
+elif selection == "Add New Customer Data":
+    st.header("Add New Customer Data")
+    st.write("Please enter the new customer data below")
+    customer_id = st.text_input("Customer ID", "")
+    customer_lastName = st.text_input("Customer Last Name", "")
+    customer_firstName = st.text_input("Customer First Name", "")
+    customer_join_date = st.date_input("Join Date", datetime.now())
+    user_name = st.text_input("User Name", "")
+    join_date = st.text_input("Join Date", "")
+    if st.button("Add Data"):
+        query = "INSERT INTO customers_db (customer_id, user_name, join_date) VALUES (%s, %s, %s)"
+        values = (customer_id, user_name, join_date)
+        cursor.execute(query, values)
+        connection.commit()
+        st.write("Data added successfully")
+        connection.close()
