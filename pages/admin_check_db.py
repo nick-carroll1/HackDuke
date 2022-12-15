@@ -119,5 +119,28 @@ elif selection == "Vendor Data":
     )
     st.altair_chart(vendor_chart, use_container_width=True)
 
+elif selection == "Customer Data":
+    query_metric_3 = "SELECT month(join_date) as Month, COUNT(distinct customer_id) as new_user FROM customers_db GROUP BY month(join_date);"
+    df_metric_3 = pd.read_sql(query_metric_3, connection)
+
+    st.header("Customer Data for 2022")
+    st.subheader("New Users by Month")
+    # create an altair chart to show x:Month, y:new_user from df_metric_3
+    customer_chart = (
+        alt.Chart(df_metric_3)
+        .mark_bar()
+        .encode(
+            x=alt.X("Month:N", title="Month", axis=alt.Axis(labelAngle=-0)),
+            y=alt.Y("new_user:Q", title="New Users"),
+            tooltip=[
+                alt.Tooltip("Month", title="Month"),
+                alt.Tooltip("new_user:Q", title="New Users"),
+            ],
+        )
+        .interactive()
+    )
+    st.altair_chart(customer_chart, use_container_width=True)
+
+
 # close connection
 connection.close()
