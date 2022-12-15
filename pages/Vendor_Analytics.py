@@ -24,7 +24,7 @@ SELECT *
 FROM transactions_log;
 """
 
-l=reatedb.query(   q1,
+l=createdb.query(   q1,
     database,
     username,
     passwd,
