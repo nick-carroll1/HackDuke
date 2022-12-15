@@ -14,7 +14,7 @@ with st.form("Customer Sign-up"):
 
     submitted = st.form_submit_button("Submit")
     if submitted:
-        user = {"customer id" = customer_id,
+        user = {"customer id": customer_id,
                 "customer_firstName": first_name,
                 "customer_lastName": last_name,
                 "join_date": date.today()

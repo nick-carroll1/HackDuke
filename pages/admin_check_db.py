@@ -327,7 +327,7 @@ if check_password():
             if submitted:
                 # Consolidate user data
                 user = {
-                    "customer_id" = customer_id,
+                    "customer_id": customer_id,
                     "customer_firstName": first_name,
                     "customer_lastName": last_name,
                     "join_date": date.today(),
