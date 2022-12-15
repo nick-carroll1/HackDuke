@@ -44,6 +44,16 @@ tables = [table[0] for table in tables]
 
 st.header("Customer Data for 2022")
 st.subheader("New Users by Month")
+
+query_customer_1 = "SELECT month(join_date) as Month, COUNT(distinct customer_id) as new_user FROM customers_db GROUP BY month(join_date);"
+df_customer_1 = pd.read_sql(query_customer_1, connection)
+query_customer_2 = "SELECT month(transaction_date) as Month, count(distinct customer_id) as active_user FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
+df_customer_2 = pd.read_sql(query_customer_2, connection)
+
+df_customer_1 = pd.read_sql(query_customer_1, connection)
+query_customer_2 = "SELECT month(transaction_date) as Month, count(distinct customer_id) as active_user FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
+df_customer_2 = pd.read_sql(query_customer_2, connection)
+
 # create an altair chart to show x:Month, y:new_user from df_metric_3
 customer_chart = (
     alt.Chart(df_customer_1)
