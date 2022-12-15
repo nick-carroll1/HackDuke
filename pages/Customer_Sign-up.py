@@ -14,7 +14,7 @@ with st.form("Customer Sign-up"):
 
     submitted = st.form_submit_button("Submit")
     if submitted:
-        user = {"customer id": customer_id,
+        user = {"customer_id": customer_id,
                 "customer_firstName": first_name,
                 "customer_lastName": last_name,
                 "join_date": date.today()
@@ -29,6 +29,4 @@ with st.form("Customer Sign-up"):
             st.write(
                 "There was an error signing you up.  Please ensure no fields are blank."
             )
-            st.write(user.keys(), len({"customer_id", "customer_firstName", "customer_lastName", "join_date"}.difference(set(user.keys()))) == 0)
-            st.write(err)
             
