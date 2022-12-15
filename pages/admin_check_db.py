@@ -239,9 +239,14 @@ elif selection == "Customer Data":
 elif selection == "Pull User Data":
     st.header("Pull User Data")
     st.write("Please enter the user ID below to pull the user data")
-
+    user_id = st.text_input("User ID", "")
+    if st.button("Pull Data"):
+        query = "SELECT * FROM customers_db WHERE customer_id = " + user_id
+        df = pd.read_sql(query, connection)
+        st.write(df)
+    # give a choice of using user_name
     username = st.text_input("User Name", "")
     if st.button("Pull Data"):
-        query = "SELECT * FROM customers_db WHERE user_name = " + username
+        query = "SELECT * FROM customers_db WHERE user_name = " + username.__str__()
         df = pd.read_sql(query, connection)
         st.write(df)
