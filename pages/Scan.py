@@ -98,7 +98,7 @@ components.html(
             });
 
             scanner.addListener('scan', function (c) {
-                """+f"""document.getElementById('text').value = {c};
+                """+f"""document.getElementById('text').value = {c};"""+"""
                 <!--document.forms["form1"].submit();-->
             });
         
