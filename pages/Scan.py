@@ -2,7 +2,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 import os
 
-components.html(
+a = components.html(
     """<?php SESSION_START(); ?>
 <html>
     <head>  
@@ -106,3 +106,5 @@ components.html(
     </body>
 </html>""", width = 900, height = 1500, scrolling= True
 )
+
+st.write(a)
