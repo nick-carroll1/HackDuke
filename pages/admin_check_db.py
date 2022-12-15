@@ -75,13 +75,22 @@ elif selection == "Read All Data":
 
 # if the user selects "Add New Data" then show the form
 elif selection == "Vendor Data":
-    query_metric_1 = "SELECT * FROM vendors_db"
-    df_metric_1 = pd.read_sql(query_metric_1, connection)
-    query_metric_2 = "SELECT month(transaction_date) as Month, count(distinct vendor_id) as Active_Vendors FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
-    df_metric_2 = pd.read_sql(query_metric_2, connection)
+    query_vendor_1 = "SELECT * FROM vendors_db"
+    df_metric_1 = pd.read_sql(query_vendor_1, connection)
+    query_vendor_2 = "SELECT month(transaction_date) as Month, count(distinct vendor_id) as Active_Vendors FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
+    df_metric_2 = pd.read_sql(query_vendor_2, connection)
+    month = st.selectbox("Select a month", df_metric_1["Month"].unique())
+    df_metric_3 = df_metric_1.loc[df_metric_1["Month"] == month, :]
+    # grou by vendor_id and count how many transaction_status == "Borrowed" for each vendor_id and make it a dataframe
+    df_metric_3 = (
+        df_metric_3.groupby("vendor_id")
+        .agg({"transaction_status": "count"})
+        .reset_index()
+    )
 
     st.header("Vendor Data for 2022")
-    # create an altair chart to show vendor_name and cup_stock
+
+    # All the chart codes - not deployed yet
     stock_chart = (
         alt.Chart(df_metric_1)
         .mark_bar()
@@ -101,7 +110,6 @@ elif selection == "Vendor Data":
         )
         .interactive()
     )
-    st.altair_chart(stock_chart, use_container_width=True)
 
     # create an altair chart to show x:month(transaction_date), y count(distinct vendor_id) from df_metric_2
     vendor_chart = (
@@ -117,17 +125,24 @@ elif selection == "Vendor Data":
         )
         .interactive()
     )
+
+    st.subheader("Cup Stock by Vendor")
+    st.altair_chart(stock_chart, use_container_width=True)
+
+    st.subheader("Active Vendors by Month")
     st.altair_chart(vendor_chart, use_container_width=True)
 
 elif selection == "Customer Data":
-    query_metric_3 = "SELECT month(join_date) as Month, COUNT(distinct customer_id) as new_user FROM customers_db GROUP BY month(join_date);"
-    df_metric_3 = pd.read_sql(query_metric_3, connection)
+    query_customer_1 = "SELECT month(join_date) as Month, COUNT(distinct customer_id) as new_user FROM customers_db GROUP BY month(join_date);"
+    df_customer_1 = pd.read_sql(query_customer_1, connection)
+    query_customer_2 = "SELECT month(transaction_date), count(distinct customer_id) FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
+    df_customer_2 = pd.read_sql(query_customer_2, connection)
 
     st.header("Customer Data for 2022")
     st.subheader("New Users by Month")
     # create an altair chart to show x:Month, y:new_user from df_metric_3
     customer_chart = (
-        alt.Chart(df_metric_3)
+        alt.Chart(df_customer_1)
         .mark_bar()
         .encode(
             x=alt.X("Month:N", title="Month", axis=alt.Axis(labelAngle=-0)),
@@ -140,6 +155,25 @@ elif selection == "Customer Data":
         .interactive()
     )
     st.altair_chart(customer_chart, use_container_width=True)
+
+    st.subheader("Active Users by Month")
+    # create an altair line chart to show x:Month, y:Active_Users from df_metric_4
+    customer_line_chart = (
+        alt.Chart(df_customer_2)
+        .mark_line()
+        .encode(
+            x=alt.X(
+                "month(transaction_date):N", title="Month", axis=alt.Axis(labelAngle=-0)
+            ),
+            y=alt.Y("count(distinct customer_id):Q", title="Active Users"),
+            tooltip=[
+                alt.Tooltip("month(transaction_date)", title="Month"),
+                alt.Tooltip("count(distinct customer_id):Q", title="Active Users"),
+            ],
+        )
+        .interactive()
+    )
+    st.altair_chart(customer_line_chart, use_container_width=True)
 
 
 # close connection
