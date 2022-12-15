@@ -50,7 +50,7 @@ def createTable(
 
 
 def query(
-    query,
+    myQuery,
     database="cup_adventure",
     username=os.getenv("AWS_CUPADVENTURE_USERNAME"),
     passwd=os.getenv("AWS_CUPADVENTURE_PASSWORD"),
@@ -62,7 +62,7 @@ def query(
     )
     cursor = connection.cursor()
     cursor.execute(f"USE {database}")
-    cursor.execute(query)
+    cursor.execute(myQuery)
     results = []
     for line in cursor:
         results.append(line)
@@ -86,12 +86,10 @@ def add_user(
     cursor.execute(f"USE {database};")
     # Confirm user information is complete to create a new user
     userKeys = list(user.keys())
-    assert set(userKeys) == {"customer_firstName", "customer_lastName", "join_date", "user_name", "password"}
-    # Confirm username is unique
-    cursor.execute(f"SELECT user_name FROM customers_db WHERE user_name = '{user['user_name']}';")
-    users = set()
-    for x in cursor:
-        users.add(x[0])
+    assert set(userKeys) == {"customer_id", "customer_firstName", "customer_lastName", "join_date"}
+    # Confirm customer_id is unique
+    cursor.execute(f"SELECT customer_id FROM customers_db WHERE user_name = '{user['customer_id']}';")
+    users = {x[0] for x in cursor}
     assert users == set()
     # Convert user information to a query
     columns = userKeys[0]
@@ -120,6 +118,45 @@ def add_user(
         connection.rollback()
     connection.close()
     pass
+
+# Update User Information
+def update_user(
+    user,
+    database="cup_adventure",
+    username=os.getenv("AWS_CUPADVENTURE_USERNAME"),
+    passwd=os.getenv("AWS_CUPADVENTURE_PASSWORD"),
+    hostname=os.getenv("AWS_CUPADVENTURE_HOSTNAME"),
+    portnum=int(os.getenv("AWS_CUPADVENTURE_PORT")),
+):
+    # Create Connection
+    connection = mysql.connector.connect(
+        user=username, password=passwd, host=hostname, port=portnum
+    )
+    cursor = connection.cursor()
+    cursor.execute(f"USE {database};")
+    # Confirm user information is complete to create a new user
+    userKeys = list(user.keys())
+    assert set(userKeys) == {"customer_id", "customer_firstName", "customer_lastName", "join_date", "deposit", "account_value"}
+    # Convert user information to a query
+    iterator =  list(set(userKeys).difference({"customer_id"}))
+    if (type(user[iterator[0]]) == type(str())) or (type(user[iterator[0]]) == type(date.today())):
+        updateQuery = f"{iterator[0]} = '{user[iterator[0]]}'"
+    else:
+        updateQuery = f"{iterator[0]} = {user[iterator[0]]}"
+    for eachKey in iterator[1:]:
+        if (type(user[eachKey]) == type(str())) or (type(user[eachKey]) == type(date.today())):
+            updateQuery += (f", {eachKey} = '{user[eachKey]}'")
+        else:
+            updateQuery += (f", {eachKey} = {user[eachKey]}")
+    # execute query
+    try:
+        cursor.execute(f"UPDATE customers_db SET {updateQuery} WHERE customer_id = '{user['customer_id']}';")
+        connection.commit()
+    except:
+        connection.rollback()
+    connection.close()
+    pass
+
 
 # Rent a cup
 def rent_cup(
@@ -241,8 +278,10 @@ if __name__ == "__main__":
     # newUser = {"customer_firstName": "Noah", "customer_lastName": "Gift", "join_date": date.today().__str__(), "user_name": "ngift1", "password": "password7"}
     # createdb(mydatabase, myuser, mypassword, myhost, myport)
     # createTable(mytable, myparameters, mydatabase, myuser, mypassword, myhost, myport)
-    print(query(myquery, mydatabase, myuser, mypassword, myhost, myport))
+    # print(query(myquery, mydatabase, myuser, mypassword, myhost, myport))
     # add_user(newUser)
     # updatedTable = pd.read_excel('raw_data/customers_db.xlsx')
     # update_table(updatedTable, mytable)
+    user1 = {"customer_id": 1, "customer_firstName": "Fred", "customer_lastName": "Astaire", "join_date": date.today(), "deposit": 5, "account_value": 0}
+    print(update_user(user1))
     

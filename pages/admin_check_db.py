@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 import streamlit as st
 import altair as alt
 import datetime
-import createdb as db
+from createdb import query, add_user, update_user
 
 
 
@@ -305,42 +305,49 @@ if check_password():
             st.write("User not found")
             connection.close()
 
-    elif selection == "Add New Customer Data":
-        today = datetime.date.today()
-        st.header("Add New Customer Data")
-        st.write("Please enter the new customer data below")
-        customer_id = st.text_input("Customer ID", "")
-        customer_lastName = st.text_input("Customer Last Name", "")
-        customer_firstName = st.text_input("Customer First Name", "")
-        customer_join_date = st.date_input("Join Date", today)
-        cup_rental = st.text_input("Cup Code", "")
-        deposit = st.text_input("Deposit", "")
-        account_value = st.text_input("Account Value", 0)
-        username = st.text_input("User Name", "")
-        if st.button("Add Data"):
-            # check if customer_id already exists in customers_db
-            query = "SELECT * FROM customers_db WHERE customer_id = " + customer_id
-            df = pd.read_sql(query, connection)
-            if df.empty == False:
-                st.write("Customer ID already exists")
-                connection.close()
-            else:
+    elif selection == "Add/Update Customer Data":
+        # Add/Update Customer Data Page
+        # Use a form to update customer data
+        with st.form("Customer Sign-up"):
+            # Collect customer data inputs
+            st.header("Add New Customer Data or Update Existing Customer Data")
+            st.write("Please enter the new customer data below")
+            customer_id = st.text_input("Customer ID")
+            customer_lastName = st.text_input("Customer Last Name")
+            customer_firstName = st.text_input("Customer First Name")
+            customer_join_date = st.date_input("Join Date", today)
+            deposit = st.text_input("Deposit", 5)
+            account_value = st.text_input("Account Value", 0)
+            submitted = st.form_submit_button("Submit")
+            # Submit inputs with form button
+            if submitted:
+                # Consolidate user data
+                user = {
+                    "customer_id" = customer_id,
+                    "customer_firstName": first_name,
+                    "customer_lastName": last_name,
+                    "join_date": date.today(),
+                    "deposit": deposit,
+                    "account_value": account_value
+                }
+                # Run query
                 try:
-                    query = "INSERT INTO customers_db (customer_id, customer_lastName, customer_firstName, join_date, cup_rental, deposit, account_value, user_name) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-                    val = (
-                        customer_id,
-                        customer_lastName,
-                        customer_firstName,
-                        customer_join_date,
-                        cup_rental,
-                        deposit,
-                        account_value,
-                        username,
+                    # check if customer_id already exists in customers_db
+                    customerQuery = f"SELECT * FROM customers_db WHERE customer_id = {customer_id};"
+                    customerResults = query(customerQuery)
+                    # Add new user
+                    if len(customerResults)  == 0:
+                        add_user(user)
+                        st.write(
+                            f"Congratulations {first_name} {last_name}!  You have signed-up for Cup Adventure!"
+                        )
+                        st.write("Thank you for joining us in reducing Cup Waste!")
+                    # Update existing user
+                    else:
+                        update_user(user)
+                        st.write(f"{first_name} {last_name}'s information has been updated in the database.")
+                except:
+                    st.write(
+                        "There was an error signing you up.  Please ensure no fields are blank."
                     )
-                    cursor.execute(query, val)
-                    connection.commit()
-                    st.write("New customer data added")
-                    connection.close()
-                except Exception as e:
-                    st.write("Error adding new customer data")
-                    connection.close()
+                    

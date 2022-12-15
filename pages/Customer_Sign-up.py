@@ -7,20 +7,18 @@ st.title("Customer Sign-up")
 
 st.subheader("Welcome to Cup Adventure!")
 
-with st.form("sign-in2"):
+with st.form("Customer Sign-up"):
+    customer_id = st.text_input("Customer ID")
     first_name = st.text_input("Add your first name")
     last_name = st.text_input("Add your last name")
-    user_name = st.text_input("Add your user name")
-    user_password = st.text_input("Add your password (passwords are not encrypted, please do not use a real password here)")
 
     submitted = st.form_submit_button("Submit")
     if submitted:
         user = {
+            "customer id" = customer_id,
             "customer_firstName": first_name,
             "customer_lastName": last_name,
-            "join_date": date.today().__str__(),
-            "user_name": user_name,
-            "password": user_password
+            "join_date": date.today(),
         }
         try:
             createdb.add_user(user)
