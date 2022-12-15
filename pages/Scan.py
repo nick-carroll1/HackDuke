@@ -16,7 +16,7 @@ components.html(
             <div class = "row">
                 <div class = "col-md-6">
                     <video id = "preview" width = "100%"></video>
-                    <?php
+                    <!--<?php
                         if(isset($_SESSION['error'])){
                         echo "
                             <div class='alert alert-danger'>
@@ -35,7 +35,7 @@ components.html(
                         ";
                         unset($_SESSION['success']);
                         }
-				  ?>
+				  ?>-->
                 </div>
                 <div class = "col-md-6">
                 <form action = "../Scan/insert1.php" method = "post" name = "form1" id = "form1" class = "form-horizontal">
