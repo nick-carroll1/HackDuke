@@ -43,7 +43,7 @@ tables = [table[0] for table in tables]
 
 
 st.header("Customer Analytics for 2022")
-st.subheader("New Users by Month")
+st.subheader("Unique Cups by Month")
 
 query_customer_1 = "SELECT month(join_date) as Month, COUNT(distinct customer_id) as new_user FROM customers_db GROUP BY month(join_date);"
 df_customer_1 = pd.read_sql(query_customer_1, connection)
@@ -60,7 +60,7 @@ unique=alt.Chart(df_customer_3).mark_line().encode(x='Month:N',y='unique_cup:Q')
 st.altair_chart(unique)
 
 
-
+st.subheader("New Users by Month")
 # create an altair chart to show x:Month, y:new_user from df_metric_3
 customer_chart = (
     alt.Chart(df_customer_1)
@@ -99,4 +99,3 @@ customer_line_chart = (
 )
 st.altair_chart(customer_line_chart, use_container_width=True)
 connection.close()
-
