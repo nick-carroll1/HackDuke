@@ -25,7 +25,7 @@ with st.form("Customer Sign-up"):
                 f"Congratulations {first_name} {last_name}!  You have signed-up for Cup Adventure!"
             )
             st.write("Thank you for joining us in reducing Cup Waste!")
-        except as err:
+        except Exception as err:
             st.write(
                 "There was an error signing you up.  Please ensure no fields are blank."
             )
