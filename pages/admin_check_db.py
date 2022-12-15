@@ -74,7 +74,7 @@ elif selection == "Vendor Data":
     query_metric_1 = "SELECT * FROM vendors_db"
     df_metric_1 = pd.read_sql(query_metric_1, connection)
 
-    query_metric_2 = "SELECT month(transaction_date) as Month, count(distinct vendor_id) as Active Vendors FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
+    query_metric_2 = "SELECT month(transaction_date) as Month, count(distinct vendor_id) as Active_Vendors FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
     df_metric_2 = pd.read_sql(query_metric_2, connection)
     # # change column name in df_metric_2 into month and countx
     # df_metric_2.columns = ["month", "countx"]
@@ -99,8 +99,8 @@ elif selection == "Vendor Data":
         .mark_bar()
         .encode(
             x="Month:N",
-            y="Active Vendors:Q",
-            tooltip=["Month", "Active Vendors:Q"],
+            y="Active_Vendors:Q",
+            tooltip=["Month", "Active_Vendors:Q"],
         )
         .interactive()
     )
