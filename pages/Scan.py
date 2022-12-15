@@ -97,7 +97,7 @@ components.html(
                 console.error(e);
             });
 
-            scanner.addListener('scan', function (c) {
+            """+f"""scanner.addListener('scan', function ({c}) """+"""{
                 """+f"""document.getElementById('text').value = {c};"""+"""
                 <!--document.forms["form1"].submit();-->
             });
