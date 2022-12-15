@@ -16,3 +16,4 @@ unique=altair.Chart(d1).mark_line().encode(x='transaction_date',y='cup_id')
 
 
 st.altair_chart(unique)
+st.write(d1)
