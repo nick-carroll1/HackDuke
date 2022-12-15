@@ -109,7 +109,7 @@ selection = st.sidebar.radio(
         "Vendor Data",
         "Customer Data",
         "Pull Customer Data",
-        "Add New Customer Data",
+        "Add/Update Customer Data",
     ],
 )
 
