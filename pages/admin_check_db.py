@@ -252,7 +252,7 @@ elif selection == "Pull Customer Data":
         df = pd.read_sql(query, connection)
         st.write(df)
         connection.close()
-    except:
+    except Exception as e:
         st.write("User not found")
         connection.close()
 
