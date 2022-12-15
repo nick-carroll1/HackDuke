@@ -138,7 +138,6 @@ elif selection == "Vendor Data":
     df_metric_1 = pd.read_sql(query_vendor_1, connection)
     query_vendor_2 = "SELECT month(transaction_date) as Month, count(distinct vendor_id) as Active_Vendors FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
     df_metric_2 = pd.read_sql(query_vendor_2, connection)
-    month = st.selectbox("Select a month", df_metric_1["Month"].unique())
 
     st.header("Vendor Data for 2022")
 
