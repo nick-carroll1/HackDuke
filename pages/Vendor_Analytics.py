@@ -43,6 +43,13 @@ tables = [table[0] for table in tables]
 
 
 st.header("Customer Analytics for 2022")
+st.subheader("Unique Users by Month")
+st.subheader("Current User Growth Rate")
+st.subheader("Unique Users per Cup")
+st.subheader("Number of Active Cafe Distributing the Cups")
+st.subheader("Cups Sold")
+st.subheader("Cups Circulation Amount Per Period?")
+
 st.subheader("Unique Cups by Month")
 
 query_customer_1 = "SELECT month(join_date) as Month, COUNT(distinct customer_id) as new_user FROM customers_db GROUP BY month(join_date);"
