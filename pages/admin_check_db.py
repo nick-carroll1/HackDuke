@@ -265,11 +265,26 @@ elif selection == "Add New Customer Data":
     customer_lastName = st.text_input("Customer Last Name", "")
     customer_firstName = st.text_input("Customer First Name", "")
     customer_join_date = st.date_input("Join Date", today)
+    cup_rental = st.text_input("Cup Code", "")
+    deposit = st.text_input("Deposit", "")
+    cups_bought = st.text_input("Cups Bought", 0)
+    account_value = st.text_input("Account Value", 0)
     user_name = st.text_input("User Name", "")
-    join_date = st.text_input("Join Date", "")
+    password = st.text_input("Password", 0)
     if st.button("Add Data"):
-        query = "INSERT INTO customers_db (customer_id, user_name, join_date) VALUES (%s, %s, %s)"
-        values = (customer_id, user_name, join_date)
+        query = "INSERT INTO customers_db (customer_id, customer_lastName, customer_firstName, join_date, cup_rental, deposit, cups_bought, account_value, user_name, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        values = (
+            customer_id,
+            customer_lastName,
+            customer_firstName,
+            customer_join_date,
+            cup_rental,
+            deposit,
+            cups_bought,
+            account_value,
+            user_name,
+            password,
+        )
         cursor.execute(query, values)
         connection.commit()
         st.write("Data added successfully")
