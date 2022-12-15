@@ -135,7 +135,7 @@ elif selection == "Vendor Data":
 elif selection == "Customer Data":
     query_customer_1 = "SELECT month(join_date) as Month, COUNT(distinct customer_id) as new_user FROM customers_db GROUP BY month(join_date);"
     df_customer_1 = pd.read_sql(query_customer_1, connection)
-    query_customer_2 = "SELECT month(transaction_date), count(distinct customer_id) FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
+    query_customer_2 = "SELECT month(transaction_date) as Month, count(distinct customer_id) as active_user FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
     df_customer_2 = pd.read_sql(query_customer_2, connection)
 
     st.header("Customer Data for 2022")
@@ -162,13 +162,11 @@ elif selection == "Customer Data":
         alt.Chart(df_customer_2)
         .mark_line()
         .encode(
-            x=alt.X(
-                "month(transaction_date):N", title="Month", axis=alt.Axis(labelAngle=-0)
-            ),
-            y=alt.Y("count(distinct customer_id):Q", title="Active Users"),
+            x=alt.X("Month:N", title="Month", axis=alt.Axis(labelAngle=-0)),
+            y=alt.Y("active_user:Q", title="Active Users"),
             tooltip=[
-                alt.Tooltip("month(transaction_date)", title="Month"),
-                alt.Tooltip("count(distinct customer_id):Q", title="Active Users"),
+                alt.Tooltip("Month", title="Month"),
+                alt.Tooltip("active_user:Q", title="Active Users"),
             ],
         )
         .interactive()
