@@ -48,5 +48,8 @@ st.write(df)
 # create a streamlit selectbox to select the column
 column_name = st.selectbox("Select a column", df.columns)
 
+# make a summary statistics table of the selected column
+st.write(df[column_name].describe())
+
 # close connection
 connection.close()
