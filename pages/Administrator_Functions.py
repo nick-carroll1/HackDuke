@@ -296,9 +296,10 @@ elif selection == "Pull Customer Data":
             customerQuery = (
                 f"SELECT customer_id, customer_lastName, customer_firstName, join_date, cup_rental, deposit, cups_bought, account_value, user_name FROM customers_db WHERE customer_id = '{customer_id}'"
             )
-            st.table(customerQuery)
-    except:
+            st.table(query(customerQuery))
+    except Exception as err:
         st.write("Error searching for User.")
+        st.write(err)
 
 elif selection == "Add/Update Customer Data":
     # Add/Update Customer Data Page
