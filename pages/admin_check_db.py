@@ -63,8 +63,13 @@ elif selection == "Add New Data":
     query_metric_1 = "SELECT * FROM vendors_db"
     df_metric_1 = pd.read_sql(query_metric_1, connection)
 
-    # show the unique values from the column "vendor_name" in the table "vendors_db" in a metric
+    # # show the unique values from the column "vendor_name" in the table "vendors_db" in a metric
+    # st.metric(label="Unique Vendors", value=df_metric_1["vendor_name"].nunique())
+
+    # Show the unique names of the vendors in a metric and cup stock in a metric
     st.metric(label="Unique Vendors", value=df_metric_1["vendor_name"].nunique())
+    st.metric(label="Cup Stock", value=df_metric_1["cup_stock"].sum())
+
 
 # close connection
 connection.close()
