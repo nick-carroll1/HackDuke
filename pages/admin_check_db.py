@@ -244,7 +244,3 @@ elif selection == "Pull User Data":
         query = "SELECT * FROM customers_db WHERE customer_id = " + user_id
         df = pd.read_sql(query, connection)
         st.write(df)
-
-
-# close connection
-connection.close()
