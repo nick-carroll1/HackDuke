@@ -160,12 +160,20 @@ def check_password():
 
 
 st.title("Cup Adventure")
-# if check_password():
+
 match selection:
-    # if the user selects "Read Data" then show the table
     case "Welcome Page":
-        st.write("Welcome to Cup Adventure Admin Page")
-        st.write("Please select a page from the sidebar")
+        st.write(selection)
+    case "Read All Data":
+        st.write(selection)
+
+
+# if check_password():
+# match selection:
+#     # if the user selects "Read Data" then show the table
+#     case "Welcome Page":
+#         st.write("Welcome to Cup Adventure Admin Page")
+#         st.write("Please select a page from the sidebar")
 
 #     case "Read All Data":
 #         # create a streamlit selectbox to select the table
