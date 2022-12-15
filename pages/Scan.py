@@ -107,4 +107,4 @@ a = components.html(
 </html>""", width = 900, height = 1500, scrolling= True
 )
 
-st.write(a)
+# st.write(a)
