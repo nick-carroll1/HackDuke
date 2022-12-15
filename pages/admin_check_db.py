@@ -37,19 +37,29 @@ cursor.execute("SHOW TABLES")
 tables = cursor.fetchall()
 tables = [table[0] for table in tables]
 
-# create a streamlit selectbox to select the table
-table_name = st.selectbox("Select a table", tables)
+# make a sidebar with choice of different pages named "Read Data" and "Add New Data"
+st.sidebar.title("Navigation")
+selection = st.sidebar.radio("Go to", ["Read Data", "Add New Data"])
 
-# query the database based on table_name selected and preserve the column names
-query = "SELECT * FROM " + table_name
-df = pd.read_sql(query, connection)
-st.write(df)
+# if the user selects "Read Data" then show the table
+if selection == "Read Data":
+    # create a streamlit selectbox to select the table
+    table_name = st.selectbox("Select a table", tables)
 
-# create a streamlit selectbox to select the column
-column_name = st.selectbox("Select a column", df.columns)
+    # query the database based on table_name selected and preserve the column names
+    query = "SELECT * FROM " + table_name
+    df = pd.read_sql(query, connection)
+    st.write(df)
 
-# make a summary statistics table of the selected column in horizontal format and integer format
-st.write(df[column_name].describe().to_frame().T)
+    # create a streamlit selectbox to select the column
+    column_name = st.selectbox("Select a column", df.columns)
+
+    # make a summary statistics table of the selected column in horizontal format and integer format
+    st.write(df[column_name].describe().to_frame().T)
+
+# if the user selects "Add New Data" then show the form
+elif selection == "Add New Data":
+    st.write("Add New Data")
 
 # close connection
 connection.close()
