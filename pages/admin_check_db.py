@@ -89,7 +89,7 @@ elif selection == "Vendor Data":
             x=alt.X(
                 "vendor_name",
                 sort="-y",
-                axis=alt.Axis(labelAngle=-90),
+                axis=alt.Axis(labelAngle=-60),
                 title="Vendor Name",
             ),
             y=alt.Y("cup_stock", title="Cup Stock"),
@@ -105,7 +105,7 @@ elif selection == "Vendor Data":
         alt.Chart(df_metric_2)
         .mark_bar()
         .encode(
-            x=alt.X("Month:N", title="Month", axis=alt.Axis(labelAngle=-45)),
+            x=alt.X("Month:N", title="Month", axis=alt.Axis(labelAngle=-60)),
             y=alt.Y("Active_Vendors:Q", title="Active Vendors"),
             tooltip=[
                 alt.Tooltip("Month", title="Month"),
