@@ -5,7 +5,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 import streamlit as st
 import altair as alt
-import datetime
+from datetime import date
 from createdb import query, add_user, update_user
 
 
@@ -307,14 +307,14 @@ elif selection == "Pull Customer Data":
 elif selection == "Add/Update Customer Data":
     # Add/Update Customer Data Page
     # Use a form to update customer data
-    with st.form("Customer Sign-up"):
+    with st.form("Customer Sign-up2"):
         # Collect customer data inputs
         st.header("Add New Customer Data or Update Existing Customer Data")
         st.write("Please enter the new customer data below")
         customer_id = st.text_input("Customer ID")
         customer_lastName = st.text_input("Customer Last Name")
         customer_firstName = st.text_input("Customer First Name")
-        customer_join_date = st.date_input("Join Date", today)
+        customer_join_date = st.date_input("Join Date", date.today())
         deposit = st.text_input("Deposit", 5)
         account_value = st.text_input("Account Value", 0)
         submitted = st.form_submit_button("Submit")
@@ -323,8 +323,8 @@ elif selection == "Add/Update Customer Data":
             # Consolidate user data
             user = {
                 "customer_id": customer_id,
-                "customer_firstName": first_name,
-                "customer_lastName": last_name,
+                "customer_firstName": customer_firstName,
+                "customer_lastName": customer_lastName,
                 "join_date": date.today(),
                 "deposit": deposit,
                 "account_value": account_value
@@ -338,7 +338,7 @@ elif selection == "Add/Update Customer Data":
                 if len(customerResults) == 0:
                     add_user(user)
                     st.write(
-                        f"Congratulations {first_name} {last_name}!  You have signed-up for Cup Adventure!"
+                        f"Congratulations {customer_firstName} {customer_lastName}!  You have signed-up for Cup Adventure!"
                     )
                     st.write(
                         "Thank you for joining us in reducing Cup Waste!")
@@ -346,7 +346,7 @@ elif selection == "Add/Update Customer Data":
                 else:
                     update_user(user)
                     st.write(
-                        f"{first_name} {last_name}'s information has been updated in the database.")
+                        f"{customer_firstName} {customer_lastName}'s information has been updated in the database.")
             except:
                 st.write(
                     "There was an error signing you up.  Please ensure no fields are blank."
