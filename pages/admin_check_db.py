@@ -83,7 +83,7 @@ elif selection == "Vendor Data":
     df_metric_2 = pd.read_sql(query_metric_2, connection)
     # # change column name in df_metric_2 into month and countx
     # df_metric_2.columns = ["month", "countx"]
-
+    st.header("Vendor Data for 2022")
     # create an altair chart to show vendor_name and cup_stock
     stock_chart = (
         alt.Chart(df_metric_1)
