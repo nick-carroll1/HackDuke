@@ -247,6 +247,6 @@ elif selection == "Pull User Data":
     # # give a choice of using user_name
     username = st.text_input("User Name", "")
     if st.button("Pull Data"):
-        query = "SELECT * FROM customers_db WHERE user_name = " + username.__str__()
+        query = "SELECT * FROM customers_db WHERE user_name = " + str(username)
         df = pd.read_sql(query, connection)
         st.write(df)
