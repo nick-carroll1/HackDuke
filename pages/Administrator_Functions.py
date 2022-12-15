@@ -119,7 +119,7 @@ def check_password():
 
     def password_entered():
         """Checks whether a password entered by the user is correct."""
-        userquery = f"SELECT user_name, password FROM customers_db where user_name = '{st.session_state['username']}';"
+        userquery = f"SELECT user_name, password FROM admin_db where user_name = '{st.session_state['username']}';"
         results = query(userquery)
         passwords = {eachLine[0]: eachLine[1] for eachLine in results}
         if (
