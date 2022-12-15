@@ -31,15 +31,13 @@ connection = create_db_connection(
     "cup_adventure",
 )
 
-print(connection)
+# make a list of all the table in cup_adventure database
+tables = ["cups_db", "customers_db", "transactions", "transactions_log", "vendors_db"]
 
-# # make a list of all the table in cup_adventure database
-# tables = ["cups_db", "customers_db", "transactions", "transactions_log", "vendors_db"]
+# create a streamlit selectbox to select the table
+table_name = st.selectbox("Select a table", tables)
 
-# # create a streamlit selectbox to select the table
-# table_name = st.selectbox("Select a table", tables)
-
-# # query the database based on table_name selected and preserve the column names
-# query = "SELECT * FROM " + table_name
-# df = pd.read_sql(query, connection)
-# st.write(df)
+# query the database based on table_name selected and preserve the column names
+query = "SELECT * FROM " + table_name
+df = pd.read_sql(query, connection)
+st.write(df)
