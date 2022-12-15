@@ -263,7 +263,7 @@ elif selection == "Add New Customer Data":
     customer_id = st.text_input("Customer ID", "")
     customer_lastName = st.text_input("Customer Last Name", "")
     customer_firstName = st.text_input("Customer First Name", "")
-    customer_join_date = st.date_input("Join Date", datetime.now())
+    customer_join_date = st.date_input("Join Date", datetime.date.today())
     user_name = st.text_input("User Name", "")
     join_date = st.text_input("Join Date", "")
     if st.button("Add Data"):
