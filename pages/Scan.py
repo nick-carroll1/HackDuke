@@ -2,7 +2,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 import os
 
-c = "c"
+c = ""
 components.html(
     """<?php SESSION_START(); ?>
 <html>
@@ -38,8 +38,8 @@ components.html(
                         }
 				  ?>-->
                 </div>
-                <div class = "col-md-6">
-                <form action = "../Scan/insert1.php" method = "post" name = "form1" id = "form1" class = "form-horizontal">
+                <div class = "col-md-6">"""+f"""
+                <form action = "{c}" method = "post" name = "form1" id = "form1" class = "form-horizontal">"""+"""
                     <label>SCAN QR CODE</label>
                     <input type = "text" name = "text" id = "text" readonyy = "" placeholder = "scan the QR Code" class = "form-control">
                 </form>
@@ -97,9 +97,9 @@ components.html(
                 console.error(e);
             });
 
-            """+f"""scanner.addListener('scan', function ({c}) """+"""{
-                """+f"""document.getElementById('text').value = {c};"""+"""
-                <!--document.forms["form1"].submit();-->
+            """+f"""scanner.addListener('scan', function (c) """+"""{
+                """+f"""document.getElementById('text').value = c;"""+"""
+                document.forms["form1"].submit();
             });
         
         
