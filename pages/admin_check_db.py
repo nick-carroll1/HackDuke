@@ -272,7 +272,7 @@ elif selection == "Add New Customer Data":
         # check if customer_id already exists in customers_db
         query = "SELECT * FROM customers_db WHERE customer_id = " + customer_id
         df = pd.read_sql(query, connection)
-        if len(df.empty) != 0:
+        if df.empty == False:
             st.write("Customer ID already exists")
             connection.close()
         else:
