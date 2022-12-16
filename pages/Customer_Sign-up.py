@@ -25,9 +25,9 @@ st_lottie(
     speed=1,
     reverse=False,
     loop=True,
-    quality="low",  # medium ; high
-    height=300,
-    width=250,
+    quality="medium",  # medium ; high
+    height=500,
+    width=400,
     key=None,
 )
 
