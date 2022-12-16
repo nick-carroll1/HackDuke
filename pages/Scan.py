@@ -18,8 +18,10 @@ cnx = mysql.connector.connect(
 
 cur = cnx.cursor(buffered=True)
 
+st.write("aaaaa")
 try:
-    text = st.server.request.text
+    text = st.server.request.Scan
+    st.write("bbbbb")
 except:
     text = ""
 
