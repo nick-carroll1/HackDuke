@@ -21,6 +21,7 @@ def add_record():
         user="admin",
         password="NoahGift706-2",
         database="cup_adventure",
+        autocommit=True,
     )
 
     cur = cnx.cursor(buffered=True)
@@ -49,7 +50,7 @@ def add_record():
             (text,),
         )
 
-    cur.commit()
+    cnx.close()
     # st.success("New borrow record added successfully")
 
 
