@@ -159,7 +159,7 @@ query_growth_rate = "select month(join_date) as Month, count(customer_id) as cou
 query_growth_rate = pd.read_sql(query_growth_rate, connection)
 growth_rate = (
         alt.Chart(query_growth_rate, title="Current User Growth Rate")
-        .mark_line(point=False, strokeWidth=5, color = "orange")
+        .mark_line(point=False, strokeWidth=5, color = "#B7D3DF")
         .encode(
             x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)), 
             y=alt.Y("growth:Q", title="User Growth"),
@@ -175,7 +175,7 @@ query_customer_unique_users_per_cup = "SELECT month(transaction_date) as Month, 
 query_customer_unique_users_per_cup = pd.read_sql(query_customer_unique_users_per_cup, connection)
 customer_unique_users_per_cup = (
         alt.Chart(query_customer_unique_users_per_cup, title="Average Users per Cup")
-        .mark_line(point=False, strokeWidth=5, color = "orange")
+        .mark_line(point=False, strokeWidth=5, color = "#C9BBCF")
         .encode(
             x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)), 
             y=alt.Y("unique_users_per_cup:Q", title="Unique Users per Cup"),
@@ -197,7 +197,7 @@ query_customer_4 = "SELECT month(transaction_date) as Month, count(distinct vend
 df_customer_4 = pd.read_sql(query_customer_4, connection)
 unique_cafe = (
     alt.Chart(df_customer_4, title="Number of Active Cafe Distributing Our Cups")
-    .mark_bar(color = "red")
+    .mark_bar(color = "#377D71")
     .encode(
         x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)),
         y=alt.Y(
@@ -216,7 +216,7 @@ query_customer_sold = "SELECT month(transaction_date) as Month, count(customer_i
 query_customer_sold = pd.read_sql(query_customer_sold, connection)
 cup_sold = (
     alt.Chart(query_customer_sold, title="Cups Sold")
-    .mark_bar(color = "red")
+    .mark_bar(color = "#97C4B8")
     .encode(
         x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)),
         y=alt.Y(
@@ -239,7 +239,7 @@ query_Circulation = "SELECT month(transaction_date) as Month, count(customer_id)
 query_Circulation = pd.read_sql(query_Circulation, connection)
 cup_Circulation = (
     alt.Chart(query_Circulation, title="Cups Circulation Amount Per Month")
-    .mark_line(point=False, strokeWidth=5, color = "orange")
+    .mark_line(point=False, strokeWidth=5, color = "#5584AC")
     .encode(
         x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)), 
         y=alt.Y("circulation:Q", title="Cups Circulation Amount", scale=alt.Scale(domain=(2, 14))),
@@ -257,7 +257,7 @@ df_customer_3 = pd.read_sql(query_customer_3, connection)
 
 unique = (
     alt.Chart(df_customer_3, title="Unique Cups by Month")
-    .mark_line(point=False, strokeWidth=5, color = "orange")
+    .mark_line(point=False, strokeWidth=5, color = "#D3DEDC")
     .encode(
         x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)), 
         y=alt.Y("unique_cup:Q", title="Unique Cups", scale=alt.Scale(domain=(2, 24))),
