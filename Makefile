@@ -1,7 +1,7 @@
 install:
 	#install commands
 	pip install --upgrade pip &&\
-		pip install -r requirements.txt
+		pip install -r pipfile
 format:
 	#format code
 	black *.py pages/*.py
@@ -20,4 +20,4 @@ run:
 deploy:
 	#deploy
 
-all: install lint  
+all: install format
