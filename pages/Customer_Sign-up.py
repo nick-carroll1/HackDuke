@@ -15,10 +15,11 @@ def load_lottieurl(url: str):
         return None
     return r.json()
 
-
-lottie_hello = load_lottieurl(
-    "https://assets2.lottiefiles.com/packages/lf20_lgvdhvlz.json"
-)
+_left, mid, _right = st.columns(3)
+with mid:
+    lottie_hello = load_lottieurl(
+        "https://assets2.lottiefiles.com/packages/lf20_lgvdhvlz.json"
+    )
 
 st_lottie(
     lottie_hello,
