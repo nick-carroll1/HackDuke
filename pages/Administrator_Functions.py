@@ -324,8 +324,9 @@ elif selection == "Transactions":
             st.write(submitted)
             if submitted:
                 try:
-                    purchase_cup(customer_id, cup)
+                    cat = purchase_cup(customer_id, cup)
                     st.write("Thank you for purchasing this cup.")
+                    st.write(cat)
                 except:
                     st.write("There has been an error in this purchase.")
     else:
