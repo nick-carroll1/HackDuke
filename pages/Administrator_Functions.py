@@ -267,7 +267,7 @@ elif selection == "Transactions":
         vendorresults = query(vendorquery)
         vendors = {'id': {eachVendor[1]: eachVendor[0] for eachVendor in vendorresults}, 'name': [eachVendor[1] for eachVendor in vendorresults]}
         vendor = st.selectbox("Please select a vendor", vendors['name'])
-        with st.form("transactions"):
+        with st.form("rental"):
             cupquery = f"SELECT cup_id FROM cups_db WHERE sold = 'no' AND cup_status = 'Available' AND vendor_id = '{vendors['id'][vendor]}';"
             cupresults = query(cupquery)
             cups = [eachCup[0] for eachCup in cupresults]
@@ -277,35 +277,32 @@ elif selection == "Transactions":
             customer = st.selectbox("Please select a customer", customerResults)[0]
             # Every form must have a submit button.
             submitted = st.form_submit_button("Submit")
-            st.write(submitted)
             if submitted:
                 try:
-                    test = rent_cup(customer, vendors['id'][vendor], cup)
-                    st.write(test)
-                    st.write("Thank you for renting your cup.")
+                    rent_cup(customer, vendors['id'][vendor], cup)
+                    st.write("Thank you for renting this cup.")
                 except Exception as err:
                     st.write("There was an error renting your cup.")
-                    st.write(err)
     # Return transaction
     elif transaction == "Return":
-        st.write("Use the dropdown below to rent your first cup.")
-        with st.form("first_rental"):
+        st.write("Use the dropdown below to return a cup.")
+        customerQuery = f"SELECT customer_id, customer_firstName, customer_lastName, cup_rental FROM customers_db WHERE cup_rental IS NOT NULL;"
+        customerResults = query(customerQuery)
+        customer = st.selectbox("Please select a customer", customerResults)
+        customer_id = customer[0]
+        cup = customer[3]
+        with st.form("return"):
             # First run, show inputs for username + password.
+            st.write(f"{customer[1]} {customer[2]} has cup {cup} to return.")
             vendorquery = f"SELECT DISTINCT vendor_id, vendor_name FROM vendors_db;"
             vendorresults = query(vendorquery)
-            vendors = {'id': [eachVendor[0] for eachVendor in vendorresults], 'name': [eachVendor[1] for eachVendor in vendorresults]}
-            vendor = st.selectbox("Please select a vendor", vendors['name'])
-            cupquery = f"SELECT cup_id FROM cups_db WHERE sold = 'no' AND cup_status = 'Available';"
-            cupresults = query(cupquery)
-            cups = [eachCup[0] for eachCup in cupresults]
-            cup = st.selectbox("Please select a cup", cups)
+            vendors = {'id': {eachVendor[1]: eachVendor[0] for eachVendor in vendorresults}, 'name': [eachVendor[1] for eachVendor in vendorresults]}
+            vendor = st.selectbox("Please select a vendor to return the cup", vendors['name'])
             # Every form must have a submit button.
             submitted = st.form_submit_button("Submit")
-            st.write(submitted)
             if submitted:
-                rent_cup(st.session_state['user info']['username'], vendor, cup)
-                st.write("Thank you for renting your cup.")
-                st.session_state['user info']['status'] = cup
+                return_cup(customer_id, vendors['id'][vendor], cup)
+                st.write("Thank you for returning the cup.  We hope you contine to use Cup Adventure.")
     # Purchase transaction
     elif transaction == "Purchase":
         st.write("You currently have a cup borrowed.  Please return your cup when you are finished with it.")
