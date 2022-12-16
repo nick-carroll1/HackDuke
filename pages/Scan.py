@@ -41,7 +41,7 @@ components.html(
 				  ?>-->
                 </div>
                 <div class = "col-md-6">"""+f"""
-                <form action = "{st.session_state['c']}" method = "post" name = "form1" id = "form1" class = "form-horizontal">"""+"""
+                <form action = "cat.txt" method = "post" name = "form1" id = "form1" class = "form-horizontal">"""+"""
                     <label>SCAN QR CODE</label>
                     <input type = "text" name = "text" id = "text" readonyy = "" placeholder = "scan the QR Code" class = "form-control">
                 </form>
@@ -101,7 +101,7 @@ components.html(
 
             scanner.addListener('scan', function (c) {
                 document.getElementById('text').value = c;
-                document.forms["form1"].submit();
+                <!--document.forms["form1"].submit();-->
             });
         
         
