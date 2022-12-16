@@ -10,11 +10,14 @@ import mysql.connector
 # dbname="qrcodedb"
 
 
-def add_record():
+# def add_record():
 
-    text = str(st.session_state.textbox)
+try:
+    text = st.experimental_get_query_params()["text"][0]
+except:
+    text = ""
 
-    st.write("text is: " + text)
+if text:
 
     cnx = mysql.connector.connect(
         host="cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com",
@@ -138,7 +141,10 @@ a = components.html(
         
         
         </script>
-"""
+""",
+    width=900,
+    height=1500,
+    scrolling=True,
 )
 
 st.write(st.session_state["c"])
