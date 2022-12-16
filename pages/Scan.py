@@ -19,6 +19,8 @@ except:
 
 if text:
 
+    st.write("text is: " + text")
+
     cnx = mysql.connector.connect(
         host="cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com",
         user="admin",
