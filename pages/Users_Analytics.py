@@ -138,11 +138,11 @@ customer_line_chart = (
 )
 st.altair_chart(customer_line_chart, use_container_width=True)
 
-st.subheader("New Users by Month")
+st.subheader("New Users per Month")
 # create an altair chart to show x:Month, y:new_user from df_metric_3
 customer_chart = (
     alt.Chart(df_customer_1)
-    .mark_bar()
+    .mark_bar(color = "red")
     .encode(
         x=alt.X("Month:N", title="Month", axis=alt.Axis(labelAngle=-0)),
         y=alt.Y("new_user:Q", title="New Users", scale=alt.Scale(domain=(0, 13))),
