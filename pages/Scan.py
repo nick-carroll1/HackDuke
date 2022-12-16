@@ -121,7 +121,7 @@ a = components.html(
         </div>
 
         <form name="form1" action="Scan" method="get" style="display:none;">
-            <input id="text" type="text" />
+            <input id="text" type="text" name="text" />
         </form>
         <script>
             let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
