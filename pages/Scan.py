@@ -64,7 +64,7 @@ st.write("hello")
 st.session_state["c"] = ""
 st.write(st.session_state)
 a = components.html(
-    """<?php SESSION_START(); ?>
+    """
 <html>
     <head>  
     <script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
@@ -77,26 +77,6 @@ a = components.html(
             <div class = "row">
                 <div class = "col-md-6">
                     <video id = "preview" width = "100%"></video>
-                    <!--<?php
-                        if(isset($_SESSION['error'])){
-                        echo "
-                            <div class='alert alert-danger'>
-                            <h4>Error!</h4>
-                            ".$_SESSION['error']."
-                            </div>
-                        ";
-                        }
-
-                        if(isset($_SESSION['success'])){
-                        echo "
-                            <div class='alert alert-success alert-dismissible' style='background:green;color:#fff'>
-                            <h4>Success!</h4>
-                            ".$_SESSION['success']."
-                            </div>
-                        ";
-                        unset($_SESSION['success']);
-                        }
-				  ?>-->
                 </div>
                 <div class = "col-md-6">"""
     + f"""
