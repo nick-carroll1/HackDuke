@@ -280,7 +280,7 @@ elif selection == "Transactions":
             st.write(submitted)
             if submitted:
                 try:
-                    test = rent_cup(customer, vendor, cup)
+                    test = rent_cup(customer, vendors['id'][vendor], cup)
                     st.write(test)
                     st.write("Thank you for renting your cup.")
                 except Exception as err:

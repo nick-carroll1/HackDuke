@@ -202,9 +202,7 @@ def rent_cup(
     # Prepare and execute queries
     try:
         cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")
-        valueValues[0] = [x for x in cursor][0][0]
-        cursor.execute(f"SELECT vendor_id FROM vendors_db WHERE vendor_name = '{vendor}';")
-        valueValues[3] = "'" + [x for x in cursor][0][0] + "'"
+        valueValues[0] = [order_id for order_id in cursor][0][0]
         # Convert transaction information to a query
         columns = columnValues[0]
         for eachColumn in columnValues[1:]:
