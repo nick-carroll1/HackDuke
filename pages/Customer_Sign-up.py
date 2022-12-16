@@ -19,7 +19,7 @@ lottie_hello = load_lottieurl(
         "https://assets2.lottiefiles.com/packages/lf20_lgvdhvlz.json"
 )
 
-left, middle, right = stl.columns((2, 5, 2))
+left, middle, right = stl.columns([2, 5, 2])
 with middle:
     st_lottie(lottie_hello, speed=1, height=400, width = 350, key=None)
 
