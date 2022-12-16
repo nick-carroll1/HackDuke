@@ -29,9 +29,8 @@ except:
 
 if text:
     cur.execute(
-        "SELECT * FROM transactions"
-    )  # WHERE STUDENTID = %s AND STATUS = '0'", (text,)
-    # )
+        "SELECT * FROM transactions WHERE STUDENTID = %s AND STATUS = '0'", (text,)
+    )
     # date = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
 
     if cur.rowcount > 0:
