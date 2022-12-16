@@ -41,6 +41,6 @@ with col5:
     pass
 with col3:
     st.markdown(
-        get_st_button_a_tag("http://cupsadventure.tech/", "QR Code Scanner"),
+        get_st_button_a_tag("https://jennyshen.tk/cup/", "QR Code Scanner"),
         unsafe_allow_html=True,
     )
