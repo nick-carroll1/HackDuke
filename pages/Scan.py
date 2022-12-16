@@ -9,25 +9,25 @@ import mysql.connector
 # password=""
 # dbname="qrcodedb"
 
-cnx = mysql.connector.connect(
-    host="cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com",
-    user="admin",
-    password="NoahGift706-2",
-    database="cup_adventure",
-)
 
-cur = cnx.cursor(buffered=True)
+def add_record(text):
 
-st.write("aaaaa")
-try:
-    text = st.experimental_get_query_params()["text"][0]
-    st.write("text is: " + text)
-except:
-    text = ""
-    st.write("no text submitted")
+    cnx = mysql.connector.connect(
+        host="cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com",
+        user="admin",
+        password="NoahGift706-2",
+        database="cup_adventure",
+    )
 
+    cur = cnx.cursor(buffered=True)
 
-if text:
+    # st.write("aaaaa")
+    # try:
+    #    text = st.experimental_get_query_params()["text"][0]
+    #    #st.write("text is: " + text)
+    # except:
+    #    text = ""
+    # st.write("no text submitted")
     cur.execute(
         "SELECT * FROM transactions WHERE STUDENTID = %s AND STATUS = '0'", (text,)
     )
@@ -46,8 +46,13 @@ if text:
         )
     # st.success("New borrow record added successfully")
 
-st.write("ccc")
 
+cnx = mysql.connector.connect(
+    host="cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com",
+    user="admin",
+    password="NoahGift706-2",
+    database="cup_adventure",
+)
 
 cur = cnx.cursor(buffered=True)
 cur.execute("SELECT * FROM transactions")
@@ -68,6 +73,10 @@ for row in result:
 st.write("hello222222222")
 st.session_state["c"] = ""
 st.write(st.session_state)
+
+input = st.text_input("text", key="text")
+button = st.button("Scan", key="submit", on_click=add_record, args=input.value)
+
 a = components.html(
     """
 <html>
@@ -86,9 +95,11 @@ a = components.html(
                 <div class = "col-md-6">"""
     + f"""
                 <form action = "Scan" method = "get" name = "form1" id = "form1" class = "form-horizontal">"""
+    + input
+    + button
     + """
                     <label>SCAN QR CODE</label>
-                    <input type = "text" name = "text" id = "text" readonyy = "" placeholder = "scan the QR Code" class = "form-control">
+                    <input type = "text" name = "text222" id = "text222" readonyy = "" placeholder = "scan the QR Code" class = "form-control">
                 </form>
                   <table class="table table-bordered">
 
