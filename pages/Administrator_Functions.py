@@ -272,13 +272,15 @@ elif selection == "Transactions":
             cupresults = query(cupquery)
             cups = [eachCup[0] for eachCup in cupresults]
             cup = st.selectbox("Please select a cup", cups)
+            customerQuery = f"SELECT customer_id, customer_firstName, customer_lastName FROM customers_db;"
+            customerResults = query(customerQuery)
+            customer = st.selectbox("Please select a customer", customerResults)[0]
             # Every form must have a submit button.
             submitted = st.form_submit_button("Submit")
             st.write(submitted)
             if submitted:
-                rent_cup(st.session_state['user info']['username'], vendor, cup)
+                rent_cup(customer, vendor, cup)
                 st.write("Thank you for renting your cup.")
-                st.session_state['user info']['status'] = cup
     # Return transaction
     elif transaction == "Return":
         st.write("Use the dropdown below to rent your first cup.")

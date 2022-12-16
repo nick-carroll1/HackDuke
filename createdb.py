@@ -201,7 +201,6 @@ def rent_cup(
     # execute query
     try:
         values[0] = cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")[0][0]
-        values[2] = cursor.execute(f"SELECT customer_id FROM customers_db WHERE user_name = '{user}';")[0][0]
         values[3] = "'" + cursor.execute(f"SELECT vendor_id FROM vendors_db WHERE vendor_name = '{vendor}';")[0][0] + "'"
         cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
         cursor.execute(f"UPDATE customers_db SET cup_rental = '{cup}' WHERE user_name = '{user}';")
@@ -235,7 +234,6 @@ def return_cup(
     # execute query
     try:
         values[0] = cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")[0][0]
-        values[2] = cursor.execute(f"SELECT customer_id FROM customers_db WHERE user_name = '{user}';")[0][0]
         values[3] = "'" + cursor.execute(f"SELECT vendor_id FROM vendors_db WHERE vendor_name = '{vendor}';")[0][0] + "'"
         cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
         cursor.execute(f"UPDATE customers_db SET cup_rental = {None} WHERE user_name = '{user}';")
