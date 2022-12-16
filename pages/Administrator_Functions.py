@@ -265,10 +265,10 @@ elif selection == "Transactions":
     if transaction == "Rental":
         vendorquery = f"SELECT DISTINCT vendor_id, vendor_name FROM vendors_db;"
         vendorresults = query(vendorquery)
-        vendors = {'id': [eachVendor[0] for eachVendor in vendorresults], 'name': [eachVendor[1] for eachVendor in vendorresults]}
+        vendors = {'id': {eachVendor[1]: eachVendor[0] for eachVendor in vendorresults}, 'name': [eachVendor[1] for eachVendor in vendorresults]}
         vendor = st.selectbox("Please select a vendor", vendors['name'])
         with st.form("transactions"):
-            cupquery = f"SELECT cup_id FROM cups_db WHERE sold = 'no' AND cup_status = 'Available';"
+            cupquery = f"SELECT cup_id FROM cups_db WHERE sold = 'no' AND cup_status = 'Available' AND vendor_id = '{vendors['id'][vendor]}';"
             cupresults = query(cupquery)
             cups = [eachCup[0] for eachCup in cupresults]
             cup = st.selectbox("Please select a cup", cups)
