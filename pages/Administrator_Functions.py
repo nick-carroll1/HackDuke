@@ -1,102 +1,7 @@
-import mysql.connector
-from mysql.connector import Error
-import os
-import pandas as pd
-from sqlalchemy import create_engine
 import streamlit as st
 import altair as alt
 from datetime import date
-from createdb import query, querydf, add_user, update_user
-
-
-# def create_db_connection(host_name, user_name, user_password, user_port, db_name):
-#     connection = None
-#     try:
-#         connection = mysql.connector.connect(
-#             host=host_name,
-#             user=user_name,
-#             passwd=user_password,
-#             port=user_port,
-#             database=db_name,
-#         )
-#         print("MySQL Database connection successful")
-#     except Error as err:
-#         print(f"Error: '{err}'")
-
-#     return connection
-
-
-# connection = create_db_connection(
-#     os.getenv("AWS_HOST"),
-#     os.getenv("AWS_USER"),
-#     os.getenv("AWS_PASSWORD"),
-#     os.getenv("AWS_PORT"),
-#     "cup_adventure",
-# )
-
-# # fetch the table names from the database
-# cursor = connection.cursor()
-# cursor.execute("SHOW TABLES")
-# tables = cursor.fetchall()
-# tables = [table[0] for table in tables]
-
-
-# def rent_cup(
-#     user,
-#     vendor,
-#     cup,
-#     database="cup_adventure",
-#     username=os.getenv("AWS_USER"),
-#     passwd=os.getenv("AWS_PASSWORD"),
-#     hostname=os.getenv("AWS_HOST"),
-#     portnum=int(os.getenv("AWS_PORT")),
-# ):
-#     # Create Connection
-#     connection = mysql.connector.connect(
-#         user=username, password=passwd, host=hostname, port=portnum
-#     )
-#     cursor = connection.cursor()
-#     cursor.execute(f"USE {database};")
-#     columns = [
-#         "order_id",
-#         "transaction_date",
-#         "customer_id",
-#         "vendor_id",
-#         "cup_id",
-#         "transaction_status",
-#         "Revenue",
-#     ]
-#     values = [None, date.today(), user, vendor, cup, "'Borrowed'", 0]
-#     # execute query
-#     try:
-#         values[0] = cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")[
-#             0
-#         ][0]
-#         values[2] = cursor.execute(
-#             f"SELECT customer_id FROM customers_db WHERE user_name = '{user}';"
-#         )[0][0]
-#         values[3] = (
-#             "'"
-#             + cursor.execute(
-#                 f"SELECT vendor_id FROM vendors_db WHERE vendor_name = '{vendor}';"
-#             )[0][0]
-#             + "'"
-#         )
-#         cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
-#         cursor.execute(
-#             f"UPDATE customers_db SET cup_rental = '{cup}' WHERE user_name = '{user}';"
-#         )
-#         cursor.execute(
-#             f"UPDATE cups_db SET cup_status = 'Borrowed', vendor_id = 'Out' WHERE cup_id = {cup};"
-#         )
-#         cursor.execute(
-#             f"UPDATE vendors_db SET cup_stock = (SELECT cup_stock FROM vendors_db WHERE vendor_name = {vendor} - 1) WHERE vendor_name = {vendor};"
-#         )
-#         connection.commit()
-#     except:
-#         connection.rollback()
-#     connection.close()
-#     pass
+from createdb import query, querydf, add_user, update_user, rent_cup, return_cup
 
 
 # make a sidebar with choice of different pages named "Read Data" and "Add New Data"
@@ -110,6 +15,7 @@ selection = st.sidebar.radio(
         "Customer Data",
         "Pull Customer Data",
         "Add/Update Customer Data",
+        "Transactions"
     ],
 )
 
@@ -349,3 +255,66 @@ elif selection == "Add/Update Customer Data":
                 st.write(
                     "There was an error signing you up.  Please ensure no fields are blank."
                 )
+
+#
+elif selection == "Transactions":
+    # Choose a transaction
+    options = ["Rental", "Return", "Purchase"]
+    transaction = st.selectbox()
+    # Rental transaction
+    if transaction = "Rental":
+        with st.form("transactions"):
+            vendorquery = f"SELECT DISTINCT vendor_id, vendor_name FROM vendors_db;"
+            vendorresults = query(vendorquery)
+            vendors = {'id': [eachVendor[0] for eachVendor in vendorresults], 'name': [eachVendor[1] for eachVendor in vendorresults]}
+            vendor = st.selectbox("Please select a vendor", vendors['name'])
+            cupquery = f"SELECT cup_id FROM cups_db WHERE sold = 'no' AND cup_status = 'Available';"
+            cupresults = query(cupquery)
+            cups = [eachCup[0] for eachCup in cupresults]
+            cup = st.selectbox("Please select a cup", cups)
+            # Every form must have a submit button.
+            submitted = st.form_submit_button("Submit")
+            st.write(submitted)
+            if submitted:
+                rent_cup(st.session_state['user info']['username'], vendor, cup)
+                st.write("Thank you for renting your cup.")
+                st.session_state['user info']['status'] = cup
+    # Return transaction
+    elif transaction = "Return":
+        st.write("Use the dropdown below to rent your first cup.")
+        with st.form("first_rental"):
+            # First run, show inputs for username + password.
+            vendorquery = f"SELECT DISTINCT vendor_id, vendor_name FROM vendors_db;"
+            vendorresults = query(vendorquery)
+            vendors = {'id': [eachVendor[0] for eachVendor in vendorresults], 'name': [eachVendor[1] for eachVendor in vendorresults]}
+            vendor = st.selectbox("Please select a vendor", vendors['name'])
+            cupquery = f"SELECT cup_id FROM cups_db WHERE sold = 'no' AND cup_status = 'Available';"
+            cupresults = query(cupquery)
+            cups = [eachCup[0] for eachCup in cupresults]
+            cup = st.selectbox("Please select a cup", cups)
+            # Every form must have a submit button.
+            submitted = st.form_submit_button("Submit")
+            st.write(submitted)
+            if submitted:
+                rent_cup(st.session_state['user info']['username'], vendor, cup)
+                st.write("Thank you for renting your cup.")
+                st.session_state['user info']['status'] = cup
+    # Purchase transaction
+    elif transaction = "Purchase":
+        st.write("You currently have a cup borrowed.  Please return your cup when you are finished with it.")
+        with st.form("return"):
+            # First run, show inputs for username + password.
+            vendorquery = f"SELECT DISTINCT vendor_name FROM vendors_db;"
+            vendorresults = query(vendorquery)
+            vendors = [eachVendor[0] for eachVendor in vendorresults]
+            vendor = st.selectbox("Please select a vendor", vendors)
+            cup = int(st.selectbox("Please select a cup", [st.session_state['user info']['status']]))
+            # Every form must have a submit button.
+            submitted = st.form_submit_button("Submit")
+            st.write(submitted)
+            if submitted:
+                return_cup(st.session_state['user info']['username'], vendor, cup)
+                st.write("Thank you for returning your cup.")
+                st.session_state['user info']['status'] = "Available"
+    else:
+        st.write("There has been an error.  Please contact us for help.")
