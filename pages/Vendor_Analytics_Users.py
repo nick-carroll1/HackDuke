@@ -41,12 +41,12 @@ tables = [table[0] for table in tables]
 
 
 
-
+st.header("Customer Analytics for 2022")
 
 st.subheader("Active Users by Month")
 query_customer_2 = "SELECT month(transaction_date) as Month, count(distinct customer_id) as active_user FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
 df_customer_2 = pd.read_sql(query_customer_2, connection)
-st.subheader("Active Users by Month")
+
 # create an altair line chart to show x:Month, y:Active_Users from df_metric_4
 customer_line_chart = (
     alt.Chart(df_customer_2)
