@@ -283,8 +283,9 @@ elif selection == "Transactions":
                     test = rent_cup(customer, vendor, cup)
                     st.write(test)
                     st.write("Thank you for renting your cup.")
-                except:
+                except Exception as err:
                     st.write("There was an error renting your cup.")
+                    st.write(err)
     # Return transaction
     elif transaction == "Return":
         st.write("Use the dropdown below to rent your first cup.")
