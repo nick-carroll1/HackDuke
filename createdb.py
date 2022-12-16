@@ -237,6 +237,7 @@ def rent_cup(
     connection.close()
     pass
 
+
 # Return a cup
 def return_cup(
     user,
@@ -287,6 +288,63 @@ def return_cup(
         cursor.execute(f"UPDATE customers_db SET cup_rental = NULL WHERE customer_id = '{user}';")
         cursor.execute(f"UPDATE cups_db SET cup_status = 'Available', vendor_id = 'Out' WHERE cup_id = {cup};")
         cursor.execute(f"UPDATE vendors_db SET cup_stock = cup_stock + 1 WHERE vendor_id = '{vendor}';")
+        connection.commit()
+    except Exception as err:
+        connection.rollback()
+        return err
+    connection.close()
+    pass
+
+
+# Purchase a cup
+def purchase_cup(
+    user,
+    cup,
+    database="cup_adventure",
+    username=os.getenv("AWS_CUPADVENTURE_USERNAME"),
+    passwd=os.getenv("AWS_CUPADVENTURE_PASSWORD"),
+    hostname=os.getenv("AWS_CUPADVENTURE_HOSTNAME"),
+    portnum=int(os.getenv("AWS_CUPADVENTURE_PORT")),
+):
+    # Create Connection
+    connection = mysql.connector.connect(
+        user=username, password=passwd, host=hostname, port=portnum
+    )
+    cursor = connection.cursor()
+    cursor.execute(f"USE {database};")
+    columnValues = ['order_id', 'transaction_date', 'customer_id', 'vendor_id', 'cup_id', 'transaction_status', 'Revenue']
+    valueValues = [None, date.today().__str__(), user, 'CA1', cup, "Purchased", 5]
+    # Prepare and execute queries
+    try:
+        cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")
+        valueValues[0] = [order_id for order_id in cursor][0][0]
+        # Convert transaction information to a query
+        columns = columnValues[0]
+        for eachColumn in columnValues[1:]:
+            columns += ", " + eachColumn
+        if (type(valueValues[0]) == type(str())):
+            values = "'" + valueValues[0] + "'"
+            pass
+        elif (type(valueValues[0]) == type(date.today())):
+            values = "'" + str(valueValues[0]) + "'"
+            pass
+        else:
+            values = str(valueValues[0])
+        for eachValue in valueValues[1:]:
+            if (type(eachValue) == type(str())):
+                values += ", '" + eachValue + "'"
+                pass
+            elif (type(eachValue) == type(date.today())):
+                values += ", '" + eachValue + "'"
+                pass
+            else:
+                values += ", " + str(eachValue)
+                pass
+            pass
+        cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
+        cursor.execute(f"UPDATE customers_db SET cups_bought = cups_bought + 1, account_value = account_value - 5 WHERE customer_id = '{user}';")
+        cursor.execute(f"UPDATE vendors_db SET cup_stock = cup_stock - 1 WHERE vendor_id = (SELECT vendor_id FROM cups_db WHERE cup_id = {cup});")
+        cursor.execute(f"UPDATE cups_db SET cup_status = 'Sold', vendor_id = 'Out', sold = 'Yes WHERE cup_id = {cup};")
         connection.commit()
     except Exception as err:
         connection.rollback()

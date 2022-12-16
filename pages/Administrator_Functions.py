@@ -1,7 +1,7 @@
 import streamlit as st
 import altair as alt
 from datetime import date
-from createdb import query, querydf, add_user, update_user, rent_cup, return_cup
+from createdb import query, querydf, add_user, update_user, rent_cup, return_cup, purchase_cup
 
 
 # make a sidebar with choice of different pages named "Read Data" and "Add New Data"
@@ -308,20 +308,25 @@ elif selection == "Transactions":
                     st.write("There was an error renting your cup.")
     # Purchase transaction
     elif transaction == "Purchase":
-        st.write("You currently have a cup borrowed.  Please return your cup when you are finished with it.")
+        st.write("Use the dropdown below to purchase a cup.")
+        customerQuery = f"SELECT customer_id, customer_firstName, customer_lastName, cup_rental FROM customers_db WHERE cup_rental IS NOT NULL;"
+        customerResults = query(customerQuery)
+        customer = st.selectbox("Please select a customer", customerResults)
+        customer_id = customer[0]
         with st.form("return"):
-            # First run, show inputs for username + password.
-            vendorquery = f"SELECT DISTINCT vendor_name FROM vendors_db;"
-            vendorresults = query(vendorquery)
-            vendors = [eachVendor[0] for eachVendor in vendorresults]
-            vendor = st.selectbox("Please select a vendor", vendors)
-            cup = int(st.selectbox("Please select a cup", [st.session_state['user info']['status']]))
+            cupquery = f"SELECT cup_id FROM cups_db WHERE sold = 'no' AND cup_status = 'Available' AND vendor_id = '{vendors['id'][vendor]}';"
+            cupresults = query(cupquery)
+            cups = [eachCup[0] for eachCup in cupresults]
+            cups.append(customer[3])
+            cup = st.selectbox("Please select a cup", cups)
             # Every form must have a submit button.
             submitted = st.form_submit_button("Submit")
             st.write(submitted)
             if submitted:
-                return_cup(st.session_state['user info']['username'], vendor, cup)
-                st.write("Thank you for returning your cup.")
-                st.session_state['user info']['status'] = "Available"
+                try:
+                    purchase_cup(customer_id, cup)
+                    st.write("Thank you for purchasing this cup.")
+                except:
+                    st.write("There has been an error in this purchase.")
     else:
         st.write("There has been an error.  Please contact us for help.")
