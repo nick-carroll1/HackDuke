@@ -254,22 +254,46 @@ def return_cup(
     )
     cursor = connection.cursor()
     cursor.execute(f"USE {database};")
-    columns = ['order_id', 'transaction_date', 'customer_id', 'vendor_id', 'cup_id', 'transaction_status', 'Revenue']
-    values = [None, date.today(), user, vendor, cup, "'Returned'", 0]
-    # execute query
+    columnValues = ['order_id', 'transaction_date', 'customer_id', 'vendor_id', 'cup_id', 'transaction_status', 'Revenue']
+    valueValues = [None, date.today().__str__(), user, vendor, cup, "Borrowed", 0]
+    # Prepare and execute queries
     try:
-        values[0] = cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")[0][0]
-        values[3] = "'" + cursor.execute(f"SELECT vendor_id FROM vendors_db WHERE vendor_name = '{vendor}';")[0][0] + "'"
+        cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")
+        valueValues[0] = [order_id for order_id in cursor][0][0]
+        # Convert transaction information to a query
+        columns = columnValues[0]
+        for eachColumn in columnValues[1:]:
+            columns += ", " + eachColumn
+        if (type(valueValues[0]) == type(str())):
+            values = "'" + valueValues[0] + "'"
+            pass
+        elif (type(valueValues[0]) == type(date.today())):
+            values = "'" + str(valueValues[0]) + "'"
+            pass
+        else:
+            values = str(valueValues[0])
+        for eachValue in valueValues[1:]:
+            if (type(eachValue) == type(str())):
+                values += ", '" + eachValue + "'"
+                pass
+            elif (type(eachValue) == type(date.today())):
+                values += ", '" + eachValue + "'"
+                pass
+            else:
+                values += ", " + str(eachValue)
+                pass
+            pass
         cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
-        cursor.execute(f"UPDATE customers_db SET cup_rental = {None} WHERE user_name = '{user}';")
-        cursor.execute(f"UPDATE cups_db SET cup_status = 'Available', vendor_id = {values[3]} WHERE cup_id = {cup};")
-        cursor.execute(f"UPDATE vendors_db SET cup_stock = (SELECT cup_stock FROM vendors_db WHERE vendor_name = {vendor} + 1) WHERE vendor_name = {vendor};")
+        cursor.execute(f"UPDATE customers_db SET cup_rental = {None} WHERE customer_id = '{user}';")
+        cursor.execute(f"UPDATE cups_db SET cup_status = 'Available', vendor_id = 'Out' WHERE cup_id = {cup};")
+        cursor.execute(f"UPDATE vendors_db SET cup_stock = cup_stock + 1 WHERE vendor_id = '{vendor}';")
         connection.commit()
-    except:
+    except Exception as err:
         connection.rollback()
+        return err
     connection.close()
     pass
-
+    
 
 # Update table
 def update_table(
@@ -315,7 +339,7 @@ if __name__ == "__main__":
     # myquery = "INSERT INTO customers (customer_firstName, customer_lastName, join_date) VALUES ('Jenny', 'Shen', '2022-12-02');"
     # myquery = "SELECT password FROM customers_db where user_name = 'ngift1';"
     # myquery = f"SELECT DISTINCT vendor_id, vendor_name FROM vendors_db;"
-    myquery = f"SELECT * FROM transactions_log;"
+    myquery = f"SELECT * FROM vendors_db;"
     # myquery = f"SELECT MAX(order_id) + 1 FROM transactions_log;"
     # myquery = f"SELECT customer_id FROM customers_db WHERE user_name = '{user}';"
     # myquery = "SHOW TABLES;"
