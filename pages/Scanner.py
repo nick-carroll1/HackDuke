@@ -2,7 +2,7 @@ import streamlit as st
 from PIL import Image
 
 
-image = Image.open("/Users/jennyshen/Desktop/bar_code.PNG")
+image = Image.open("images/bar_code.PNG")
 
 # displaying the image on streamlit app
 st.image(image, caption="Please Click the Button Below")
