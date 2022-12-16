@@ -115,22 +115,23 @@ def add_user(
     assert users == set()
     # Convert user information to a query
     columns = userKeys[0]
-    if (type(valueValues[0]) == type(str())) or (type(valueValues[0]) == type(date.today())):
-        values = "'" + valueValues[0] + "'"
+    if (type(user[userKeys[0]]) == type(str())) or (type(user[userKeys[0]]) == type(date.today())):
+        values = "'" + user[userKeys[0]] + "'"
         pass
     else:
-        values = str(valueValues[0])
-    for eachColumn in columnValues[1:]:
-        columns += ", " + eachColumn
-    for eachValue in valueValues[1:]:
-        if (type(eachValue) == type(str())) or (type(eachValue) == type(date.today())):
-            values += ", '" + str(eachValue) + "'"
-            pass
-        else:
-            values += ", " + str(eachValue)
+        values = str(user[userKeys[0]])
+    if len(userKeys) > 1:
+        for eachKey in userKeys[1:]:
+            columns += ", " + eachKey
+            eachValue = user[eachKey]
+            if (type(eachValue) == type(str())) or (type(eachValue) == type(date.today())):
+                values += ", '" + str(eachValue) + "'"
+                pass
+            else:
+                values += ", " + str(eachValue)
+                pass
             pass
         pass
-    return columns, values
     # execute query
     try:
         cursor.execute(f"INSERT INTO customers_db ({columns}) VALUES ({values});")
@@ -196,27 +197,32 @@ def rent_cup(
     )
     cursor = connection.cursor()
     cursor.execute(f"USE {database};")
-    # Convert user information to a query
+    # Convert user information to a query    
     columnValues = ['order_id', 'transaction_date', 'customer_id', 'vendor_id', 'cup_id', 'transaction_status', 'Revenue']
     valueValues = [None, date.today().__str__(), user, vendor, cup, "'Borrowed'", 0]
-    columns = columnValues[0]
-    if (type(valueValues[0]]) == type(str())) or (type(valueValues[0]]) == type(date.today())):
-        values = "'" + valueValues[0]] + "'"
+    columns = columns[0]
+    for eachColumn in columnValues[1:]:
+        columns += ", " + eachColumn
+    if (type(valueValues[0]) == type(str())):
+        values = "'" + valueValues[0] + "'"
+        pass
+    elif (type(valueValues[0]) == type(date.today())):
+        values = "'" + str(valueValues[0]) + "'"
         pass
     else:
-        values = str(valueValues[0]])
-    if len(userKeys) > 1:
-        for eachKey in userKeys[1:]:
-            columns += ", " + eachKey
-            eachValue = user[eachKey]
-            if (type(eachValue) == type(str())) or (type(eachValue) == type(date.today())):
-                values += ", '" + str(eachValue) + "'"
-                pass
-            else:
-                values += ", " + str(eachValue)
-                pass
+        values = str(valueValues[0])
+    for eachValue in valueValues[1:]:
+        if (type(eachValue) == type(str())):
+            values += ", '" + eachValue + "'"
+            pass
+        elif (type(eachValue) == type(date.today())):
+            values += ", '" + eachValue + "'"
+            pass
+        else:
+            values += ", " + str(eachValue)
             pass
         pass
+    return columns, values
     # execute query
     try:
         cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")
