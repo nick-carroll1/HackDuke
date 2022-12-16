@@ -16,20 +16,21 @@ cnx = mysql.connector.connect(
     database="cup_adventure",
 )
 
-cur = cnx.cursor()
+cur = cnx.cursor(buffered=True)
 
 st.write("aaaaa")
 try:
     text = st.experimental_get_query_params()["text"]
-    st.write("bbbbb")
+    st.write("text is :" + text)
 except:
     text = ""
 
 
 if text:
     cur.execute(
-        "SELECT * FROM transactions WHERE STUDENTID = %s AND STATUS = '0'", (text,)
-    )
+        "SELECT * FROM transactions"
+    )  # WHERE STUDENTID = %s AND STATUS = '0'", (text,)
+    # )
     # date = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
 
     if cur.rowcount > 0:
