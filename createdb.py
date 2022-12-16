@@ -229,7 +229,7 @@ def rent_cup(
         cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
         cursor.execute(f"UPDATE customers_db SET cup_rental = '{cup}' WHERE customer_id = '{user}';")
         cursor.execute(f"UPDATE cups_db SET cup_status = 'Borrowed', vendor_id = 'Out' WHERE cup_id = {cup};")
-        cursor.execute(f"UPDATE vendors_db SET cup_stock = (SELECT cup_stock FROM vendors_db WHERE vendor_name = {vendor} - 1) WHERE vendor_name = {vendor};")
+        cursor.execute(f"UPDATE vendors_db SET cup_stock = (SELECT cup_stock FROM vendors_db WHERE vendor_id = {vendor}) - 1 WHERE vendor_name = {vendor};")
         connection.commit()
     except Exception as err:
         connection.rollback()
