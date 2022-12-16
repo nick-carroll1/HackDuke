@@ -313,8 +313,8 @@ elif selection == "Transactions":
         customerResults = query(customerQuery)
         customer = st.selectbox("Please select a customer", customerResults)
         customer_id = customer[0]
-        with st.form("return"):
-            cupquery = f"SELECT cup_id FROM cups_db WHERE sold = 'no' AND cup_status = 'Available' AND vendor_id = '{vendors['id'][vendor]}';"
+        with st.form("purchase"):
+            cupquery = f"SELECT cup_id FROM cups_db WHERE sold = 'no' AND cup_status = 'Available';"
             cupresults = query(cupquery)
             cups = [eachCup[0] for eachCup in cupresults]
             cups.append(customer[3])
