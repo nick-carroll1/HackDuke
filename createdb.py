@@ -198,14 +198,13 @@ def rent_cup(
     cursor = connection.cursor()
     cursor.execute(f"USE {database};")
     columns = ['order_id', 'transaction_date', 'customer_id', 'vendor_id', 'cup_id', 'transaction_status', 'Revenue']
-    values = [None, date.today(), user, vendor, cup, "'Borrowed'", 0]
+    values = [None, date.today().__str__(), user, vendor, cup, "'Borrowed'", 0]
     # execute query
     try:
         cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")
         values[0] = [x for x in cursor][0][0]
         cursor.execute(f"SELECT vendor_id FROM vendors_db WHERE vendor_name = '{vendor}';")
         values[3] = "'" + [x for x in cursor][0][0] + "'"
-        return values
         cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
         cursor.execute(f"UPDATE customers_db SET cup_rental = '{cup}' WHERE user_name = '{user}';")
         cursor.execute(f"UPDATE cups_db SET cup_status = 'Borrowed', vendor_id = 'Out' WHERE cup_id = {cup};")
