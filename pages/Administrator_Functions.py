@@ -184,9 +184,9 @@ elif selection == "Read All Data":
 # if the user selects "Add New Data" then show the form
 elif selection == "Vendor Data":
     query_vendor_1 = "SELECT * FROM vendors_db"
-    df_metric_1 = pd.read_sql(query_vendor_1, connection)
+    df_metric_1 = querydf(query_vendor_1)
     query_vendor_2 = "SELECT month(transaction_date) as Month, count(distinct vendor_id) as Active_Vendors FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
-    df_metric_2 = pd.read_sql(query_vendor_2, connection)
+    df_metric_2 = querydf(query_vendor_2)
 
     st.header("Vendor Data for 2022")
 
