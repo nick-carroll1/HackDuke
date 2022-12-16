@@ -20,4 +20,4 @@ cnx = mysql.connector.connect(
 cur = cnx.cursor(buffered=True)
 
 
-st.write('{"jenny": 1, "jenny2": 2}')
+st.json({"jenny": 1, "jenny2": 2})
