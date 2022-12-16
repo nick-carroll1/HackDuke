@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 import streamlit as st
 import altair as alt
 from datetime import date
-from createdb import query, add_user, update_user
+from createdb import query, querydf, add_user, update_user
 
 
 # def create_db_connection(host_name, user_name, user_password, user_port, db_name):
@@ -296,7 +296,7 @@ elif selection == "Pull Customer Data":
             customerQuery = (
                 f"SELECT customer_id, customer_lastName, customer_firstName, join_date, cup_rental, deposit, cups_bought, account_value FROM customers_db WHERE customer_id = '{customer_id}'"
             )
-            st.table(query(customerQuery))
+            st.table(querydf(customerQuery))
     except Exception as err:
         st.write("Error searching for User.")
         st.write(err)

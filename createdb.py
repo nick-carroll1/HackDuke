@@ -48,7 +48,7 @@ def createTable(
     connection.close()
     pass
 
-
+# mySQL Query
 def query(
     myQuery,
     database="cup_adventure",
@@ -68,6 +68,29 @@ def query(
         results.append(line)
     connection.close()
     return results
+
+
+# Query Dataframe
+def querydf(
+    myquery,
+    database="cup_adventure",
+    username=os.getenv("AWS_CUPADVENTURE_USERNAME"),
+    passwd=os.getenv("AWS_CUPADVENTURE_PASSWORD"),
+    hostname=os.getenv("AWS_CUPADVENTURE_HOSTNAME"),
+    portnum=int(os.getenv("AWS_CUPADVENTURE_PORT")),
+):
+    # Create Connection
+    engine = create_engine(f"mysql://{username}:{passwd}@{hostname}:{portnum}/{database}")
+    connection = engine.connect()
+    # Update table
+    try:
+        dataframe.read_sql(
+            myquery, connection
+        )
+        pass
+    except:
+        return (f"Error: Query could not be executed")
+    pass
 
 
 def add_user(
