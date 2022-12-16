@@ -167,6 +167,7 @@ if selection == "Welcome Page":
     st.write("Please select a page from the sidebar")
 
 elif selection == "Read All Data":
+    tables = query("SHOW TABLES")
     # create a streamlit selectbox to select the table
     table_name = st.selectbox("Select a table", tables)
 
