@@ -84,13 +84,11 @@ def querydf(
     connection = engine.connect()
     # Update table
     try:
-        dataframe.read_sql(
+        return pd.read_sql(
             myquery, connection
         )
-        pass
     except:
         return (f"Error: Query could not be executed")
-    pass
 
 
 def add_user(
@@ -301,7 +299,8 @@ if __name__ == "__main__":
     # newUser = {"customer_id": 14050, "customer_firstName": "Noah", "customer_lastName": "Gift", "join_date": date.today()}
     # createdb(mydatabase, myuser, mypassword, myhost, myport)
     # createTable(mytable, myparameters, mydatabase, myuser, mypassword, myhost, myport)
-    print(query(myquery, mydatabase, myuser, mypassword, myhost, myport))
+    # print(query(myquery, mydatabase, myuser, mypassword, myhost, myport))
+    print(querydf(myquery, mydatabase, myuser, mypassword, myhost, myport))
     # add_user(newUser)
     # updatedTable = pd.read_excel('raw_data/customers_db.xlsx')
     # update_table(updatedTable, mytable)
