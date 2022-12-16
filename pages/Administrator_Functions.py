@@ -262,7 +262,7 @@ elif selection == "Transactions":
     options = ["Rental", "Return", "Purchase"]
     transaction = st.selectbox()
     # Rental transaction
-    if transaction = "Rental":
+    if transaction == "Rental":
         with st.form("transactions"):
             vendorquery = f"SELECT DISTINCT vendor_id, vendor_name FROM vendors_db;"
             vendorresults = query(vendorquery)
@@ -280,7 +280,7 @@ elif selection == "Transactions":
                 st.write("Thank you for renting your cup.")
                 st.session_state['user info']['status'] = cup
     # Return transaction
-    elif transaction = "Return":
+    elif transaction == "Return":
         st.write("Use the dropdown below to rent your first cup.")
         with st.form("first_rental"):
             # First run, show inputs for username + password.
@@ -300,7 +300,7 @@ elif selection == "Transactions":
                 st.write("Thank you for renting your cup.")
                 st.session_state['user info']['status'] = cup
     # Purchase transaction
-    elif transaction = "Purchase":
+    elif transaction == "Purchase":
         st.write("You currently have a cup borrowed.  Please return your cup when you are finished with it.")
         with st.form("return"):
             # First run, show inputs for username + password.
