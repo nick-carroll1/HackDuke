@@ -81,7 +81,7 @@ st.write("hello222222222")
 st.session_state["c"] = ""
 st.write(st.session_state)
 
-input = st.text_input("textbox", key="textbox", on_change=add_record)
+# input = st.text_input("textbox", key="textbox", on_change=add_record)
 
 a = components.html(
     """
@@ -98,7 +98,9 @@ a = components.html(
                 <div class = "col-md-6">
                     <video id = "preview" width = "100%"></video>
                 </div>
-                <div class = "col-md-6">
+                <div class = "col-md-6">"""
+    + st.text_input("textbox", key="textbox", on_change=add_record)
+    + """
                   <table class="table table-bordered">
 
                   <thead>
