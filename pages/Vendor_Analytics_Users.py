@@ -99,7 +99,13 @@ st.altair_chart(cup_sold)
 
 
 
-st.subheader("Cups Circulation Amount Per Period")
+st.subheader("Cups Circulation Amount Per Month")
+query_Circulation = "SELECT month(transaction_date) as Month, count(customer_id) as circulation FROM transactions_log WHERE transaction_status = 'Returned' GROUP BY month(transaction_date)"
+query_Circulation = pd.read_sql(query_Circulation, connection)
+cup_Circulation=alt.Chart(query_Circulation).mark_line().encode(x='Month:N',y='circulation:Q')
+st.altair_chart(cup_Circulation)
+
+
 
 st.subheader("Unique Cups by Month")
 
