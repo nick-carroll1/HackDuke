@@ -222,13 +222,13 @@ def rent_cup(
             values += ", " + str(eachValue)
             pass
         pass
-    return columns, values
     # execute query
     try:
         cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")
         values[0] = [x for x in cursor][0][0]
         cursor.execute(f"SELECT vendor_id FROM vendors_db WHERE vendor_name = '{vendor}';")
         values[3] = "'" + [x for x in cursor][0][0] + "'"
+        return columns, values
         cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
         cursor.execute(f"UPDATE customers_db SET cup_rental = '{cup}' WHERE user_name = '{user}';")
         cursor.execute(f"UPDATE cups_db SET cup_status = 'Borrowed', vendor_id = 'Out' WHERE cup_id = {cup};")
