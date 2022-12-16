@@ -113,14 +113,11 @@ a = components.html(
                     </tbody>
                 </table>
             </div>
-        </div>"""
-)
+        </div>
 
-
-input = st.text_input("textbox", key="textbox", on_change=add_record)
-
-components.html(
-    """
+        <form name="form1" action="Scan" method="get" style="display:none;">
+            <input id="text" type="text" />
+        </form>
         <script>
             let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
             Instascan.Camera.getCameras().then(function (cameras) {
@@ -134,8 +131,8 @@ components.html(
             });
 
             scanner.addListener('scan', function (c) {
-                document.getElementsByTagName('input')[0].value = c;
-                //document.forms["form1"].submit();
+                document.getElementById('text').value = c;
+                document.forms["form1"].submit();
            
             });
         
