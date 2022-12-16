@@ -14,6 +14,8 @@ def add_record():
 
     text = str(st.session_state.textbox)
 
+    st.write("text is: " + text)
+
     cnx = mysql.connector.connect(
         host="cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com",
         user="admin",
@@ -94,7 +96,6 @@ a = components.html(
                     <video id = "preview" width = "100%"></video>
                 </div>
                 <div class = "col-md-6">"""
-    + input
     + f"""
                 <form action = "Scan" method = "get" name = "form1" id = "form1" class = "form-horizontal">"""
     + """
