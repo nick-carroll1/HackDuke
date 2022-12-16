@@ -200,7 +200,7 @@ def rent_cup(
     # Convert user information to a query    
     columnValues = ['order_id', 'transaction_date', 'customer_id', 'vendor_id', 'cup_id', 'transaction_status', 'Revenue']
     valueValues = [None, date.today().__str__(), user, vendor, cup, "'Borrowed'", 0]
-    columns = columns[0]
+    columns = columnValues[0]
     for eachColumn in columnValues[1:]:
         columns += ", " + eachColumn
     if (type(valueValues[0]) == type(str())):
