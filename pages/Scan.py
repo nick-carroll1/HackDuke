@@ -20,7 +20,7 @@ cur = cnx.cursor(buffered=True)
 
 st.write("aaaaa")
 try:
-    text = st.server.request.Scan
+    text = st.experimental_get_query_params()["text"]
     st.write("bbbbb")
 except:
     text = ""
@@ -84,7 +84,7 @@ a = components.html(
                 </div>
                 <div class = "col-md-6">"""
     + f"""
-                <form action = "Scan" method = "post" name = "form1" id = "form1" class = "form-horizontal">"""
+                <form action = "Scan" method = "get" name = "form1" id = "form1" class = "form-horizontal">"""
     + """
                     <label>SCAN QR CODE</label>
                     <input type = "text" name = "text" id = "text" readonyy = "" placeholder = "scan the QR Code" class = "form-control">
