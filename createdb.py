@@ -202,7 +202,9 @@ def rent_cup(
     # execute query
     try:
         values[0] = None # MAX(order_id) + 1
-        return cursor.execute(f"SELECT * FROM transactions_log;")
+        cursor.execute(f"SELECT * FROM transactions_log;")
+        for x in cursor:
+            return x
         values[3] = "'" + cursor.execute(f"SELECT vendor_id FROM vendors_db WHERE vendor_name = '{vendor}';")[0][0] + "'"
         return values
         cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
