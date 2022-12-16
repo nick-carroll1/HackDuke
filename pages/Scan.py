@@ -16,7 +16,7 @@ cnx = mysql.connector.connect(
     database="cup_adventure",
 )
 
-cur = cnx.cursor(buffered=True)
+cur = cnx.cursor()
 
 st.write("aaaaa")
 try:
