@@ -198,7 +198,7 @@ def rent_cup(
     cursor = connection.cursor()
     cursor.execute(f"USE {database};")
     columnValues = ['order_id', 'transaction_date', 'customer_id', 'vendor_id', 'cup_id', 'transaction_status', 'Revenue']
-    valueValues = [None, date.today().__str__(), user, vendor, cup, "'Borrowed'", 0]
+    valueValues = [None, date.today().__str__(), user, vendor, cup, "Borrowed", 0]
     # Prepare and execute queries
     try:
         cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")
