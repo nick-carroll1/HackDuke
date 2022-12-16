@@ -172,14 +172,14 @@ elif selection == "Read All Data":
 
     # query the database based on table_name selected and preserve the column names
     query = "SELECT * FROM " + table_name
-    df = pd.read_sql(query, connection)
-    st.write(df)
+    df = querydf(query)
+    st.table(df)
 
     # create a streamlit selectbox to select the column
     column_name = st.selectbox("Select a column", df.columns)
 
     # make a summary statistics table of the selected column in horizontal format and integer format
-    st.write(df[column_name].describe().to_frame().T)
+    st.table(df[column_name].describe().to_frame().T)
 
 # if the user selects "Add New Data" then show the form
 elif selection == "Vendor Data":
