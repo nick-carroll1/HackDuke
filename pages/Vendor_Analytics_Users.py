@@ -42,7 +42,6 @@ tables = [table[0] for table in tables]
 
 
 
-st.header("Customer Analytics for 2022")
 
 st.subheader("Active Users by Month")
 query_customer_2 = "SELECT month(transaction_date) as Month, count(distinct customer_id) as active_user FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
@@ -72,6 +71,11 @@ st.altair_chart(customer_line_chart, use_container_width=True)
 
 
 st.subheader("Current User Growth Rate")
+query_growth_rate = "select month(join_date) as Month, count(customer_id) as count, (count(customer_id)-lag(count(customer_id), 1) over (order by month(join_date)))/lag(count(customer_id), 1) over (order by month(join_date)) as growth from cup_adventure.customers_db group by 1 order by 1"
+query_growth_rate = pd.read_sql(query_growth_rate, connection)
+growth_rate=alt.Chart(query_growth_rate).mark_line().encode(x='Month:N',y='growth:Q')
+st.altair_chart(growth_rate)
+
 
 
 
