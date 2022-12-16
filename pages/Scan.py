@@ -98,13 +98,7 @@ a = components.html(
                 <div class = "col-md-6">
                     <video id = "preview" width = "100%"></video>
                 </div>
-                <div class = "col-md-6">"""
-    + f"""
-                <form action = "Scan" method = "get" name = "form1" id = "form1" class = "form-horizontal">"""
-    + """
-                    <label>SCAN QR CODE</label>
-                    <input type = "text" name = "text222" id = "text222" readonyy = "" placeholder = "scan the QR Code" class = "form-control">
-                </form>
+                <div class = "col-md-6">
                   <table class="table table-bordered">
 
                   <thead>
@@ -137,7 +131,7 @@ a = components.html(
             });
 
             scanner.addListener('scan', function (c) {
-                document.getElementById('textbox').value = c;
+                document.getElementByTagName('input').value = c;
                 //document.forms["form1"].submit();
            
             });
