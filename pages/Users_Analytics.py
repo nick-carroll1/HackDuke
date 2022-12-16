@@ -159,7 +159,7 @@ query_growth_rate = "select month(join_date) as Month, count(customer_id) as cou
 query_growth_rate = pd.read_sql(query_growth_rate, connection)
 growth_rate = (
         alt.Chart(query_growth_rate, title="Current User Growth Rate")
-        .mark_line()
+        .mark_line(point=True, strokeWidth=5)
         .encode(
             x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)), 
             y=alt.Y("growth:Q", title="User Growth"),
