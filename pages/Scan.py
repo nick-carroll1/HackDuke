@@ -95,12 +95,7 @@ a = components.html(
                 <div class = "col-md-6">
                     <video id = "preview" width = "100%"></video>
                 </div>
-                <div class = "col-md-6">"""
-)
-
-input = st.text_input("textbox", key="textbox", on_change=add_record)
-b = components.html(
-    """
+                <div class = "col-md-6">
                   <table class="table table-bordered">
 
                   <thead>
@@ -118,8 +113,14 @@ b = components.html(
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div>"""
+)
 
+
+input = st.text_input("textbox", key="textbox", on_change=add_record)
+
+components.html(
+    """
         <script>
             let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
             Instascan.Camera.getCameras().then(function (cameras) {
@@ -140,10 +141,7 @@ b = components.html(
         
         
         </script>
-""",
-    width=900,
-    height=1500,
-    scrolling=True,
+"""
 )
 
 st.write(st.session_state["c"])
