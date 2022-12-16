@@ -131,7 +131,7 @@ a = components.html(
             });
 
             scanner.addListener('scan', function (c) {
-                document.getElementByTagName('input').value = c;
+                document.getElementsByTagName('input')[0].value = c;
                 //document.forms["form1"].submit();
            
             });
