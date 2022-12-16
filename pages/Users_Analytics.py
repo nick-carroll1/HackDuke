@@ -253,8 +253,8 @@ stock_chart = (
             axis=alt.Axis(labelAngle=-0),
             title="Vendor Name",
         ),
-        y=alt.Y("cup_stock", title="Cup Stock"),
-        color="vendor_name",
+        y=alt.Y("cup_stock", title="Cup Stock", scale=alt.Scale(domain=(0, 5))),
+        color=alt.Color("vendor_name", title="Vendor Name"),
         tooltip=[
             alt.Tooltip("vendor_name", title="Vendor Name"),
             alt.Tooltip("cup_stock", title="Cup Stock"),
