@@ -199,10 +199,10 @@ def rent_cup(
     cursor.execute(f"USE {database};")
     columns = ['order_id', 'transaction_date', 'customer_id', 'vendor_id', 'cup_id', 'transaction_status', 'Revenue']
     values = [None, date.today(), user, vendor, cup, "'Borrowed'", 0]
-    return values
     # execute query
     try:
-        values[0] = cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")[0][0]
+        values[0] = None
+        return cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")[0][0]
         values[3] = "'" + cursor.execute(f"SELECT vendor_id FROM vendors_db WHERE vendor_name = '{vendor}';")[0][0] + "'"
         return values
         cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
