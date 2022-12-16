@@ -81,7 +81,7 @@ st.subheader("Unique Users per Cup")
 st.subheader("Number of Active Cafe Distributing the Cups")
 query_customer_4 = "SELECT month(transaction_date) as Month, count(distinct vendor_id) as active_vendor FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
 df_customer_4 = pd.read_sql(query_customer_4, connection)
-unique_cafe=alt.Chart(df_customer_4).mark_line().encode(x='Month:N',y='unique_vendor:Q')
+unique_cafe=alt.Chart(df_customer_4).mark_line().encode(x='Month:N',y='active_vendor:Q')
 st.altair_chart(unique_cafe)
 
 
