@@ -279,8 +279,11 @@ elif selection == "Transactions":
             submitted = st.form_submit_button("Submit")
             st.write(submitted)
             if submitted:
-                rent_cup(customer, vendor, cup)
-                st.write("Thank you for renting your cup.")
+                try:
+                    rent_cup(customer, vendor, cup)
+                    st.write("Thank you for renting your cup.")
+                except:
+                    st.write("There was an error renting your cup.")
     # Return transaction
     elif transaction == "Return":
         st.write("Use the dropdown below to rent your first cup.")
