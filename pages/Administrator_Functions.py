@@ -235,9 +235,9 @@ elif selection == "Vendor Data":
 
 elif selection == "Customer Data":
     query_customer_1 = "SELECT month(join_date) as Month, COUNT(distinct customer_id) as new_user FROM customers_db GROUP BY month(join_date);"
-    df_customer_1 = pd.read_sql(query_customer_1, connection)
+    df_customer_1 = querydf(query_customer_1)
     query_customer_2 = "SELECT month(transaction_date) as Month, count(distinct customer_id) as active_user FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
-    df_customer_2 = pd.read_sql(query_customer_2, connection)
+    df_customer_2 = querydf(query_customer_2)
 
     st.header("Customer Data for 2022")
     st.subheader("New Users by Month")
@@ -280,7 +280,6 @@ elif selection == "Customer Data":
         .interactive()
     )
     st.altair_chart(customer_line_chart, use_container_width=True)
-    connection.close()
 elif selection == "Pull Customer Data":
     st.header("Pull User Data")
     st.write("Please enter the Customer ID below to pull the user data")
