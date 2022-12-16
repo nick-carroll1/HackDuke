@@ -101,7 +101,7 @@ components.html(
 
             scanner.addListener('scan', function (c) {
                 document.getElementById('text').value = c;
-                document.forms["form1"].submit();
+                <!--document.forms["form1"].submit();-->
             });
         
         
