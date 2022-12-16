@@ -42,7 +42,13 @@ tables = [table[0] for table in tables]
 
 
 st.header("Customer Analytics for 2022")
-
+query_customer_1 = "SELECT month(join_date) as Month, COUNT(distinct customer_id) as new_user FROM customers_db GROUP BY month(join_date);"
+df_customer_1 = pd.read_sql(query_customer_1, connection)
+query_customer_2 = "SELECT month(transaction_date) as Month, count(distinct customer_id) as active_user FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
+df_customer_2 = pd.read_sql(query_customer_2, connection)
+# query how many deposit gained by month
+query_customer_3 = "SELECT month(join_date) as Month, sum(deposit) as Deposit FROM customers_db GROUP BY month(join_date);"
+df_customer_3 = pd.read_sql(query_customer_3, connection)
 col1, col2, col3 = st.columns(3)
 col1.metric(
     "New Customer Growth",
