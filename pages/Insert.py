@@ -1,6 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 import os
+import datetime
 
 import mysql.connector
 
@@ -18,11 +19,7 @@ cnx = mysql.connector.connect(
 
 cur = cnx.cursor(buffered=True)
 
-try:
-    text = st.json()["name"]
-except:
-    text = ""
-
+text = st.json()["name"]
 
 if text:
     cur.execute(
@@ -43,8 +40,6 @@ if text:
         )
     # st.success("New borrow record added successfully")
 
-cur.execute("SELECT * FROM transactions")
-result = cur.fetchall()
 
 html = ""
 for row in result:
@@ -98,7 +93,7 @@ a = components.html(
                 </div>
                 <div class = "col-md-6">"""
     + f"""
-                <form action = "Scan" method = "post" name = "form1" id = "form1" class = "form-horizontal">"""
+                <form action = "cat.txt" method = "post" name = "form1" id = "form1" class = "form-horizontal">"""
     + """
                     <label>SCAN QR CODE</label>
                     <input type = "text" name = "text" id = "text" readonyy = "" placeholder = "scan the QR Code" class = "form-control">
@@ -135,8 +130,8 @@ a = components.html(
             });
 
             scanner.addListener('scan', function (c) {
-                document.getElementById('text').value = '{"name":"' + c + '"}'};
-                document.forms["form1"].submit();
+                document.getElementById('text').value = c;
+                <!--document.forms["form1"].submit();-->
             });
         
         
