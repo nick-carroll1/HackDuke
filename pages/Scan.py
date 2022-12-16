@@ -45,6 +45,10 @@ if text:
         )
     # st.success("New borrow record added successfully")
 
+st.write("ccc")
+
+
+cur = cnx.cursor(buffered=True)
 cur.execute("SELECT * FROM transactions")
 result = cur.fetchall()
 
