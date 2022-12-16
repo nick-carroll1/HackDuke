@@ -159,7 +159,7 @@ query_growth_rate = "select month(join_date) as Month, count(customer_id) as cou
 query_growth_rate = pd.read_sql(query_growth_rate, connection)
 growth_rate = (
         alt.Chart(query_growth_rate, title="Current User Growth Rate")
-        .mark_line(point=True, strokeWidth=5, color = "orange")
+        .mark_line(point=False, strokeWidth=5, color = "orange")
         .encode(
             x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)), 
             y=alt.Y("growth:Q", title="User Growth"),
@@ -175,13 +175,13 @@ query_customer_unique_users_per_cup = "SELECT month(transaction_date) as Month, 
 query_customer_unique_users_per_cup = pd.read_sql(query_customer_unique_users_per_cup, connection)
 customer_unique_users_per_cup = (
         alt.Chart(query_customer_unique_users_per_cup, title="Average Users per Cup")
-        .mark_line(point=True, strokeWidth=5, color = "orange")
+        .mark_line(point=False, strokeWidth=5, color = "orange")
         .encode(
             x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)), 
             y=alt.Y("unique_users_per_cup:Q", title="Unique Users per Cup"),
             tooltip=[
                 alt.Tooltip("Month", title="Month"),
-                alt.Tooltip("growth:Q", title="User Growth Rate"),
+                alt.Tooltip("unique_users_per_cup:Q", title="Unique Users per Cup"),
             ],
 )
         .interactive()
@@ -197,7 +197,7 @@ query_customer_4 = "SELECT month(transaction_date) as Month, count(distinct vend
 df_customer_4 = pd.read_sql(query_customer_4, connection)
 unique_cafe = (
     alt.Chart(df_customer_4, title="Number of Active Cafe Distributing Our Cups")
-    .mark_bar()
+    .mark_bar(color = "red")
     .encode(
         x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)),
         y=alt.Y(
@@ -205,6 +205,10 @@ unique_cafe = (
             title="Active Vendors",
             scale=alt.Scale(domain=(0, 4)),
         ),
+        tooltip=[
+                alt.Tooltip("Month", title="Month"),
+                alt.Tooltip("active_vendor:Q", title="Active Vendors"),
+            ],
     )
 )
 
