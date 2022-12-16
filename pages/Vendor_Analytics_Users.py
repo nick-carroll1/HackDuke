@@ -43,10 +43,52 @@ tables = [table[0] for table in tables]
 
 
 st.header("Customer Analytics for 2022")
-st.subheader("Unique Users by Month")
+
+st.subheader("Active Users by Month")
+query_customer_2 = "SELECT month(transaction_date) as Month, count(distinct customer_id) as active_user FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
+df_customer_2 = pd.read_sql(query_customer_2, connection)
+st.subheader("Active Users by Month")
+# create an altair line chart to show x:Month, y:Active_Users from df_metric_4
+customer_line_chart = (
+    alt.Chart(df_customer_2)
+    .mark_bar()
+    .encode(
+        x=alt.X(
+            "Month:N",
+            title="Month",
+            axis=alt.Axis(labelAngle=-0),
+            scale=alt.Scale(zero=False),
+        ),
+        y=alt.Y("active_user:Q", title="Active Users", scale=alt.Scale(zero=False)),
+        tooltip=[
+            alt.Tooltip("Month", title="Month"),
+            alt.Tooltip("active_user:Q", title="Active Users"),
+        ],
+    )
+    .interactive()
+)
+st.altair_chart(customer_line_chart, use_container_width=True)
+
+
+
 st.subheader("Current User Growth Rate")
+
+
+
 st.subheader("Unique Users per Cup")
+
+
 st.subheader("Number of Active Cafe Distributing the Cups")
+query_customer_4 = "SELECT month(transaction_date) as Month, count(distinct vendor_id) as active_cafe FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
+df_customer_4 = pd.read_sql(query_customer_4, connection)
+unique_cafe=alt.Chart(df_customer_4).mark_line().encode(x='Month:N',y='unique_vendor:Q')
+st.altair_chart(unique_cafe)
+
+
+
+
+
+
 st.subheader("Cups Sold")
 st.subheader("Cups Circulation Amount Per Period?")
 
@@ -54,10 +96,10 @@ st.subheader("Unique Cups by Month")
 
 query_customer_1 = "SELECT month(join_date) as Month, COUNT(distinct customer_id) as new_user FROM customers_db GROUP BY month(join_date);"
 df_customer_1 = pd.read_sql(query_customer_1, connection)
-query_customer_2 = "SELECT month(transaction_date) as Month, count(distinct customer_id) as active_user FROM transactions_log WHERE transaction_status = 'Borrowed' GROUP BY month(transaction_date)"
-df_customer_2 = pd.read_sql(query_customer_2, connection)
+
 query_customer_3="SELECT month(transaction_date) as Month, count(distinct cup_id) as unique_cup FROM transactions_log GROUP BY month(transaction_date)"
 df_customer_3=pd.read_sql(query_customer_3, connection)
+
 
 
 
@@ -84,25 +126,5 @@ customer_chart = (
 )
 st.altair_chart(customer_chart, use_container_width=True)
 
-st.subheader("Active Users by Month")
-# create an altair line chart to show x:Month, y:Active_Users from df_metric_4
-customer_line_chart = (
-    alt.Chart(df_customer_2)
-    .mark_bar()
-    .encode(
-        x=alt.X(
-            "Month:N",
-            title="Month",
-            axis=alt.Axis(labelAngle=-0),
-            scale=alt.Scale(zero=False),
-        ),
-        y=alt.Y("active_user:Q", title="Active Users", scale=alt.Scale(zero=False)),
-        tooltip=[
-            alt.Tooltip("Month", title="Month"),
-            alt.Tooltip("active_user:Q", title="Active Users"),
-        ],
-    )
-    .interactive()
-)
-st.altair_chart(customer_line_chart, use_container_width=True)
+
 connection.close()
