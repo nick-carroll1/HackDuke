@@ -9,28 +9,37 @@ import mysql.connector
 # password=""
 # dbname="qrcodedb"
 
-cnx = mysql.connector.connect(
-    host="cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com",
-    user="admin",
-    password="NoahGift706-2",
-    database="cup_adventure",
-)
 
-cur = cnx.cursor(buffered=True)
+# def add_record():
 
-st.write("aaaaa")
 try:
-    text = st.server.request.Scan
-    st.write("bbbbb")
+    text = st.experimental_get_query_params()["text"][0]
 except:
     text = ""
 
-
 if text:
+
+    cnx = mysql.connector.connect(
+        host="AWS_CUPADVENTURE_HOSTNAME",
+        user="AWS_CUPADVENTURE_USERNAME",
+        password="AWS_CUPADVENTURE_PASSWORD",
+        database="cup_adventure",
+        autocommit=True,
+    )
+
+    cur = cnx.cursor(buffered=True)
+
+    # st.write("aaaaa")
+    # try:
+    #    text = st.experimental_get_query_params()["text"][0]
+    #    #st.write("text is: " + text)
+    # except:
+    #    text = ""
+    # st.write("no text submitted")
     cur.execute(
         "SELECT * FROM transactions WHERE STUDENTID = %s AND STATUS = '0'", (text,)
     )
-    date = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
+    # date = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
 
     if cur.rowcount > 0:
         cur.execute(
@@ -43,8 +52,19 @@ if text:
             "INSERT INTO transactions(STUDENTID,BORROW,RETURNS,STATUS) VALUES (%s, NOW(),'','0')",
             (text,),
         )
+
+    cnx.close()
     # st.success("New borrow record added successfully")
 
+
+cnx = mysql.connector.connect(
+    host="cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com",
+    user="admin",
+    password="NoahGift706-2",
+    database="cup_adventure",
+)
+
+cur = cnx.cursor(buffered=True)
 cur.execute("SELECT * FROM transactions")
 result = cur.fetchall()
 
@@ -60,31 +80,22 @@ for row in result:
     </tr>
     """
 
-st.write("hello")
-st.session_state["c"] = ""
-st.write(st.session_state)
+
+# input = st.text_input("textbox", key="textbox", on_change=add_record)
+
 a = components.html(
     """
-<html>
-    <head>  
     <script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
     <script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
     <script type = "text/javascript" src = "https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
     <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    </head>
-    <body>
+
         <div class = "container">
             <div class = "row">
                 <div class = "col-md-6">
                     <video id = "preview" width = "100%"></video>
                 </div>
-                <div class = "col-md-6">"""
-    + f"""
-                <form action = "Scan" method = "post" name = "form1" id = "form1" class = "form-horizontal">"""
-    + """
-                    <label>SCAN QR CODE</label>
-                    <input type = "text" name = "text" id = "text" readonyy = "" placeholder = "scan the QR Code" class = "form-control">
-                </form>
+                <div class = "col-md-6">
                   <table class="table table-bordered">
 
                   <thead>
@@ -104,6 +115,9 @@ a = components.html(
             </div>
         </div>
 
+        <form name="form1" action="Scan" method="get" style="display:none;">
+            <input id="text" type="text" name="text" />
+        </form>
         <script>
             let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
             Instascan.Camera.getCameras().then(function (cameras) {
@@ -124,17 +138,8 @@ a = components.html(
         
         
         </script>
-    </body>
-</html>""",
+""",
     width=900,
     height=1500,
     scrolling=True,
 )
-
-st.write(st.session_state["c"])
-st.write("hello")
-st.write(st.session_state)
-all_variables = dir()
-html_variables = dir(a)
-st.write(all_variables)
-st.write(html_variables.text_input())
