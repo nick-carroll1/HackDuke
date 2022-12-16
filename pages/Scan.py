@@ -2,8 +2,39 @@ import streamlit as st
 import streamlit.components.v1 as components
 import os
 
+import mysql.connector
+
+# server = "localhost"
+# username="root"
+# password=""
+# dbname="qrcodedb"
+
+cnx = mysql.connector.connect(
+    host="cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com",
+    user="admin",
+    password="NoahGift706-2",
+    database="cup_adventure",
+)
+
+cur = cnx.cursor(buffered=True)
+
+cur.execute("SELECT * FROM transactions")
+result = cur.fetchall()
+
+html = ""
+for row in result:
+    html += f"""
+    <tr>
+        <td>{row[0]}</td>
+        <td>{row[1]}</td>
+        <td>{row[2]}</td>
+        <td>{row[3]}</td>
+        <td>{row[4]}</td>
+    </tr>
+    """
+
 st.write("hello")
-st.session_state['c'] = ""
+st.session_state["c"] = ""
 st.write(st.session_state)
 a = components.html(
     """<?php SESSION_START(); ?>
@@ -40,14 +71,16 @@ a = components.html(
                         }
 				  ?>-->
                 </div>
-                <div class = "col-md-6">"""+f"""
-                <form action = "cat.txt" method = "post" name = "form1" id = "form1" class = "form-horizontal">"""+"""
+                <div class = "col-md-6">"""
+    + f"""
+                <form action = "cat.txt" method = "post" name = "form1" id = "form1" class = "form-horizontal">"""
+    + """
                     <label>SCAN QR CODE</label>
                     <input type = "text" name = "text" id = "text" readonyy = "" placeholder = "scan the QR Code" class = "form-control">
                 </form>
                   <table class="table table-bordered">
 
-                  <!--<thead>
+                  <thead>
                         <tr>
                             <td>ID</td>
                             <td>Student ID</td>
@@ -55,34 +88,11 @@ a = components.html(
                             <td>Return</td>
                             <td>Status</td>
                         </tr>
-                    </thead>-->
-                    <!--<tbody>"""+f"""
-                        <?php
-                        $server = {os.getenv("AWS_CUPADVENTURE_HOSTNAME")};
-                        $username={os.getenv("AWS_CUPADVENTURE_USERNAME")};
-                        $password={os.getenv("AWS_CUPADVENTURE_PASSWORD")};
-                        $dbname="cup_adventure";"""+"""
-                    
-                        $conn = new mysqli($server,$username,$password,$dbname);
-						$date = date("Y-m-d H:i:s");
-                        if($conn->connect_error){
-                            die("Connection failed" .$conn->connect_error);
-                        }
-                           $sql ="SELECT * FROM transactions";
-                           $query = $conn->query($sql);
-                           while ($row = $query->fetch_assoc()){
-                        ?>
-                            <tr>
-                                <td><?php echo $row['ID'];?></td>
-                                <td><?php echo $row['STUDENTID'];?></td>
-                                <td><?php echo $row['BORROW'];?></td>
-                                <td><?php echo $row['RETURNS'];?></td>
-                                <td><?php echo $row['STATUS'];?></td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-                    </tbody>-->
+                    </thead>
+                    <tbody>"""
+    + html
+    + """
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -107,10 +117,13 @@ a = components.html(
         
         </script>
     </body>
-</html>""", width = 900, height = 1500, scrolling= True
+</html>""",
+    width=900,
+    height=1500,
+    scrolling=True,
 )
 
-st.write(st.session_state['c'])
+st.write(st.session_state["c"])
 st.write("hello")
 st.write(st.session_state)
 all_variables = dir()
