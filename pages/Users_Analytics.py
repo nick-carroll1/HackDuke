@@ -240,5 +240,30 @@ st.altair_chart(
     use_container_width=True,
 )
 
+query_vendor_1 = "SELECT * FROM vendors_db"
+df_metric_1 = pd.read_sql(query_vendor_1, connection)
+
+stock_chart = (
+    alt.Chart(df_metric_1)
+    .mark_bar()
+    .encode(
+        x=alt.X(
+            "vendor_name",
+            sort="-y",
+            axis=alt.Axis(labelAngle=-0),
+            title="Vendor Name",
+        ),
+        y=alt.Y("cup_stock", title="Cup Stock"),
+        color="vendor_name",
+        tooltip=[
+            alt.Tooltip("vendor_name", title="Vendor Name"),
+            alt.Tooltip("cup_stock", title="Cup Stock"),
+        ],
+    )
+    .interactive()
+)
+
+st.subheader("Cup Stock by Vendor")
+st.altair_chart(stock_chart, use_container_width=True)
 
 connection.close()
