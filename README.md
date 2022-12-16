@@ -7,9 +7,14 @@ Final Project for IDS 706: Data Engineering Systems
 
 
 
+Steps: 
+Amazon AWS to host......
 
 
+Connecting to SQL Database
 
+
+Frontend: Streamlit
 
 
 
