@@ -160,8 +160,16 @@ query_growth_rate = pd.read_sql(query_growth_rate, connection)
 growth_rate = (
         alt.Chart(query_growth_rate, title="Current User Growth Rate")
         .mark_line()
-        .encode(x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)), y=alt.Y("growth:Q", title="User Growth"))
-    )
+        .encode(
+            x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)), 
+            y=alt.Y("growth:Q", title="User Growth"),
+            tooltip=[
+                alt.Tooltip("Month", title="Month"),
+                alt.Tooltip("growth:Q", title="User Growth Rate"),
+            ],
+)
+        .interactive()
+)
 
 query_customer_unique_users_per_cup = "SELECT month(transaction_date) as Month, count(customer_id)/count(distinct cup_id) as unique_users_per_cup FROM cup_adventure.transactions_log GROUP BY month(transaction_date)"
 query_customer_unique_users_per_cup = pd.read_sql(query_customer_unique_users_per_cup, connection)
