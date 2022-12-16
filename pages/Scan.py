@@ -20,7 +20,7 @@ cur = cnx.cursor(buffered=True)
 
 st.write("aaaaa")
 try:
-    text = st.experimental_get_query_params()["text"]
+    text = st.experimental_get_query_params()["text"][0]
     st.write("text is: " + text)
 except:
     text = ""
