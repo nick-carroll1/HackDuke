@@ -24,6 +24,7 @@ def check_password():
     def password_entered():
         """Checks whether a password entered by the user is correct."""
         userquery = f"SELECT user_name, password FROM admin_db where user_name = '{st.session_state['username']}';"
+        st.write(userquery)
         results = query(userquery)
         passwords = {eachLine[0]: eachLine[1] for eachLine in results}
         if (
@@ -64,6 +65,7 @@ def check_password():
 
 
 st.title("Cup Adventure")
+st.write(st.session_state)
 if check_password():
     # if the user selects "Read Data" then show the table
     if selection == "Welcome Page":
