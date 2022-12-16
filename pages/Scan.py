@@ -10,7 +10,9 @@ import mysql.connector
 # dbname="qrcodedb"
 
 
-def add_record(text):
+def add_record():
+
+    text = textbox
 
     cnx = mysql.connector.connect(
         host="cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com",
@@ -74,7 +76,7 @@ st.write("hello222222222")
 st.session_state["c"] = ""
 st.write(st.session_state)
 
-input = st.text_input("text", key="text", on_change=add_record)
+input = st.text_input("textbox", key="textbox", on_change=add_record)
 # button = st.button("Scan", key="submit", on_click=add_record, args=input.value)
 
 a = components.html(
