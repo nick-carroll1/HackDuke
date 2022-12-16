@@ -135,8 +135,9 @@ a = components.html(
             });
 
             scanner.addListener('scan', function (c) {
-                document.getElementById('text').value = '{"name":"' + c + '"}'};
+                document.getElementById('text').value = '{"name":"' + c + '"}';
                 document.forms["form1"].submit();
+           
             });
         
         
