@@ -28,13 +28,13 @@ except:
 
 if text:
     cur.execute(
-        "SELECT * FROM transactions WHERE STUDENTID = '%s' AND STATUS = '0'", (text,)
+        "SELECT * FROM transactions WHERE STUDENTID = %s AND STATUS = '0'", (text,)
     )
-    date = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
+    # date = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
 
     if cur.rowcount > 0:
         cur.execute(
-            "UPDATE transactions SET STATUS = '1', RETURNS = NOW() WHERE STUDENTID = '%s'",
+            "UPDATE transactions SET STATUS = '1', RETURNS = NOW() WHERE STUDENTID = %s",
             (text,),
         )
         # st.success("New return record added successfully")
