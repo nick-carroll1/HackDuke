@@ -48,6 +48,8 @@ def add_record():
             "INSERT INTO transactions(STUDENTID,BORROW,RETURNS,STATUS) VALUES (%s, NOW(),'','0')",
             (text,),
         )
+
+    cur.commit()
     # st.success("New borrow record added successfully")
 
 
