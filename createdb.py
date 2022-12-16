@@ -204,6 +204,7 @@ def rent_cup(
         values[0] = cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")[0][0]
         values[3] = "'" + cursor.execute(f"SELECT vendor_id FROM vendors_db WHERE vendor_name = '{vendor}';")[0][0] + "'"
         cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
+        return cursor
         cursor.execute(f"UPDATE customers_db SET cup_rental = '{cup}' WHERE user_name = '{user}';")
         cursor.execute(f"UPDATE cups_db SET cup_status = 'Borrowed', vendor_id = 'Out' WHERE cup_id = {cup};")
         cursor.execute(f"UPDATE vendors_db SET cup_stock = (SELECT cup_stock FROM vendors_db WHERE vendor_name = {vendor} - 1) WHERE vendor_name = {vendor};")
