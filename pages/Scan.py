@@ -77,7 +77,6 @@ st.session_state["c"] = ""
 st.write(st.session_state)
 
 input = st.text_input("textbox", key="textbox", on_change=add_record)
-# button = st.button("Scan", key="submit", on_click=add_record, args=input.value)
 
 a = components.html(
     """
@@ -134,8 +133,8 @@ a = components.html(
             });
 
             scanner.addListener('scan', function (c) {
-                document.getElementById('text').value = c;
-                document.forms["form1"].submit();
+                document.getElementById('textbox').value = c;
+                //document.forms["form1"].submit();
            
             });
         
