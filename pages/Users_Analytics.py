@@ -216,7 +216,7 @@ query_customer_sold = "SELECT month(transaction_date) as Month, count(customer_i
 query_customer_sold = pd.read_sql(query_customer_sold, connection)
 cup_sold = (
     alt.Chart(query_customer_sold, title="Cups Sold")
-    .mark_bar()
+    .mark_bar(color = "red")
     .encode(
         x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)),
         y=alt.Y(
@@ -239,8 +239,14 @@ query_Circulation = "SELECT month(transaction_date) as Month, count(customer_id)
 query_Circulation = pd.read_sql(query_Circulation, connection)
 cup_Circulation = (
     alt.Chart(query_Circulation, title="Cups Circulation Amount Per Month")
-    .mark_line()
-    .encode(x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)), y=alt.Y("circulation:Q", title="Cups Circulation Amount"))
+    .mark_line(point=False, strokeWidth=5, color = "orange")
+    .encode(
+        x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)), 
+        y=alt.Y("circulation:Q", title="Cups Circulation Amount", scale=alt.Scale(domain=(2, 14))),
+        tooltip=[
+                alt.Tooltip("Month", title="Month"),
+                alt.Tooltip("circulation:Q", title="Cups Circulation Amount"),
+            ],)
 )
 
 query_customer_1 = "SELECT month(join_date) as Month, COUNT(distinct customer_id) as new_user FROM customers_db GROUP BY month(join_date);"
@@ -251,8 +257,14 @@ df_customer_3 = pd.read_sql(query_customer_3, connection)
 
 unique = (
     alt.Chart(df_customer_3, title="Unique Cups by Month")
-    .mark_line()
-    .encode(x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)), y=alt.Y("unique_cup:Q", title="Unique Cups"))
+    .mark_line(point=False, strokeWidth=5, color = "orange")
+    .encode(
+        x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)), 
+        y=alt.Y("unique_cup:Q", title="Unique Cups", scale=alt.Scale(domain=(2, 24))),
+        tooltip=[
+                alt.Tooltip("Month", title="Month"),
+                alt.Tooltip("unique_cup:Q", title="Unique Cups"),
+            ],)
 )
 
 st.altair_chart(
