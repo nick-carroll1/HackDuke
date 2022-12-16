@@ -75,7 +75,15 @@ st.subheader("Current User Growth Rate")
 
 
 
-st.subheader("Unique Users per Cup")
+st.subheader("Average Users per Cup")
+query_customer_unique_users_per_cup = "SELECT month(transaction_date) as Month, count(customer_id)/count(distinct cup_id) as unique_users_per_cup FROM cup_adventure.transactions_log GROUP BY month(transaction_date)"
+query_customer_unique_users_per_cup = pd.read_sql(query_customer_unique_users_per_cup, connection)
+customer_unique_users_per_cup=alt.Chart(query_customer_unique_users_per_cup).mark_line().encode(x='Month:N',y='unique_users_per_cup:Q')
+st.altair_chart(customer_unique_users_per_cup)
+
+
+
+
 
 
 st.subheader("Number of Active Cafe Distributing the Cups")
