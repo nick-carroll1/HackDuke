@@ -10,7 +10,7 @@ lint:
 	# pylint --disable=R,C *.py pages/*.py
 test:
 	#test
-	# python -m pytest -vv --cov=mylib test_logic.py
+	# python -m pytest -vv --cov=pages/*.py
 build:
 	#build container
 	# docker build -t deploy-fastapi .
