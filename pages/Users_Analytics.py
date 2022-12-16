@@ -138,12 +138,29 @@ customer_line_chart = (
 )
 st.altair_chart(customer_line_chart, use_container_width=True)
 
+st.subheader("New Users by Month")
+# create an altair chart to show x:Month, y:new_user from df_metric_3
+customer_chart = (
+    alt.Chart(df_customer_1)
+    .mark_bar()
+    .encode(
+        x=alt.X("Month:N", title="Month", axis=alt.Axis(labelAngle=-0)),
+        y=alt.Y("new_user:Q", title="New Users"),
+        tooltip=[
+            alt.Tooltip("Month", title="Month"),
+            alt.Tooltip("new_user:Q", title="New Users"),
+        ],
+)
+    .interactive()
+)
+st.altair_chart(customer_chart, use_container_width=True)
+
 query_growth_rate = "select month(join_date) as Month, count(customer_id) as count, (count(customer_id)-lag(count(customer_id), 1) over (order by month(join_date)))/lag(count(customer_id), 1) over (order by month(join_date)) as growth from cup_adventure.customers_db group by 1 order by 1"
 query_growth_rate = pd.read_sql(query_growth_rate, connection)
 growth_rate = (
         alt.Chart(query_growth_rate, title="Current User Growth Rate")
         .mark_line()
-        .encode(x="Month:N", y=alt.Y("growth:Q", title="User Growth"))
+        .encode(x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)), y=alt.Y("growth:Q", title="User Growth"))
     )
 
 query_customer_unique_users_per_cup = "SELECT month(transaction_date) as Month, count(customer_id)/count(distinct cup_id) as unique_users_per_cup FROM cup_adventure.transactions_log GROUP BY month(transaction_date)"
@@ -151,7 +168,7 @@ query_customer_unique_users_per_cup = pd.read_sql(query_customer_unique_users_pe
 customer_unique_users_per_cup = (
         alt.Chart(query_customer_unique_users_per_cup, title="Average Users per Cup")
         .mark_line()
-        .encode(x="Month:N", y=alt.Y("unique_users_per_cup:Q", title="Unique Users per Cup")))
+        .encode(x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)), y=alt.Y("unique_users_per_cup:Q", title="Unique Users per Cup")))
 
 st.altair_chart(
         growth_rate.properties(width=300, height=300)
@@ -165,7 +182,7 @@ unique_cafe = (
     alt.Chart(df_customer_4, title="Number of Active Cafe Distributing Our Cups")
     .mark_bar()
     .encode(
-        x="Month:N",
+        x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)),
         y=alt.Y(
             "active_vendor:Q",
             title="Active Vendors",
@@ -180,7 +197,7 @@ cup_sold = (
     alt.Chart(query_customer_sold, title="Cups Sold")
     .mark_bar()
     .encode(
-        x="Month:N",
+        x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)),
         y=alt.Y(
             "bought:Q",
             title="Cups Sold",
@@ -202,7 +219,7 @@ query_Circulation = pd.read_sql(query_Circulation, connection)
 cup_Circulation = (
     alt.Chart(query_Circulation, title="Cups Circulation Amount Per Month")
     .mark_line()
-    .encode(x="Month:N", y=alt.Y("circulation:Q", title="Cups Circulation Amount"))
+    .encode(x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)), y=alt.Y("circulation:Q", title="Cups Circulation Amount"))
 )
 
 query_customer_1 = "SELECT month(join_date) as Month, COUNT(distinct customer_id) as new_user FROM customers_db GROUP BY month(join_date);"
@@ -214,7 +231,7 @@ df_customer_3 = pd.read_sql(query_customer_3, connection)
 unique = (
     alt.Chart(df_customer_3, title="Unique Cups by Month")
     .mark_line()
-    .encode(x="Month:N", y=alt.Y("unique_cup:Q", title="Unique Cups"))
+    .encode(x=alt.X("Month:N", axis=alt.Axis(labelAngle=-0)), y=alt.Y("unique_cup:Q", title="Unique Cups"))
 )
 
 st.altair_chart(
@@ -222,24 +239,6 @@ st.altair_chart(
     | unique.properties(width=300, height=300),
     use_container_width=True,
 )
-
-
-st.subheader("New Users by Month")
-# create an altair chart to show x:Month, y:new_user from df_metric_3
-customer_chart = (
-    alt.Chart(df_customer_1)
-    .mark_bar()
-    .encode(
-        x=alt.X("Month:N", title="Month", axis=alt.Axis(labelAngle=-0)),
-        y=alt.Y("new_user:Q", title="New Users"),
-        tooltip=[
-            alt.Tooltip("Month", title="Month"),
-            alt.Tooltip("new_user:Q", title="New Users"),
-        ],
-)
-    .interactive()
-)
-st.altair_chart(customer_chart, use_container_width=True)
 
 
 connection.close()
