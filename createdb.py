@@ -5,6 +5,7 @@ import mysql.connector
 from datetime import date
 import pandas as pd
 from sqlalchemy import create_engine
+import numpy as np
 
 
 def createdb(

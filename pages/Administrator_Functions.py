@@ -272,7 +272,7 @@ elif selection == "Transactions":
             cupresults = query(cupquery)
             cups = [eachCup[0] for eachCup in cupresults]
             cup = st.selectbox("Please select a cup", cups)
-            customerQuery = f"SELECT customer_id, customer_firstName, customer_lastName FROM customers_db;"
+            customerQuery = f"SELECT customer_id, customer_firstName, customer_lastName FROM customers_db WHERE cup_rental IS NULL;"
             customerResults = query(customerQuery)
             customer = st.selectbox("Please select a customer", customerResults)[0]
             # Every form must have a submit button.
