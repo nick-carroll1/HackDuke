@@ -284,7 +284,7 @@ def return_cup(
                 pass
             pass
         cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
-        cursor.execute(f"UPDATE customers_db SET cup_rental = {None} WHERE customer_id = '{user}';")
+        cursor.execute(f"UPDATE customers_db SET cup_rental = NULL WHERE customer_id = '{user}';")
         cursor.execute(f"UPDATE cups_db SET cup_status = 'Available', vendor_id = 'Out' WHERE cup_id = {cup};")
         cursor.execute(f"UPDATE vendors_db SET cup_stock = cup_stock + 1 WHERE vendor_id = '{vendor}';")
         connection.commit()
