@@ -57,6 +57,8 @@ if text:
 
     cnx.close()
     # st.success("New borrow record added successfully")
+    st.session_state.runpage = "Scan"
+    st.experimental_rerun()
 
 
 cnx = mysql.connector.connect(
