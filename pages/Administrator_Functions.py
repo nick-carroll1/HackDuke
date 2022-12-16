@@ -281,7 +281,7 @@ elif selection == "Transactions":
                 try:
                     rent_cup(customer, vendors['id'][vendor], cup)
                     st.write("Thank you for renting this cup.")
-                except Exception as err:
+                except:
                     st.write("There was an error renting your cup.")
     # Return transaction
     elif transaction == "Return":
@@ -301,8 +301,12 @@ elif selection == "Transactions":
             # Every form must have a submit button.
             submitted = st.form_submit_button("Submit")
             if submitted:
-                return_cup(customer_id, vendors['id'][vendor], cup)
-                st.write("Thank you for returning the cup.  We hope you contine to use Cup Adventure.")
+                try:
+                    return_cup(customer_id, vendors['id'][vendor], cup)
+                    st.write("Thank you for returning the cup.  We hope you contine to use Cup Adventure.")
+                except Exception as err:
+                    st.write("There was an error renting your cup.")
+                    st.write(err)
     # Purchase transaction
     elif transaction == "Purchase":
         st.write("You currently have a cup borrowed.  Please return your cup when you are finished with it.")
