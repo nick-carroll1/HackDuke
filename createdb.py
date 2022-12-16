@@ -228,6 +228,7 @@ def rent_cup(
                 values += ", " + str(eachValue)
                 pass
             pass
+        return columns, values
         cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
         cursor.execute(f"UPDATE customers_db SET cup_rental = '{cup}' WHERE user_name = '{user}';")
         cursor.execute(f"UPDATE cups_db SET cup_status = 'Borrowed', vendor_id = 'Out' WHERE cup_id = {cup};")
