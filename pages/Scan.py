@@ -74,8 +74,8 @@ st.write("hello222222222")
 st.session_state["c"] = ""
 st.write(st.session_state)
 
-input = st.text_input("text", key="text")
-button = st.button("Scan", key="submit", on_click=add_record, args=input.value)
+input = st.text_input("text", key="text", on_change=add_record)
+# button = st.button("Scan", key="submit", on_click=add_record, args=input.value)
 
 a = components.html(
     """
@@ -93,10 +93,9 @@ a = components.html(
                     <video id = "preview" width = "100%"></video>
                 </div>
                 <div class = "col-md-6">"""
+    + input
     + f"""
                 <form action = "Scan" method = "get" name = "form1" id = "form1" class = "form-horizontal">"""
-    + input
-    + button
     + """
                     <label>SCAN QR CODE</label>
                     <input type = "text" name = "text222" id = "text222" readonyy = "" placeholder = "scan the QR Code" class = "form-control">
