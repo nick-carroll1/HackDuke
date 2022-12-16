@@ -197,37 +197,37 @@ def rent_cup(
     )
     cursor = connection.cursor()
     cursor.execute(f"USE {database};")
-    # Convert user information to a query    
     columnValues = ['order_id', 'transaction_date', 'customer_id', 'vendor_id', 'cup_id', 'transaction_status', 'Revenue']
     valueValues = [None, date.today().__str__(), user, vendor, cup, "'Borrowed'", 0]
-    columns = columnValues[0]
-    for eachColumn in columnValues[1:]:
-        columns += ", " + eachColumn
-    if (type(valueValues[0]) == type(str())):
-        values = "'" + valueValues[0] + "'"
-        pass
-    elif (type(valueValues[0]) == type(date.today())):
-        values = "'" + str(valueValues[0]) + "'"
-        pass
-    else:
-        values = str(valueValues[0])
-    for eachValue in valueValues[1:]:
-        if (type(eachValue) == type(str())):
-            values += ", '" + eachValue + "'"
-            pass
-        elif (type(eachValue) == type(date.today())):
-            values += ", '" + eachValue + "'"
-            pass
-        else:
-            values += ", " + str(eachValue)
-            pass
-        pass
-    # execute query
+    # Prepare and execute queries
     try:
         cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")
-        values[0] = [x for x in cursor][0][0]
+        valueValues[0] = [x for x in cursor][0][0]
         cursor.execute(f"SELECT vendor_id FROM vendors_db WHERE vendor_name = '{vendor}';")
-        values[3] = "'" + [x for x in cursor][0][0] + "'"
+        valueValues[3] = "'" + [x for x in cursor][0][0] + "'"
+        # Convert transaction information to a query
+        columns = columnValues[0]
+        for eachColumn in columnValues[1:]:
+            columns += ", " + eachColumn
+        if (type(valueValues[0]) == type(str())):
+            values = "'" + valueValues[0] + "'"
+            pass
+        elif (type(valueValues[0]) == type(date.today())):
+            values = "'" + str(valueValues[0]) + "'"
+            pass
+        else:
+            values = str(valueValues[0])
+        for eachValue in valueValues[1:]:
+            if (type(eachValue) == type(str())):
+                values += ", '" + eachValue + "'"
+                pass
+            elif (type(eachValue) == type(date.today())):
+                values += ", '" + eachValue + "'"
+                pass
+            else:
+                values += ", " + str(eachValue)
+                pass
+            pass
         return columns, values
         cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
         cursor.execute(f"UPDATE customers_db SET cup_rental = '{cup}' WHERE user_name = '{user}';")
