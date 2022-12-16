@@ -81,7 +81,7 @@ query_customer_unique_users_per_cup = pd.read_sql(query_customer_unique_users_pe
 customer_unique_users_per_cup = (
         alt.Chart(query_customer_unique_users_per_cup, title="Average Users per Cup")
         .mark_line()
-        .encode(x="Month:N", y=alt.Y("unique_users_per_cup:Q", title="Unique Users per Cup)))
+        .encode(x="Month:N", y=alt.Y("unique_users_per_cup:Q", title="Unique Users per Cup")))
 
 st.altair_chart(
         growth_rate.properties(width=300, height=300)
