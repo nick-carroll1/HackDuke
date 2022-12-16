@@ -5,7 +5,7 @@ import os
 st.write("hello")
 st.session_state['c'] = ""
 st.write(st.session_state)
-components.html(
+a = components.html(
     """<?php SESSION_START(); ?>
 <html>
     <head>  
@@ -113,3 +113,7 @@ components.html(
 st.write(st.session_state['c'])
 st.write("hello")
 st.write(st.session_state)
+all_variables = dir()
+html_variables = dir(a)
+st.write(all_variables)
+st.write(html_variables)
