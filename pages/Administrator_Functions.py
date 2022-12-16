@@ -263,11 +263,11 @@ elif selection == "Transactions":
     transaction = st.selectbox("Please select a transaction", options)
     # Rental transaction
     if transaction == "Rental":
+        vendorquery = f"SELECT DISTINCT vendor_id, vendor_name FROM vendors_db;"
+        vendorresults = query(vendorquery)
+        vendors = {'id': [eachVendor[0] for eachVendor in vendorresults], 'name': [eachVendor[1] for eachVendor in vendorresults]}
+        vendor = st.selectbox("Please select a vendor", vendors['name'])
         with st.form("transactions"):
-            vendorquery = f"SELECT DISTINCT vendor_id, vendor_name FROM vendors_db;"
-            vendorresults = query(vendorquery)
-            vendors = {'id': [eachVendor[0] for eachVendor in vendorresults], 'name': [eachVendor[1] for eachVendor in vendorresults]}
-            vendor = st.selectbox("Please select a vendor", vendors['name'])
             cupquery = f"SELECT cup_id FROM cups_db WHERE sold = 'no' AND cup_status = 'Available';"
             cupresults = query(cupquery)
             cups = [eachCup[0] for eachCup in cupresults]
