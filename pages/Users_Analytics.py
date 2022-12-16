@@ -128,7 +128,7 @@ customer_line_chart = (
             axis=alt.Axis(labelAngle=-0),
             scale=alt.Scale(zero=False),
         ),
-        y=alt.Y("active_user:Q", title="Active Users", scale=alt.Scale(zero=False)),
+        y=alt.Y("active_user:Q", title="Active Users", scale=alt.Scale(domain=(0, 22))),
         tooltip=[
             alt.Tooltip("Month", title="Month"),
             alt.Tooltip("active_user:Q", title="Active Users"),
@@ -145,7 +145,7 @@ customer_chart = (
     .mark_bar()
     .encode(
         x=alt.X("Month:N", title="Month", axis=alt.Axis(labelAngle=-0)),
-        y=alt.Y("new_user:Q", title="New Users"),
+        y=alt.Y("new_user:Q", title="New Users", scale=alt.Scale(domain=(0, 13))),
         tooltip=[
             alt.Tooltip("Month", title="Month"),
             alt.Tooltip("new_user:Q", title="New Users"),
