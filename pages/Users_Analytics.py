@@ -120,7 +120,7 @@ df_customer_2 = pd.read_sql(query_customer_2, connection)
 # create an altair line chart to show x:Month, y:Active_Users from df_metric_4
 customer_line_chart = (
     alt.Chart(df_customer_2)
-    .mark_bar()
+    .mark_bar(color="orange")
     .encode(
         x=alt.X(
             "Month:N",
