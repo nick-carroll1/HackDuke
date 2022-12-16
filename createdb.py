@@ -203,6 +203,7 @@ def rent_cup(
     try:
         values[0] = None 
         cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")
+        return cursor[0]
         for x in cursor:
             return x
         values[3] = "'" + cursor.execute(f"SELECT vendor_id FROM vendors_db WHERE vendor_name = '{vendor}';")[0][0] + "'"
