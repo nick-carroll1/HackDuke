@@ -260,7 +260,7 @@ elif selection == "Add/Update Customer Data":
 elif selection == "Transactions":
     # Choose a transaction
     options = ["Rental", "Return", "Purchase"]
-    transaction = st.selectbox()
+    transaction = st.selectbox("Please select a transaction", options)
     # Rental transaction
     if transaction == "Rental":
         with st.form("transactions"):
