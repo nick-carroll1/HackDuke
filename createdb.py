@@ -201,8 +201,8 @@ def rent_cup(
     values = [None, date.today(), user, vendor, cup, "'Borrowed'", 0]
     # execute query
     try:
-        values[0] = None
-        return cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")
+        values[0] = None # MAX(order_id) + 1
+        return cursor.execute(f"SELECT * FROM transactions_log;")
         values[3] = "'" + cursor.execute(f"SELECT vendor_id FROM vendors_db WHERE vendor_name = '{vendor}';")[0][0] + "'"
         return values
         cursor.execute(f"INSERT INTO transactions_log ({columns}) VALUES ({values});")
