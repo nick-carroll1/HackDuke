@@ -19,8 +19,6 @@ except:
 
 if text:
 
-    st.write("text is: " + text)
-
     cnx = mysql.connector.connect(
         host="cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com",
         user="admin",
@@ -82,9 +80,6 @@ for row in result:
     </tr>
     """
 
-st.write("hello222222222")
-st.session_state["c"] = ""
-st.write(st.session_state)
 
 # input = st.text_input("textbox", key="textbox", on_change=add_record)
 
@@ -148,11 +143,3 @@ a = components.html(
     height=1500,
     scrolling=True,
 )
-
-st.write(st.session_state["c"])
-st.write("hello")
-st.write(st.session_state)
-all_variables = dir()
-html_variables = dir(a)
-st.write(all_variables)
-st.write(html_variables.text_input())
