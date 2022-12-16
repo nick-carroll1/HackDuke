@@ -15,13 +15,21 @@ def load_lottieurl(url: str):
         return None
     return r.json()
 
+
 lottie_hello = load_lottieurl(
-        "https://assets2.lottiefiles.com/packages/lf20_lgvdhvlz.json"
+    "https://assets7.lottiefiles.com/packages/lf20_jcikwtux.json"
 )
 
-left, middle, right = stl.columns([2, 5, 2])
-with middle:
-    st_lottie(lottie_hello, speed=1, height=400, width = 350, key=None)
+st_lottie(
+    lottie_hello,
+    speed=1,
+    reverse=False,
+    loop=True,
+    quality="medium",  # low ; high
+    height=None,
+    width=None,
+    key=None,
+)
 
 with st.form("Customer Sign-up"):
     customer_id = st.text_input("Customer ID")
