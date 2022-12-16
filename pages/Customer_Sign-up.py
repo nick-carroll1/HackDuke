@@ -26,11 +26,10 @@ st_lottie(
     reverse=False,
     loop=True,
     quality="medium",  # low ; high
-    height=400,
-    width=350,
+    height=450,
+    width=400,
     key=None,
 )
-
 with st.form("Customer Sign-up"):
     customer_id = st.text_input("Customer ID")
     first_name = st.text_input("Add your first name")
