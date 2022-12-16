@@ -255,7 +255,7 @@ def return_cup(
     cursor = connection.cursor()
     cursor.execute(f"USE {database};")
     columnValues = ['order_id', 'transaction_date', 'customer_id', 'vendor_id', 'cup_id', 'transaction_status', 'Revenue']
-    valueValues = [None, date.today().__str__(), user, vendor, cup, "Borrowed", 0]
+    valueValues = [None, date.today().__str__(), user, vendor, cup, "Returned", 0]
     # Prepare and execute queries
     try:
         cursor.execute(f"SELECT MAX(order_id) + 1 FROM transactions_log;")
@@ -339,7 +339,7 @@ if __name__ == "__main__":
     # myquery = "INSERT INTO customers (customer_firstName, customer_lastName, join_date) VALUES ('Jenny', 'Shen', '2022-12-02');"
     # myquery = "SELECT password FROM customers_db where user_name = 'ngift1';"
     # myquery = f"SELECT DISTINCT vendor_id, vendor_name FROM vendors_db;"
-    myquery = f"SELECT * FROM customers_db;"
+    myquery = f"SELECT * FROM transactions_log;"
     # myquery = f"SELECT MAX(order_id) + 1 FROM transactions_log;"
     # myquery = f"SELECT customer_id FROM customers_db WHERE user_name = '{user}';"
     # myquery = "SHOW TABLES;"
