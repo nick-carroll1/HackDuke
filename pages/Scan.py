@@ -2,7 +2,66 @@ import streamlit as st
 import streamlit.components.v1 as components
 import os
 
-components.html(
+import mysql.connector
+
+# server = "localhost"
+# username="root"
+# password=""
+# dbname="qrcodedb"
+
+cnx = mysql.connector.connect(
+    host="cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com",
+    user="admin",
+    password="NoahGift706-2",
+    database="cup_adventure",
+)
+
+cur = cnx.cursor(buffered=True)
+
+try:
+    text = st.server.request.text
+except:
+    text = ""
+
+
+if text:
+    cur.execute(
+        "SELECT * FROM transactions WHERE STUDENTID = %s AND STATUS = '0'", (text,)
+    )
+    date = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
+
+    if cur.rowcount > 0:
+        cur.execute(
+            "UPDATE transactions SET STATUS = '1', RETURNS = NOW() WHERE STUDENTID = %s",
+            (text,),
+        )
+        # st.success("New return record added successfully")
+    else:
+        cur.execute(
+            "INSERT INTO transactions(STUDENTID,BORROW,RETURNS,STATUS) VALUES (%s, NOW(),'','0')",
+            (text,),
+        )
+    # st.success("New borrow record added successfully")
+
+cur.execute("SELECT * FROM transactions")
+result = cur.fetchall()
+
+html = ""
+for row in result:
+    html += f"""
+    <tr>
+        <td>{row[0]}</td>
+        <td>{row[1]}</td>
+        <td>{row[2]}</td>
+        <td>{row[3]}</td>
+        <td>{row[4]}</td>
+    </tr>
+    """
+
+st.write("hello")
+st.session_state["c"] = ""
+st.write(st.session_state)
+a = components.html(
     """<?php SESSION_START(); ?>
 <html>
     <head>  
@@ -16,7 +75,7 @@ components.html(
             <div class = "row">
                 <div class = "col-md-6">
                     <video id = "preview" width = "100%"></video>
-                    <?php
+                    <!--<?php
                         if(isset($_SESSION['error'])){
                         echo "
                             <div class='alert alert-danger'>
@@ -35,10 +94,12 @@ components.html(
                         ";
                         unset($_SESSION['success']);
                         }
-				  ?>
+				  ?>-->
                 </div>
-                <div class = "col-md-6">
-                <form action = "../Scan/insert1.php" method = "post" name = "form1" id = "form1" class = "form-horizontal">
+                <div class = "col-md-6">"""
+    + f"""
+                <form action = "Scan" method = "post" name = "form1" id = "form1" class = "form-horizontal">"""
+    + """
                     <label>SCAN QR CODE</label>
                     <input type = "text" name = "text" id = "text" readonyy = "" placeholder = "scan the QR Code" class = "form-control">
                 </form>
@@ -54,33 +115,8 @@ components.html(
                         </tr>
                     </thead>
                     <tbody>"""
-    + f"""
-                        <?php
-                        $server = {os.getenv("AWS_CUPADVENTURE_HOSTNAME")};
-                        $username={os.getenv("AWS_CUPADVENTURE_USERNAME")};
-                        $password={os.getenv("AWS_CUPADVENTURE_PASSWORD")};
-                        $dbname="cup_adventure";"""
+    + html
     + """
-                    
-                        $conn = new mysqli($server,$username,$password,$dbname);
-						$date = date("Y-m-d H:i:s");
-                        if($conn->connect_error){
-                            die("Connection failed" .$conn->connect_error);
-                        }
-                           $sql ="SELECT * FROM transactions";
-                           $query = $conn->query($sql);
-                           while ($row = $query->fetch_assoc()){
-                        ?>
-                            <tr>
-                                <td><?php echo $row['ID'];?></td>
-                                <td><?php echo $row['STUDENTID'];?></td>
-                                <td><?php echo $row['BORROW'];?></td>
-                                <td><?php echo $row['RETURNS'];?></td>
-                                <td><?php echo $row['STATUS'];?></td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
                     </tbody>
                 </table>
             </div>
@@ -101,6 +137,7 @@ components.html(
             scanner.addListener('scan', function (c) {
                 document.getElementById('text').value = c;
                 document.forms["form1"].submit();
+           
             });
         
         
@@ -111,4 +148,11 @@ components.html(
     height=1500,
     scrolling=True,
 )
- 
+
+st.write(st.session_state["c"])
+st.write("hello")
+st.write(st.session_state)
+all_variables = dir()
+html_variables = dir(a)
+st.write(all_variables)
+st.write(html_variables.text_input())
