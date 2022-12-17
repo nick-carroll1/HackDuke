@@ -30,6 +30,7 @@ Frontend: Streamlit
 ### Functions:
 <img width="817" alt="Screen Shot 2022-12-16 at 5 12 18 PM" src="https://user-images.githubusercontent.com/89174034/208215534-326e0ed1-3bd3-4d76-84fd-754b1b7c6da2.png">
 ##### 1. Read All Data
+
 ##### 2. Pull Customer Data
 ##### 3. Add/Update Customer Data
 ##### 4. Transactions
