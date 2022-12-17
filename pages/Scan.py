@@ -20,9 +20,9 @@ except:
 if text:
 
     cnx = mysql.connector.connect(
-        host="AWS_CUPADVENTURE_HOSTNAME",
-        user="AWS_CUPADVENTURE_USERNAME",
-        password="AWS_CUPADVENTURE_PASSWORD",
+        host="cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com",
+        user="admin",
+        password="NoahGift706-2",
         database="cup_adventure",
         autocommit=True,
     )
@@ -58,12 +58,12 @@ if text:
 
 
 cnx = mysql.connector.connect(
-    host="AWS_CUPADVENTURE_HOSTNAME",
-    user="AWS_CUPADVENTURE_USERNAME",
-    password="AWS_CUPADVENTURE_PASSWORD",
+    host="cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com",
+    user="admin",
+    password="NoahGift706-2",
     database="cup_adventure",
-    autocommit=True,
 )
+
 cur = cnx.cursor(buffered=True)
 cur.execute("SELECT * FROM transactions")
 result = cur.fetchall()
