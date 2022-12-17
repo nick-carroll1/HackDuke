@@ -28,17 +28,35 @@ Frontend: Streamlit
 
 
 ### Functions:
+##### I. Administrator Functions
 <img width="817" alt="Screen Shot 2022-12-16 at 5 12 18 PM" src="https://user-images.githubusercontent.com/89174034/208215534-326e0ed1-3bd3-4d76-84fd-754b1b7c6da2.png">
+Can sign in with the following information:
+<img width="249" alt="Screen Shot 2022-12-16 at 5 17 10 PM" src="https://user-images.githubusercontent.com/89174034/208215804-a0ca318e-6069-4783-b695-0713681fa8b9.png">
+
 ##### 1. Read All Data
+<img width="1132" alt="Screen Shot 2022-12-16 at 5 18 04 PM" src="https://user-images.githubusercontent.com/89174034/208215836-8ac616b6-578e-48e4-8a6b-a5ab5e962dff.png">
+
+
 
 ##### 2. Pull Customer Data
+<img width="1130" alt="Screen Shot 2022-12-16 at 5 18 38 PM" src="https://user-images.githubusercontent.com/89174034/208215890-d7ea04d9-f0c9-4188-aae6-cef2aa9d03e9.png">
+
+
+
+
 ##### 3. Add/Update Customer Data
+<img width="1137" alt="Screen Shot 2022-12-16 at 5 18 56 PM" src="https://user-images.githubusercontent.com/89174034/208215904-8d2559ca-0378-4132-82d9-34b67ebec341.png">
+
+
 ##### 4. Transactions
 <img width="816" alt="Screen Shot 2022-12-16 at 5 13 47 PM" src="https://user-images.githubusercontent.com/89174034/208215605-cf0cd06b-88eb-4aeb-9b90-961adba5fe7f.png">
 
 
+##### II. Customer Sign-Up
 
+<img width="764" alt="Screen Shot 2022-12-16 at 5 20 21 PM" src="https://user-images.githubusercontent.com/89174034/208216109-faf39b7e-b598-4fba-9e58-74cd8dfe1009.png">
 
+##### III. Scanning Page 
 ### Results:
 
 
