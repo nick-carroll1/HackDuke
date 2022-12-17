@@ -6,6 +6,18 @@ Final Project for IDS 706: Data Engineering Systems
 
 Streamlit Page: https://nick-carroll1-hackduke-welcome-page-streamlit-onpq1t.streamlit.app
 
+## Inspiration
+We are inspired by a cup of hot chocolate. One Saturday afternoon, when we were brainstorming about the project for this hackathon at McDonald's, Jenny ordered a hot chocolate. However, we disposed of the coffee cup after using it, which is not environmentally friendly. In addition, we notice students mainly use plastic or paper cups when dining on the campus. Therefore, we decided to build an app that helps to recycle the cups when we order drinks at the cafe.
+
+## What it does
+"Cups Adventure" program is designed to encourage students to reduce the amount of disposable cups and promote a more sustainable campus. Reusable cups would be circulated around the campus through borrowing and returning, and sustainability credits could be earned with rewards redeemable after each circulation.
+
+Activities when you embark on a Cup Adventure:
+
+- _Borrow_ : Borrow a cup from your favorite vendor!
+- _Return_: Return the cup before embarking on a new adventure.
+- _Save the earth_: Every time you use a reusable cup, mother earth hugs you very tight to show her thanks
+
 
 ### Steps: 
 1.  Create the SQL Database and generate fake data
@@ -73,17 +85,7 @@ ________________________Hackathon
 ## Checkout our website here:
 [CupsAdventure Website](http://cupsadventure.tech)
 
-## Inspiration
-We are inspired by a cup of hot chocolate. This Saturday afternoon, when we were brainstorming about the project for this hackathon at McDonald's, Jenny ordered a hot chocolate. However, we disposed of the coffee cup after using it, which is not environmentally friendly. In addition, we notice students mainly use plastic or paper cups when dining on the campus. Therefore, we decided to build an app that helps to recycle the cups when we order drinks at the cafe.
 
-## What it does
-"Cups Adventure" program is designed to encourage students to reduce the amount of disposable cups and promote a more sustainable campus. Reusable cups would be circulated around the campus through borrowing and returning, and sustainability credits could be earned with rewards redeemable after each circulation.
-
-Activities when you embark on a Cup Adventure:
-
-- _Borrow_ : Borrow a cup from your favorite vendor!
-- _Return_: Return the cup before embarking on a new adventure.
-- _Save the earth_: Every time you use a reusable cup, mother earth hugs you very tight to show her thanks
 
 ## How we built it
 To introduce people to the idea of using a reusable cup, we use an HTML and CSS webpage, combined with data visualization and insights from the Python library using JavaScript. To engage people with the actual act of using a reusable cup, we create the front end of CupAdventure app, which can be previewed on the link provided.
