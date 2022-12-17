@@ -57,12 +57,6 @@ if text:
     # st.success("New borrow record added successfully")
 
 
-cnx = mysql.connector.connect(
-    host="AWS_CUPADVENTURE_HOSTNAME",
-    user="AWS_CUPADVENTURE_USERNAME",
-    password="AWS_CUPADVENTURE_PASSWORD",
-    database="cup_adventure",
-)
 
 cur = cnx.cursor(buffered=True)
 cur.execute("SELECT * FROM transactions")
