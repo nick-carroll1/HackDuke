@@ -7,7 +7,7 @@ Final Project for IDS 706: Data Engineering Systems
 Streamlit Page: https://nick-carroll1-hackduke-welcome-page-streamlit-onpq1t.streamlit.app
 
 
-Steps: 
+### Steps: 
 1.  Create the SQL Database and generate fake data
 ![image (2)](https://user-images.githubusercontent.com/89174034/208215166-2a94f850-fe47-4d21-b6cc-44ac2b96e6cc.png)
 
@@ -15,15 +15,30 @@ Steps:
 
 
 
-2. Connect Amazon AWS to with SQL Database
+2. Connect Amazon AWS to with SQL Database, store data in AWS database
+
+<img width="807" alt="Screen Shot 2022-12-16 at 5 11 05 PM" src="https://user-images.githubusercontent.com/89174034/208215447-b485d24e-7adc-4307-8ba0-52bbb7be003b.png">
 
 
 3. 
-
+build code with pip environment (ensure that streamlit has all the dependencies that we need)
 
 4. 
 Frontend: Streamlit
 
+
+### Functions:
+<img width="817" alt="Screen Shot 2022-12-16 at 5 12 18 PM" src="https://user-images.githubusercontent.com/89174034/208215534-326e0ed1-3bd3-4d76-84fd-754b1b7c6da2.png">
+##### 1. Read All Data
+##### 2. Pull Customer Data
+##### 3. Add/Update Customer Data
+##### 4. Transactions
+<img width="816" alt="Screen Shot 2022-12-16 at 5 13 47 PM" src="https://user-images.githubusercontent.com/89174034/208215605-cf0cd06b-88eb-4aeb-9b90-961adba5fe7f.png">
+
+
+
+
+### Results:
 
 
 
