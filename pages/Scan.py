@@ -4,10 +4,10 @@ import os
 
 import mysql.connector
 
-# server = "localhost"
-# username="root"
-# password=""
-# dbname="qrcodedb"
+# server = "AWS_CUPADVENTURE_USERNAME"
+# username="AWS_CUPADVENTURE_USERNAME"
+# password="AWS_CUPADVENTURE_PASSWORD"
+# dbname="cup_adventure"
 
 
 # def add_record():
@@ -20,9 +20,9 @@ except:
 if text:
 
     cnx = mysql.connector.connect(
-        host="cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com",
-        user="admin",
-        password="NoahGift706-2",
+        host="AWS_CUPADVENTURE_USERNAME",
+        user="AWS_CUPADVENTURE_USERNAME",
+        password="AWS_CUPADVENTURE_PASSWORD",
         database="cup_adventure",
         autocommit=True,
     )
