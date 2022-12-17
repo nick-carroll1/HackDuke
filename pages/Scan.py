@@ -62,6 +62,7 @@ cnx = mysql.connector.connect(
     user="admin",
     password="NoahGift706-2",
     database="cup_adventure",
+    autocommit=True,
 )
 
 cur = cnx.cursor(buffered=True)
