@@ -8,20 +8,26 @@ Streamlit Page: https://nick-carroll1-hackduke-welcome-page-streamlit-onpq1t.str
 
 
 Steps: 
-Amazon AWS to host......
+1.  Create the SQL Database and generate fake data
+![image (2)](https://user-images.githubusercontent.com/89174034/208215166-2a94f850-fe47-4d21-b6cc-44ac2b96e6cc.png)
+
+<img width="1019" alt="Screen Shot 2022-12-16 at 5 07 26 PM" src="https://user-images.githubusercontent.com/89174034/208215208-952d1583-a76f-409b-b335-32fd89c0282a.png">
 
 
-Connecting to SQL Database
+
+2. Connect Amazon AWS to with SQL Database
 
 
+3. 
+
+
+4. 
 Frontend: Streamlit
 
 
 
 
 ________________________Hackathon 
-## Checkout our app here:
-[CupAdventure App](https://www.justinmind.com/usernote/tests/73177010/73181425/73181427/index.html#/screens/d12245cc-1680-458d-89dd-4f0d7fb22724)
 
 ## Checkout our website here:
 [CupsAdventure Website](http://cupsadventure.tech)
