@@ -57,7 +57,14 @@ Can sign in with the following information:
 <img width="764" alt="Screen Shot 2022-12-16 at 5 20 21 PM" src="https://user-images.githubusercontent.com/89174034/208216109-faf39b7e-b598-4fba-9e58-74cd8dfe1009.png">
 
 ##### III. Scanning Page 
-### Results:
+<img width="833" alt="Screen Shot 2022-12-16 at 5 23 35 PM" src="https://user-images.githubusercontent.com/89174034/208216310-849211c2-0a12-47b3-9d04-b917520b5c4a.png">
+
+
+##### IV. Customer Analytics
+<img width="471" alt="Screen Shot 2022-12-16 at 5 25 18 PM" src="https://user-images.githubusercontent.com/89174034/208216367-3f13fb60-0b2b-4cc0-a281-5fbdec81f3ca.png">
+<img width="371" alt="Screen Shot 2022-12-16 at 5 25 47 PM" src="https://user-images.githubusercontent.com/89174034/208216462-9c041f70-1a45-43cc-9422-a59728f98f62.png">
+<img width="499" alt="Screen Shot 2022-12-16 at 5 25 54 PM" src="https://user-images.githubusercontent.com/89174034/208216467-5506b391-93aa-4b86-b195-295c7afb56e5.png">
+
 
 
 
