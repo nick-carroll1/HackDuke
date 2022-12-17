@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e40b509326ffe06256ff86d6563db2f26d864a1996bb67e63169da400e5bf7cb"
+            "sha256": "0d22155d7eedb16efe5f4a5c7aae8f41749838281262edf1a78581167d5792b2"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -794,6 +794,14 @@
             ],
             "index": "pypi",
             "version": "==0.2.1"
+        },
+        "streamlit-lottie": {
+            "hashes": [
+                "sha256:b6ab8171d4423cdd14630dcae237fc339b998264dd57ff8810705e01d03f5c33",
+                "sha256:c1b65e2b56c51db7f911c727b16e8f1e27591594294f0ac06333978984cade83"
+            ],
+            "index": "pypi",
+            "version": "==0.0.3"
         },
         "toml": {
             "hashes": [

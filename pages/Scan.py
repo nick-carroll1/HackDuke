@@ -4,10 +4,10 @@ import os
 
 import mysql.connector
 
-# server = "localhost"
-# username="root"
-# password=""
-# dbname="qrcodedb"
+# server = "AWS_CUPADVENTURE_USERNAME"
+# username="AWS_CUPADVENTURE_USERNAME"
+# password="AWS_CUPADVENTURE_PASSWORD"
+# dbname="cup_adventure"
 
 
 # def add_record():
@@ -57,11 +57,29 @@ if text:
     # st.success("New borrow record added successfully")
 
 
-cnx = mysql.connector.connect(
-    host="cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com",
-    user="admin",
-    password="NoahGift706-2",
-    database="cup_adventure",
+def create_db_connection(host_name, user_name, user_password, user_port, db_name):
+    connection = None
+    try:
+        connection = mysql.connector.connect(
+            host=host_name,
+            user=user_name,
+            passwd=user_password,
+            port=user_port,
+            database=db_name,
+        )
+        print("MySQL Database connection successful")
+    except Error as err:
+        print(f"Error: '{err}'")
+
+    return connection
+
+
+cnx = create_db_connection(
+    os.getenv("AWS_CUPADVENTURE_HOSTNAME"),
+    os.getenv("AWS_CUPADVENTURE_USERNAME"),
+    os.getenv("AWS_CUPADVENTURE_PASSWORD"),
+    os.getenv("AWS_CUPADVENTURE_PORT"),
+    "cup_adventure",
 )
 
 cur = cnx.cursor(buffered=True)
