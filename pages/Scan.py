@@ -58,9 +58,9 @@ if text:
 
 
 cnx = mysql.connector.connect(
-    host="cupadventure.cus96lnhsxap.us-east-1.rds.amazonaws.com",
-    user="admin",
-    password="NoahGift706-2",
+    host="AWS_CUPADVENTURE_HOSTNAME",
+    user="AWS_CUPADVENTURE_USERNAME",
+    password="AWS_CUPADVENTURE_PASSWORD",
     database="cup_adventure",
 )
 
